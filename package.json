@@ -86,8 +86,8 @@
   "peerDependencies": {
     "@emotion/cache": "^10.0.14",
     "@emotion/core": "^10.0.10",
-    "@emotion/styled": "^10.0.14",
     "@emotion/react": "^11.1.4",
+    "@emotion/styled": "^10.0.14",
     "polished": "^3.4.0"
   },
   "scripts": {
