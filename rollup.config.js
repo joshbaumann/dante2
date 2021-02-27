@@ -9,7 +9,7 @@ const pluginsConfig = [
         exclude: 'node_modules/**',
         runtimeHelpers: true ,
         babelrc: false,
-        presets: [["@babel/preset-env", { modules: false }], ["react-app", {flow:true}]],
+        presets: [["@babel/preset-env", { modules: false }], ["@babel/preset-react"]],
         plugins: [
           "@babel/plugin-proposal-class-properties",
           "@babel/plugin-proposal-export-default-from",
@@ -26,23 +26,6 @@ const pluginsConfig = [
     // if this list contains "browser", overrides specified in "pkg.browser"
     // will be used
     mainFields: ['module', 'main'], // Default: ['module', 'main']
-
-    // DEPRECATED: use "mainFields" instead
-    // use "module" field for ES6 module if possible
-    module: true, // Default: true
-
-    // DEPRECATED: use "mainFields" instead
-    // use "jsnext:main" if possible
-    // legacy field pointing to ES6 module in third-party libraries,
-    // deprecated in favor of "pkg.module":
-    // - see: https://github.com/rollup/rollup/wiki/pkg.module
-    jsnext: true,  // Default: false
-
-    // DEPRECATED: use "mainFields" instead
-    // use "main" field or index.js, even if it's not an ES6 module
-    // (needs to be converted from CommonJS to ES6)
-    // – see https://github.com/rollup/rollup-plugin-commonjs
-    main: true,  // Default: true
 
     // some package.json files have a "browser" field which specifies
     // alternative files to load for people bundling for the browser. If

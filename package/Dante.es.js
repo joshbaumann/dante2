@@ -1,18 +1,10 @@
-import Immutable, { Map } from 'immutable';
-import { EditorState, ContentBlock, genKey, ContentState, convertFromHTML, getSafeBodyFromHTML, convertToRaw, convertFromRaw, CompositeDecorator, getDefaultKeyBinding, Editor, Entity, RichUtils, DefaultDraftBlockRenderMap, SelectionState, Modifier, getVisibleSelectionRect, EditorBlock } from 'draft-js';
-import _classCallCheck from '@babel/runtime/helpers/esm/classCallCheck';
-import _createClass from '@babel/runtime/helpers/esm/createClass';
-import _assertThisInitialized from '@babel/runtime/helpers/esm/assertThisInitialized';
-import _inherits from '@babel/runtime/helpers/esm/inherits';
-import _possibleConstructorReturn from '@babel/runtime/helpers/esm/possibleConstructorReturn';
-import _getPrototypeOf from '@babel/runtime/helpers/esm/getPrototypeOf';
-import _defineProperty from '@babel/runtime/helpers/esm/defineProperty';
 import React from 'react';
-import axios from 'axios';
+import Immutable, { Map } from 'immutable';
 import { isEmpty, capitalize } from 'lodash';
+import { EditorState, genKey, ContentBlock, ContentState, convertFromHTML, getSafeBodyFromHTML, DefaultDraftBlockRenderMap, convertFromRaw, SelectionState, convertToRaw, Modifier, RichUtils, Entity, getDefaultKeyBinding, Editor, getVisibleSelectionRect, EditorBlock, CompositeDecorator } from 'draft-js';
 import { convertToHTML } from 'draft-convert';
+import axios from 'axios';
 import createStyles from 'draft-js-custom-styles';
-import _taggedTemplateLiteral from '@babel/runtime/helpers/esm/taggedTemplateLiteral';
 import styled from '@emotion/styled';
 import { math, lighten, opacify } from 'polished';
 import ReactDOM from 'react-dom';
@@ -22,6 +14,153 @@ import Prism from 'prismjs';
 import PrismDecorator from 'draft-js-prism';
 import MultiDecorator from 'draft-js-multidecorators';
 import { ThemeProvider } from '@emotion/react';
+import PropTypes from 'prop-types';
+
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  return Constructor;
+}
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+function _extends() {
+  _extends = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  return _extends.apply(this, arguments);
+}
+
+function _inherits(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function");
+  }
+
+  subClass.prototype = Object.create(superClass && superClass.prototype, {
+    constructor: {
+      value: subClass,
+      writable: true,
+      configurable: true
+    }
+  });
+  if (superClass) _setPrototypeOf(subClass, superClass);
+}
+
+function _getPrototypeOf(o) {
+  _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+    return o.__proto__ || Object.getPrototypeOf(o);
+  };
+  return _getPrototypeOf(o);
+}
+
+function _setPrototypeOf(o, p) {
+  _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+    o.__proto__ = p;
+    return o;
+  };
+
+  return _setPrototypeOf(o, p);
+}
+
+function _isNativeReflectConstruct() {
+  if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+  if (Reflect.construct.sham) return false;
+  if (typeof Proxy === "function") return true;
+
+  try {
+    Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+function _assertThisInitialized(self) {
+  if (self === void 0) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return self;
+}
+
+function _possibleConstructorReturn(self, call) {
+  if (call && (typeof call === "object" || typeof call === "function")) {
+    return call;
+  }
+
+  return _assertThisInitialized(self);
+}
+
+function _createSuper(Derived) {
+  var hasNativeReflectConstruct = _isNativeReflectConstruct();
+
+  return function _createSuperInternal() {
+    var Super = _getPrototypeOf(Derived),
+        result;
+
+    if (hasNativeReflectConstruct) {
+      var NewTarget = _getPrototypeOf(this).constructor;
+
+      result = Reflect.construct(Super, arguments, NewTarget);
+    } else {
+      result = Super.apply(this, arguments);
+    }
+
+    return _possibleConstructorReturn(this, result);
+  };
+}
+
+function _taggedTemplateLiteral(strings, raw) {
+  if (!raw) {
+    raw = strings.slice(0);
+  }
+
+  return Object.freeze(Object.defineProperties(strings, {
+    raw: {
+      value: Object.freeze(raw)
+    }
+  }));
+}
 
 /*
 Used from [react-rte](https://github.com/brijeshb42/medium-draft)
@@ -176,10 +315,6 @@ var addNewBlockAt = function addNewBlockAt(editorState, pivotBlockKey) {
   });
   return EditorState.push(editorState, newContent, 'split-block');
 };
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 var Debug = /*#__PURE__*/function (_React$Component) {
   _inherits(Debug, _React$Component);
@@ -562,14 +697,10 @@ var customHTML2Content = function customHTML2Content(HTML, blockRn) {
   return ContentState.createFromBlockArray(contentBlocks);
 };
 
-function _createSuper$1(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct$1(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _isNativeReflectConstruct$1() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-
 var DanteEditor = /*#__PURE__*/function (_React$Component) {
   _inherits(DanteEditor, _React$Component);
 
-  var _super = _createSuper$1(DanteEditor);
+  var _super = _createSuper(DanteEditor);
 
   function DanteEditor(props) {
     var _this;
@@ -1016,7 +1147,6 @@ var DanteEditor = /*#__PURE__*/function (_React$Component) {
               _this.onChange(resetBlockWithType(editorState, "unstyled"));
 
               return true;
-              break;
 
             default:
               return false;
@@ -1519,8 +1649,8 @@ function styleInject(css, ref) {
   }
 }
 
-var css = "/**\n * @providesModule DraftEditor\n * @permanent\n */\n\n/**\n * We inherit the height of the container by default\n */\n\n.DraftEditor-root,\n.DraftEditor-editorContainer,\n.public-DraftEditor-content {\n  height: inherit;\n  text-align: initial;\n}\n\n.DraftEditor-root {\n  position: relative;\n}\n\n/*HACK FOR ISSUE  https://github.com/facebook/draft-js/issues/304 , proposal from @bradbumbalough*/\n.DraftEditor-root {\n  //overflow: auto;\n}\n\n/**\n * Zero-opacity background used to allow focus in IE. Otherwise, clicks\n * fall through to the placeholder.\n */\n\n.DraftEditor-editorContainer {\n  background-color: rgba(255, 255, 255, 0);\n  /* Repair mysterious missing Safari cursor */\n  border-left: 0.1px solid transparent;\n  position: relative;\n  z-index: 1;\n}\n\n.public-DraftEditor-content {\n  outline: none;\n  white-space: pre-wrap;\n}\n\n.public-DraftEditor-block {\n  position: relative;\n}\n\n.DraftEditor-alignLeft .public-DraftStyleDefault-block {\n  text-align: left;\n}\n\n.DraftEditor-alignLeft .public-DraftEditorPlaceholder-root {\n  left: 0;\n  text-align: left;\n}\n\n.DraftEditor-alignCenter .public-DraftStyleDefault-block {\n  text-align: center;\n}\n\n.DraftEditor-alignCenter .public-DraftEditorPlaceholder-root {\n  margin: 0 auto;\n  text-align: center;\n  width: 100%;\n}\n\n.DraftEditor-alignRight .public-DraftStyleDefault-block {\n  text-align: right;\n}\n\n.DraftEditor-alignRight .public-DraftEditorPlaceholder-root {\n  right: 0;\n  text-align: right;\n}\n/**\n * @providesModule DraftEditorPlaceholder\n */\n\n.public-DraftEditorPlaceholder-root {\n  color: #9197a3;\n  position: absolute;\n  z-index: 0;\n  background-color: white;\n}\n\n.public-DraftEditorPlaceholder-hasFocus {\n  color: #bdc1c9;\n}\n\n.DraftEditorPlaceholder-hidden {\n  display: none;\n}\n/**\n * @providesModule DraftStyleDefault\n */\n\n.public-DraftStyleDefault-block {\n  position: relative;\n  white-space: pre-wrap;\n}\n\n/* @noflip */\n\n.public-DraftStyleDefault-ltr {\n  direction: ltr;\n  text-align: left;\n}\n\n/* @noflip */\n\n.public-DraftStyleDefault-rtl {\n  direction: rtl;\n  text-align: right;\n}\n\n/**\n * These rules provide appropriate text direction for counter pseudo-elements.\n */\n\n/* @noflip */\n\n.public-DraftStyleDefault-listLTR {\n  direction: ltr;\n}\n\n/* @noflip */\n\n.public-DraftStyleDefault-listRTL {\n  direction: rtl;\n}\n\n/**\n * Default spacing for list container elements. Override with CSS as needed.\n */\n\n.public-DraftStyleDefault-ul,\n.public-DraftStyleDefault-ol {\n  margin: 16px 0;\n  padding: 0;\n}\n\n/**\n * Default counters and styles are provided for five levels of nesting.\n * If you require nesting beyond that level, you should use your own CSS\n * classes to do so. If you care about handling RTL languages, the rules you\n * create should look a lot like these.\n */\n\n/* @noflip */\n\n.public-DraftStyleDefault-depth0.public-DraftStyleDefault-listLTR {\n  margin-left: 1.5em;\n}\n\n/* @noflip */\n\n.public-DraftStyleDefault-depth0.public-DraftStyleDefault-listRTL {\n  margin-right: 1.5em;\n}\n\n/* @noflip */\n\n.public-DraftStyleDefault-depth1.public-DraftStyleDefault-listLTR {\n  margin-left: 3em;\n}\n\n/* @noflip */\n\n.public-DraftStyleDefault-depth1.public-DraftStyleDefault-listRTL {\n  margin-right: 3em;\n}\n\n/* @noflip */\n\n.public-DraftStyleDefault-depth2.public-DraftStyleDefault-listLTR {\n  margin-left: 4.5em;\n}\n\n/* @noflip */\n\n.public-DraftStyleDefault-depth2.public-DraftStyleDefault-listRTL {\n  margin-right: 4.5em;\n}\n\n/* @noflip */\n\n.public-DraftStyleDefault-depth3.public-DraftStyleDefault-listLTR {\n  margin-left: 6em;\n}\n\n/* @noflip */\n\n.public-DraftStyleDefault-depth3.public-DraftStyleDefault-listRTL {\n  margin-right: 6em;\n}\n\n/* @noflip */\n\n.public-DraftStyleDefault-depth4.public-DraftStyleDefault-listLTR {\n  margin-left: 7.5em;\n}\n\n/* @noflip */\n\n.public-DraftStyleDefault-depth4.public-DraftStyleDefault-listRTL {\n  margin-right: 7.5em;\n}\n\n/**\n * Only use `square` list-style after the first two levels.\n */\n\n.public-DraftStyleDefault-unorderedListItem {\n  list-style-type: square;\n  position: relative;\n}\n\n.public-DraftStyleDefault-unorderedListItem.public-DraftStyleDefault-depth0 {\n  list-style-type: disc;\n}\n\n.public-DraftStyleDefault-unorderedListItem.public-DraftStyleDefault-depth1 {\n  list-style-type: circle;\n}\n\n/**\n * Ordered list item counters are managed with CSS, since all list nesting is\n * purely visual.\n */\n\n.public-DraftStyleDefault-orderedListItem {\n  list-style-type: none;\n  position: relative;\n}\n\n/* @noflip */\n\n.public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-listLTR:before {\n  left: -36px;\n  position: absolute;\n  text-align: right;\n  width: 30px;\n}\n\n/* @noflip */\n\n.public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-listRTL:before {\n  position: absolute;\n  right: -36px;\n  text-align: left;\n  width: 30px;\n}\n\n/**\n * Counters are reset in JavaScript. If you need different counter styles,\n * override these rules. If you need more nesting, create your own rules to\n * do so.\n */\n\n.public-DraftStyleDefault-orderedListItem:before {\n  content: counter(ol0) \". \";\n  counter-increment: ol0;\n}\n\n.public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-depth1:before {\n  content: counter(ol1) \". \";\n  counter-increment: ol1;\n}\n\n.public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-depth2:before {\n  content: counter(ol2) \". \";\n  counter-increment: ol2;\n}\n\n.public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-depth3:before {\n  content: counter(ol3) \". \";\n  counter-increment: ol3;\n}\n\n.public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-depth4:before {\n  content: counter(ol4) \". \";\n  counter-increment: ol4;\n}\n\n.public-DraftStyleDefault-depth0.public-DraftStyleDefault-reset {\n  counter-reset: ol0;\n}\n\n.public-DraftStyleDefault-depth1.public-DraftStyleDefault-reset {\n  counter-reset: ol1;\n}\n\n.public-DraftStyleDefault-depth2.public-DraftStyleDefault-reset {\n  counter-reset: ol2;\n}\n\n.public-DraftStyleDefault-depth3.public-DraftStyleDefault-reset {\n  counter-reset: ol3;\n}\n\n.public-DraftStyleDefault-depth4.public-DraftStyleDefault-reset {\n  counter-reset: ol4;\n}\n";
-styleInject(css);
+var css_248z = "/**\n * @providesModule DraftEditor\n * @permanent\n */\n\n/**\n * We inherit the height of the container by default\n */\n\n.DraftEditor-root,\n.DraftEditor-editorContainer,\n.public-DraftEditor-content {\n  height: inherit;\n  text-align: initial;\n}\n\n.DraftEditor-root {\n  position: relative;\n}\n\n/*HACK FOR ISSUE  https://github.com/facebook/draft-js/issues/304 , proposal from @bradbumbalough*/\n.DraftEditor-root {\n  //overflow: auto;\n}\n\n/**\n * Zero-opacity background used to allow focus in IE. Otherwise, clicks\n * fall through to the placeholder.\n */\n\n.DraftEditor-editorContainer {\n  background-color: rgba(255, 255, 255, 0);\n  /* Repair mysterious missing Safari cursor */\n  border-left: 0.1px solid transparent;\n  position: relative;\n  z-index: 1;\n}\n\n.public-DraftEditor-content {\n  outline: none;\n  white-space: pre-wrap;\n}\n\n.public-DraftEditor-block {\n  position: relative;\n}\n\n.DraftEditor-alignLeft .public-DraftStyleDefault-block {\n  text-align: left;\n}\n\n.DraftEditor-alignLeft .public-DraftEditorPlaceholder-root {\n  left: 0;\n  text-align: left;\n}\n\n.DraftEditor-alignCenter .public-DraftStyleDefault-block {\n  text-align: center;\n}\n\n.DraftEditor-alignCenter .public-DraftEditorPlaceholder-root {\n  margin: 0 auto;\n  text-align: center;\n  width: 100%;\n}\n\n.DraftEditor-alignRight .public-DraftStyleDefault-block {\n  text-align: right;\n}\n\n.DraftEditor-alignRight .public-DraftEditorPlaceholder-root {\n  right: 0;\n  text-align: right;\n}\n/**\n * @providesModule DraftEditorPlaceholder\n */\n\n.public-DraftEditorPlaceholder-root {\n  color: #9197a3;\n  position: absolute;\n  z-index: 0;\n  background-color: white;\n}\n\n.public-DraftEditorPlaceholder-hasFocus {\n  color: #bdc1c9;\n}\n\n.DraftEditorPlaceholder-hidden {\n  display: none;\n}\n/**\n * @providesModule DraftStyleDefault\n */\n\n.public-DraftStyleDefault-block {\n  position: relative;\n  white-space: pre-wrap;\n}\n\n/* @noflip */\n\n.public-DraftStyleDefault-ltr {\n  direction: ltr;\n  text-align: left;\n}\n\n/* @noflip */\n\n.public-DraftStyleDefault-rtl {\n  direction: rtl;\n  text-align: right;\n}\n\n/**\n * These rules provide appropriate text direction for counter pseudo-elements.\n */\n\n/* @noflip */\n\n.public-DraftStyleDefault-listLTR {\n  direction: ltr;\n}\n\n/* @noflip */\n\n.public-DraftStyleDefault-listRTL {\n  direction: rtl;\n}\n\n/**\n * Default spacing for list container elements. Override with CSS as needed.\n */\n\n.public-DraftStyleDefault-ul,\n.public-DraftStyleDefault-ol {\n  margin: 16px 0;\n  padding: 0;\n}\n\n/**\n * Default counters and styles are provided for five levels of nesting.\n * If you require nesting beyond that level, you should use your own CSS\n * classes to do so. If you care about handling RTL languages, the rules you\n * create should look a lot like these.\n */\n\n/* @noflip */\n\n.public-DraftStyleDefault-depth0.public-DraftStyleDefault-listLTR {\n  margin-left: 1.5em;\n}\n\n/* @noflip */\n\n.public-DraftStyleDefault-depth0.public-DraftStyleDefault-listRTL {\n  margin-right: 1.5em;\n}\n\n/* @noflip */\n\n.public-DraftStyleDefault-depth1.public-DraftStyleDefault-listLTR {\n  margin-left: 3em;\n}\n\n/* @noflip */\n\n.public-DraftStyleDefault-depth1.public-DraftStyleDefault-listRTL {\n  margin-right: 3em;\n}\n\n/* @noflip */\n\n.public-DraftStyleDefault-depth2.public-DraftStyleDefault-listLTR {\n  margin-left: 4.5em;\n}\n\n/* @noflip */\n\n.public-DraftStyleDefault-depth2.public-DraftStyleDefault-listRTL {\n  margin-right: 4.5em;\n}\n\n/* @noflip */\n\n.public-DraftStyleDefault-depth3.public-DraftStyleDefault-listLTR {\n  margin-left: 6em;\n}\n\n/* @noflip */\n\n.public-DraftStyleDefault-depth3.public-DraftStyleDefault-listRTL {\n  margin-right: 6em;\n}\n\n/* @noflip */\n\n.public-DraftStyleDefault-depth4.public-DraftStyleDefault-listLTR {\n  margin-left: 7.5em;\n}\n\n/* @noflip */\n\n.public-DraftStyleDefault-depth4.public-DraftStyleDefault-listRTL {\n  margin-right: 7.5em;\n}\n\n/**\n * Only use `square` list-style after the first two levels.\n */\n\n.public-DraftStyleDefault-unorderedListItem {\n  list-style-type: square;\n  position: relative;\n}\n\n.public-DraftStyleDefault-unorderedListItem.public-DraftStyleDefault-depth0 {\n  list-style-type: disc;\n}\n\n.public-DraftStyleDefault-unorderedListItem.public-DraftStyleDefault-depth1 {\n  list-style-type: circle;\n}\n\n/**\n * Ordered list item counters are managed with CSS, since all list nesting is\n * purely visual.\n */\n\n.public-DraftStyleDefault-orderedListItem {\n  list-style-type: none;\n  position: relative;\n}\n\n/* @noflip */\n\n.public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-listLTR:before {\n  left: -36px;\n  position: absolute;\n  text-align: right;\n  width: 30px;\n}\n\n/* @noflip */\n\n.public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-listRTL:before {\n  position: absolute;\n  right: -36px;\n  text-align: left;\n  width: 30px;\n}\n\n/**\n * Counters are reset in JavaScript. If you need different counter styles,\n * override these rules. If you need more nesting, create your own rules to\n * do so.\n */\n\n.public-DraftStyleDefault-orderedListItem:before {\n  content: counter(ol0) \". \";\n  counter-increment: ol0;\n}\n\n.public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-depth1:before {\n  content: counter(ol1) \". \";\n  counter-increment: ol1;\n}\n\n.public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-depth2:before {\n  content: counter(ol2) \". \";\n  counter-increment: ol2;\n}\n\n.public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-depth3:before {\n  content: counter(ol3) \". \";\n  counter-increment: ol3;\n}\n\n.public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-depth4:before {\n  content: counter(ol4) \". \";\n  counter-increment: ol4;\n}\n\n.public-DraftStyleDefault-depth0.public-DraftStyleDefault-reset {\n  counter-reset: ol0;\n}\n\n.public-DraftStyleDefault-depth1.public-DraftStyleDefault-reset {\n  counter-reset: ol1;\n}\n\n.public-DraftStyleDefault-depth2.public-DraftStyleDefault-reset {\n  counter-reset: ol2;\n}\n\n.public-DraftStyleDefault-depth3.public-DraftStyleDefault-reset {\n  counter-reset: ol3;\n}\n\n.public-DraftStyleDefault-depth4.public-DraftStyleDefault-reset {\n  counter-reset: ol4;\n}\n";
+styleInject(css_248z);
 
 function imageFill() {
   return /*#__PURE__*/React.createElement("svg", {
@@ -1966,8 +2096,8 @@ var getSelection = function getSelection(root) {
   return t;
 };
 
-var _templateObject;
-var AnchorStyle = styled.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n\n  // MENU\n  position: absolute;\n  visibility: hidden;\n  z-index: 10;\n  -webkit-transition: none;\n  transition: none;\n  display: none;\n  top: 0;\n  left: 0;\n  display:block;\n  white-space: nowrap;\n\n  height: ", ";\n  background: ", ";\n  color: ", ";\n\n  border: ", ";\n  border-radius: ", ";\n  box-shadow: ", ";\n\n  // CARET\n  // &:before -> Borde\n  // &:after  -> Triangulo\n\n  &.dante-menu{\n    &:after {\n      content: \"\";\n      height: 0;\n      width: 0;\n      position: absolute;\n      left: ", ";\n      pointer-events: none;\n      border: ", " solid transparent;\n      margin-left: -", ";\n    }\n    &:after {\n      border-top-color: ", ";\n      bottom: -", ";\n    }\n  }\n\n\n\n  &.dante-sticky-menu {\n    position: -webkit-sticky;\n    position: sticky;\n    width: 100%;\n    border-radius: 0px;\n    //overflow-x: scroll;\n    &:after{\n      display: none;\n    }\n  }\n\n  &.is-active {\n    visibility: visible;\n    opacity: 1;\n    transition: visibility 0s linear 0s,opacity .2s 0s;\n  }\n\n  &.is-active {\n    opacity: 1;\n  }\n\n\n  // Visible\n\n  &.dante-menu--active {\n    display: inline-block !important;\n    visibility: visible !important;\n    -webkit-animation: pop-upwards 180ms forwards linear;\n    animation: pop-upwards 180ms forwards linear;\n  }\n\n\n  // Link mode\n\n  &.dante-menu--linkmode {\n    .dante-menu-buttons {\n      visibility: hidden;\n    }\n    .dante-menu-linkinput {\n      display: block;\n    }\n    .dante-menu-input {\n      -webkit-animation: pop-upwards 180ms forwards linear;\n              animation: pop-upwards 180ms forwards linear;\n    }\n  }\n\n  &.popover--Linktooltip .popover-inner {\n    padding: 10px 10px;\n    font-size: 12px;\n  }\n\n  &.popover--tooltip .popover-inner {\n      //background: #333333;\n      border-radius: 4px;\n      color: ", ";\n  }\n\n  .popover-inner a {\n    color: inherit;\n    text-decoration: none;\n  }\n\n  .popover-arrow {\n    position: absolute;\n  }\n\n  .popover-arrow:after {\n    background-color: ", ";\n  }\n\n  &.popover--top .popover-arrow,\n  &.popover--bottom .popover-arrow {\n    left: 50%;\n    margin-left: -", ";\n  }\n\n  &.popover--left .popover-arrow,\n  &.popover--right .popover-arrow {\n    top: 50%;\n    margin-top: -", ";\n  }\n\n\n  &.popover--right .popover-arrow {\n    left: 1px;\n  }\n\n  &.popover--bottom .popover-arrow {\n    top: -13px;\n  }\n\n  &.popover--left .popover-arrow {\n    right: 1px;\n    // clip: rect(-4px 14px 18px 0);\n  }\n\n  .popover-arrow:after {\n    content: '';\n    display: block;\n    width: ", ";\n    height: ", ";\n  }\n\n  &.popover--top .popover-arrow:after {\n    -webkit-transform: rotate(45deg) translate(-5px,-5px);\n    -ms-transform: rotate(45deg) translate(-5px,-5px);\n    transform: rotate(45deg) translate(-5px,-5px);\n    box-shadow: 1px 1px 1px -1px ", ";\n  }\n\n  &.popover--right .popover-arrow:after {\n    -webkit-transform: rotate(45deg) translate(6px,-6px);\n    -ms-transform: rotate(45deg) translate(6px,-6px);\n    transform: rotate(45deg) translate(6px,-6px);\n    box-shadow: -1px 1px 1px -1px ", ";\n  }\n\n  &.popover--bottom .popover-arrow:after {\n    -webkit-transform: rotate(45deg) translate(6px,6px);\n    -ms-transform: rotate(45deg) translate(6px,6px);\n    transform: rotate(45deg) translate(6px,6px);\n    box-shadow: -1px -1px 1px -1px ", ";\n  }\n\n  &.popover--left .popover-arrow:after {\n    -webkit-transform: rotate(45deg) translate(-6px,6px);\n    -ms-transform: rotate(45deg) translate(-6px,6px);\n    transform: rotate(45deg) translate(-6px,6px);\n    box-shadow: 1px -1px 1px -1px ", ";\n  }\n\n\n// BUTONS\n\n.dante-menu-buttons {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n  line-height: 0;\n}\n.dante-menu-divider {\n  width: 1px;\n  height: ", ";\n  margin: 9px 2px;\n  background: rgba(100, 100, 100,.2);\n  display: inline-block;\n  overflow: hidden;\n  cursor: default;\n  line-height: ", ";\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n}\n.dante-menu-button {\n\n  min-width: 20px;\n  display: inline-block;\n  padding-left: 10px;\n  padding-right: 10px;\n  overflow: hidden;\n  text-align: center;\n  color: ", ";\n  cursor: pointer;\n  font-size: ", ";\n  line-height: ", ";\n  -webkit-user-select: none;\n      -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n\n  &:hover{\n    // nada\n  }\n  &.active{\n    color: ", ";\n  }\n\n\n  &:first-of-type {\n    border-top-left-radius: ", ";\n    border-bottom-left-radius: ", ";\n    padding-left: 18px;\n  }\n  &:last-child {\n    border-top-right-radius: ", ";\n    border-bottom-right-radius: ", ";\n    padding-right: 18px;\n  }\n\n}\n\n.dante-menu-button--disabled {\n  -webkit-user-select: none !important;\n     -moz-user-select: none !important;\n      -ms-user-select: none !important;\n          user-select: none !important;\n          opacity: .3;\n}\n\n\n// LINK\n\n.dante-menu-linkinput {\n  & {\n    display: none;\n    position: absolute;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n  }\n  .dante-menu-button {\n    position: absolute;\n    top: 0;\n    right: 0;\n  }\n}\n\n.dante-menu-input {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  padding: 13px 40px 13px 10px;\n  color: ", ";\n  border: none;\n  outline: none;\n  font-size: 14px;\n  box-sizing: border-box;\n  border-radius: ", ";\n  appearance: none;\n  text-align: left;\n  font-family: ", ";\n  letter-spacing: 0.01rem;\n  font-weight: 400;\n  font-style: normal;\n  text-rendering: optimizeLegibility;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  -moz-font-feature-settings: \"liga\" on;\n}\n\n&:after {\n  border-top-color: ", ";\n}\n.dante-menu-input {\n  padding: 11px 40px 11px 10px;\n}\n.dante-menu-button {\n  padding-left: 0;\n  padding-right: 0;\n  vertical-align: top;\n  line-height: 1;\n  margin: 0px;\n}\n.dante-menu-button:first-of-type {\n  border-top-left-radius: 4px;\n  border-bottom-left-radius: 4px;\n  padding-left: 0;\n}\n.dante-menu-button:last-of-type {\n  border-top-right-radius: 4px;\n  border-bottom-right-radius: 4px;\n  padding-right: 0;\n}\n.dante-menu-button.visible-overflow {\n  vertical-align: top;\n}\n.dante-menu-button button {\n  height: 42px;\n}\n.dante-menu-button .dante-icon {\n  padding: 10px;\n  min-width: 20px;\n  display: inline-block;\n}\n.dante-menu-button .tooltip-icon {\n  padding: 10px;\n  display: inline-block;\n}\n.dante-menu-button .dante-icon:hover .icon-fillcolor {\n  fill: ", ";\n}\n.dante-menu-button.active .dante-icon .icon-fillcolor {\n  fill: ", ";\n}\n\n.dante-menu-button .dante-icon svg {\n  vertical-align: middle;\n}\n.dropdown {\n  float: left\n}\n.dropdown .btn {\n  color: #BEC2CC;\n  padding: 0 10px;\n  width: auto;\n  font-size: 12px\n}\n.dropdown .btn .caret {\n  border-top-color: #62656A;\n  margin-left: 4px;\n}\n.dropdown .btn:hover {\n  color: ", ";\n}\n.dropdown .btn:hover .caret {\n  border-top-color: ", ";\n}\n.dropdown .dropdown-menu {\n  background: #2A2B32;\n  padding: 0;\n  max-height: 300px;\n  overflow-y: auto;\n  width: auto;\n  min-width: 60px\n}\n.dropdown .dropdown-menu li {\n  border-bottom: 1px solid #383943\n}\n.dropdown .dropdown-menu li:last-child {\n  border-bottom: 0\n}\n.dropdown .dropdown-menu li a {\n  color: #BEC2CC;\n  font-size: 12px;\n  padding: 0 10px;\n  line-height: 30px\n}\n.dropdown.open > .dropdown-toggle.btn-default {\n  color: #BEC2CC;\n}\n.dropdown .dropdown-menu li a:hover,\n.dropdown.open > .dropdown-toggle.btn-default:hover {\n  background: 0;\n  color: ", ";\n}\n\n.divider {\n  position: relative;\n  float: left;\n  width: 1px;\n  height: 20px;\n  margin: 10px 5px;\n  background: ", "\n}\n\n"])), function (props) {
+var _templateObject$1;
+var AnchorStyle = styled.div(_templateObject$1 || (_templateObject$1 = _taggedTemplateLiteral(["\n\n  // MENU\n  position: absolute;\n  visibility: hidden;\n  z-index: 10;\n  -webkit-transition: none;\n  transition: none;\n  display: none;\n  top: 0;\n  left: 0;\n  display:block;\n  white-space: nowrap;\n\n  height: ", ";\n  background: ", ";\n  color: ", ";\n\n  border: ", ";\n  border-radius: ", ";\n  box-shadow: ", ";\n\n  // CARET\n  // &:before -> Borde\n  // &:after  -> Triangulo\n\n  &.dante-menu{\n    &:after {\n      content: \"\";\n      height: 0;\n      width: 0;\n      position: absolute;\n      left: ", ";\n      pointer-events: none;\n      border: ", " solid transparent;\n      margin-left: -", ";\n    }\n    &:after {\n      border-top-color: ", ";\n      bottom: -", ";\n    }\n  }\n\n\n\n  &.dante-sticky-menu {\n    position: -webkit-sticky;\n    position: sticky;\n    width: 100%;\n    border-radius: 0px;\n    //overflow-x: scroll;\n    &:after{\n      display: none;\n    }\n  }\n\n  &.is-active {\n    visibility: visible;\n    opacity: 1;\n    transition: visibility 0s linear 0s,opacity .2s 0s;\n  }\n\n  &.is-active {\n    opacity: 1;\n  }\n\n\n  // Visible\n\n  &.dante-menu--active {\n    display: inline-block !important;\n    visibility: visible !important;\n    -webkit-animation: pop-upwards 180ms forwards linear;\n    animation: pop-upwards 180ms forwards linear;\n  }\n\n\n  // Link mode\n\n  &.dante-menu--linkmode {\n    .dante-menu-buttons {\n      visibility: hidden;\n    }\n    .dante-menu-linkinput {\n      display: block;\n    }\n    .dante-menu-input {\n      -webkit-animation: pop-upwards 180ms forwards linear;\n              animation: pop-upwards 180ms forwards linear;\n    }\n  }\n\n  &.popover--Linktooltip .popover-inner {\n    padding: 10px 10px;\n    font-size: 12px;\n  }\n\n  &.popover--tooltip .popover-inner {\n      //background: #333333;\n      border-radius: 4px;\n      color: ", ";\n  }\n\n  .popover-inner a {\n    color: inherit;\n    text-decoration: none;\n  }\n\n  .popover-arrow {\n    position: absolute;\n  }\n\n  .popover-arrow:after {\n    background-color: ", ";\n  }\n\n  &.popover--top .popover-arrow,\n  &.popover--bottom .popover-arrow {\n    left: 50%;\n    margin-left: -", ";\n  }\n\n  &.popover--left .popover-arrow,\n  &.popover--right .popover-arrow {\n    top: 50%;\n    margin-top: -", ";\n  }\n\n\n  &.popover--right .popover-arrow {\n    left: 1px;\n  }\n\n  &.popover--bottom .popover-arrow {\n    top: -13px;\n  }\n\n  &.popover--left .popover-arrow {\n    right: 1px;\n    // clip: rect(-4px 14px 18px 0);\n  }\n\n  .popover-arrow:after {\n    content: '';\n    display: block;\n    width: ", ";\n    height: ", ";\n  }\n\n  &.popover--top .popover-arrow:after {\n    -webkit-transform: rotate(45deg) translate(-5px,-5px);\n    -ms-transform: rotate(45deg) translate(-5px,-5px);\n    transform: rotate(45deg) translate(-5px,-5px);\n    box-shadow: 1px 1px 1px -1px ", ";\n  }\n\n  &.popover--right .popover-arrow:after {\n    -webkit-transform: rotate(45deg) translate(6px,-6px);\n    -ms-transform: rotate(45deg) translate(6px,-6px);\n    transform: rotate(45deg) translate(6px,-6px);\n    box-shadow: -1px 1px 1px -1px ", ";\n  }\n\n  &.popover--bottom .popover-arrow:after {\n    -webkit-transform: rotate(45deg) translate(6px,6px);\n    -ms-transform: rotate(45deg) translate(6px,6px);\n    transform: rotate(45deg) translate(6px,6px);\n    box-shadow: -1px -1px 1px -1px ", ";\n  }\n\n  &.popover--left .popover-arrow:after {\n    -webkit-transform: rotate(45deg) translate(-6px,6px);\n    -ms-transform: rotate(45deg) translate(-6px,6px);\n    transform: rotate(45deg) translate(-6px,6px);\n    box-shadow: 1px -1px 1px -1px ", ";\n  }\n\n\n// BUTONS\n\n.dante-menu-buttons {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n  line-height: 0;\n}\n.dante-menu-divider {\n  width: 1px;\n  height: ", ";\n  margin: 9px 2px;\n  background: rgba(100, 100, 100,.2);\n  display: inline-block;\n  overflow: hidden;\n  cursor: default;\n  line-height: ", ";\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n}\n.dante-menu-button {\n\n  min-width: 20px;\n  display: inline-block;\n  padding-left: 10px;\n  padding-right: 10px;\n  overflow: hidden;\n  text-align: center;\n  color: ", ";\n  cursor: pointer;\n  font-size: ", ";\n  line-height: ", ";\n  -webkit-user-select: none;\n      -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n\n  &:hover{\n    // nada\n  }\n  &.active{\n    color: ", ";\n  }\n\n\n  &:first-of-type {\n    border-top-left-radius: ", ";\n    border-bottom-left-radius: ", ";\n    padding-left: 18px;\n  }\n  &:last-child {\n    border-top-right-radius: ", ";\n    border-bottom-right-radius: ", ";\n    padding-right: 18px;\n  }\n\n}\n\n.dante-menu-button--disabled {\n  -webkit-user-select: none !important;\n     -moz-user-select: none !important;\n      -ms-user-select: none !important;\n          user-select: none !important;\n          opacity: .3;\n}\n\n\n// LINK\n\n.dante-menu-linkinput {\n  & {\n    display: none;\n    position: absolute;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n  }\n  .dante-menu-button {\n    position: absolute;\n    top: 0;\n    right: 0;\n  }\n}\n\n.dante-menu-input {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  padding: 13px 40px 13px 10px;\n  color: ", ";\n  border: none;\n  outline: none;\n  font-size: 14px;\n  box-sizing: border-box;\n  border-radius: ", ";\n  appearance: none;\n  text-align: left;\n  font-family: ", ";\n  letter-spacing: 0.01rem;\n  font-weight: 400;\n  font-style: normal;\n  text-rendering: optimizeLegibility;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  -moz-font-feature-settings: \"liga\" on;\n}\n\n&:after {\n  border-top-color: ", ";\n}\n.dante-menu-input {\n  padding: 11px 40px 11px 10px;\n}\n.dante-menu-button {\n  padding-left: 0;\n  padding-right: 0;\n  vertical-align: top;\n  line-height: 1;\n  margin: 0px;\n}\n.dante-menu-button:first-of-type {\n  border-top-left-radius: 4px;\n  border-bottom-left-radius: 4px;\n  padding-left: 0;\n}\n.dante-menu-button:last-of-type {\n  border-top-right-radius: 4px;\n  border-bottom-right-radius: 4px;\n  padding-right: 0;\n}\n.dante-menu-button.visible-overflow {\n  vertical-align: top;\n}\n.dante-menu-button button {\n  height: 42px;\n}\n.dante-menu-button .dante-icon {\n  padding: 10px;\n  min-width: 20px;\n  display: inline-block;\n}\n.dante-menu-button .tooltip-icon {\n  padding: 10px;\n  display: inline-block;\n}\n.dante-menu-button .dante-icon:hover .icon-fillcolor {\n  fill: ", ";\n}\n.dante-menu-button.active .dante-icon .icon-fillcolor {\n  fill: ", ";\n}\n\n.dante-menu-button .dante-icon svg {\n  vertical-align: middle;\n}\n.dropdown {\n  float: left\n}\n.dropdown .btn {\n  color: #BEC2CC;\n  padding: 0 10px;\n  width: auto;\n  font-size: 12px\n}\n.dropdown .btn .caret {\n  border-top-color: #62656A;\n  margin-left: 4px;\n}\n.dropdown .btn:hover {\n  color: ", ";\n}\n.dropdown .btn:hover .caret {\n  border-top-color: ", ";\n}\n.dropdown .dropdown-menu {\n  background: #2A2B32;\n  padding: 0;\n  max-height: 300px;\n  overflow-y: auto;\n  width: auto;\n  min-width: 60px\n}\n.dropdown .dropdown-menu li {\n  border-bottom: 1px solid #383943\n}\n.dropdown .dropdown-menu li:last-child {\n  border-bottom: 0\n}\n.dropdown .dropdown-menu li a {\n  color: #BEC2CC;\n  font-size: 12px;\n  padding: 0 10px;\n  line-height: 30px\n}\n.dropdown.open > .dropdown-toggle.btn-default {\n  color: #BEC2CC;\n}\n.dropdown .dropdown-menu li a:hover,\n.dropdown.open > .dropdown-toggle.btn-default:hover {\n  background: 0;\n  color: ", ";\n}\n\n.divider {\n  position: relative;\n  float: left;\n  width: 1px;\n  height: 20px;\n  margin: 10px 5px;\n  background: ", "\n}\n\n"])), function (props) {
   return props.theme.dante_menu_height;
 }, function (props) {
   return props.theme.dante_menu_background;
@@ -2051,14 +2181,10 @@ var AnchorStyle = styled.div(_templateObject || (_templateObject = _taggedTempla
   return props.theme.dante_menu_divider_color;
 });
 
-function _createSuper$2(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct$2(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _isNativeReflectConstruct$2() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-
 var DanteImagePopover = /*#__PURE__*/function (_React$Component) {
   _inherits(DanteImagePopover, _React$Component);
 
-  var _super = _createSuper$2(DanteImagePopover);
+  var _super = _createSuper(DanteImagePopover);
 
   function DanteImagePopover(props) {
     var _this;
@@ -2215,7 +2341,7 @@ var DanteImagePopover = /*#__PURE__*/function (_React$Component) {
 var DanteImagePopoverItem = /*#__PURE__*/function (_React$Component2) {
   _inherits(DanteImagePopoverItem, _React$Component2);
 
-  var _super2 = _createSuper$2(DanteImagePopoverItem);
+  var _super2 = _createSuper(DanteImagePopoverItem);
 
   function DanteImagePopoverItem() {
     var _this2;
@@ -2258,14 +2384,10 @@ var DanteImagePopoverConfig = function DanteImagePopoverConfig() {
   return Object.assign(config, options);
 };
 
-function _createSuper$3(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct$3(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _isNativeReflectConstruct$3() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-
 var DanteAnchorPopover = /*#__PURE__*/function (_React$Component) {
   _inherits(DanteAnchorPopover, _React$Component);
 
-  var _super = _createSuper$3(DanteAnchorPopover);
+  var _super = _createSuper(DanteAnchorPopover);
 
   function DanteAnchorPopover(props) {
     var _this;
@@ -2299,9 +2421,9 @@ var DanteAnchorPopover = /*#__PURE__*/function (_React$Component) {
         return;
       }
 
-      var editorState = _this.props.editorState;
+      _this.props.editorState;
       var selectionRect = node.getBoundingClientRect();
-      var parent = ReactDOM.findDOMNode(_this.props.editor);
+      ReactDOM.findDOMNode(_this.props.editor);
       var relativeParent = getRelativeParent(_this.refs.dante_popover.parentElement);
       var toolbarHeight = _this.refs.dante_popover.clientHeight;
       var toolbarWidth = _this.refs.dante_popover.clientWidth;
@@ -2375,8 +2497,8 @@ var DanteAnchorPopoverConfig = function DanteAnchorPopoverConfig() {
   return Object.assign(config, options);
 };
 
-var _templateObject$1, _templateObject2;
-var EditorContainer = styled.div(_templateObject$1 || (_templateObject$1 = _taggedTemplateLiteral(["\n  \n  @import url('//fonts.googleapis.com/css?family=Merriweather:400,700,400italic,700italic|Open+Sans:400,300,800');\n\n  font-family: ", ";\n  letter-spacing: 0.01rem;\n  font-weight: 400;\n  font-style: normal;\n  font-size: ", ";\n  line-height: ", ";\n  color: ", ";\n\n  @media (max-width: 500px) {\n\n    .postContent {\n      font-size: ", ";\n      line-height: ", ";\n    }\n\n  }\n\n  .public-DraftEditorPlaceholder-root {\n    color: ", ";\n    position: absolute;\n    z-index: 0;\n    font-size: ", ";\n    background-color: transparent;\n  }\n\n  .graf--h2,\n  .graf--h3,\n  .graf--h4,\n  .graf--h5,\n  .graf--h6,\n  .graf--h7,\n  .postList,\n  .graf--hr,\n  .graf--figure,\n  .graf--blockquote,\n  .graf--pullquote,\n  .graf--p,\n  .graf--pre {\n    margin: 0;\n    //position:relative;\n  }\n\n  .graf--code {\n    position:relative;\n    overflow: visible;\n\n    background: ", ";\n    font-family: ", ";\n    font-size: 16px;\n    margin-bottom: 20px;\n    padding: 20px;\n    white-space: pre-wrap;\n    color: ", ";\n\n    .dante-code-syntax{\n      color: ", ";\n      position: absolute;\n      top: 4px;\n      right: 4px;\n      width: 165px;\n    }\n  }\n\n  .graf--pre {\n      background: #000 !important;\n      font-family: ", ";\n      font-size: 16px;\n      margin-bottom: 20px;\n      padding: 20px;\n      white-space: pre-wrap;\n      color: #fff !important;\n  }\n\n  .postList {\n    margin-bottom: 30px;\n  }\n\n  .graf--p,\n  .graf--blockquote,\n  .graf--pullquote {\n    margin-bottom: 30px;\n  }\n\n  .graf--code {\n    line-height: 1em;\n  }\n\n  .graf--p.dante--spinner{\n    position:relative;\n  }\n\n  .graf--hr {\n    hr{\n      border: 1px solid #ccc;\n      margin: 26px;\n    }\n  }\n\n  .graf--h2 {\n    font-family: ", ";\n    font-size: 3.6em;\n    font-style: normal;\n    font-weight: 700;\n    letter-spacing: -0.04em;\n    line-height: 1;\n    margin-bottom: .4em;\n    margin-left: -3px;\n    margin-top: 40px;\n    padding-top: 0;\n  }\n  .graf--h3 {\n    font-family: ", ";\n    letter-spacing: -0.02em;\n    font-weight: 700;\n    font-style: normal;\n    font-size: 2.1em;\n    margin-left: -1.8px;\n    line-height: 1.2;\n    margin-top: 40px;\n    margin-bottom: .7em;\n  }\n  .public-DraftStyleDefault-pre{\n    overflow: inherit;\n  }\n  .graf--h4 {\n    font-family: ", ";\n    letter-spacing: -0.02em;\n    font-weight: 300;\n    font-style: normal;\n    font-size: 1.5em;\n    margin-left: -1.5px;\n    line-height: 1.2;\n    color: ", ";\n    margin-top: 40px;\n    margin-bottom: .6em;\n  }\n\n  .section--first .graf--h2.graf--first,\n  .section--first .graf--h3.graf--first,\n  .section--first .graf--h4.graf--first {\n    margin-top: 0;\n    padding-top: 0;\n  }\n\n  .graf--h2 + .graf--h2 {\n    margin-top: -8px;\n  }\n\n  .graf--h2 + .graf--h3,\n  .graf--h2 + .graf--h4 {\n    margin-top: -6px;\n  }\n\n  .graf--h3 + .graf--h4,\n  .graf--h4 + .graf--h2 {\n    margin-top: 2px;\n  }\n\n  .graf--h3 + .graf--h4,\n  .graf--h4 + .graf--h3 {\n    margin-top: -2px;\n  }\n\n  .graf--h2 + .postList,\n  .graf--h3 + .postList,\n  .graf--h4 + .postList {\n    margin-top: 10px;\n  }\n\n  .graf--h2 + .graf--p.graf--empty,\n  .graf--h3 + .graf--p.graf--empty,\n  .graf--h4 + .graf--p.graf--empty {\n    margin-bottom: -7px;\n    margin-top: -7px;\n  }\n\n  .graf--h2 + .graf--p.graf--empty + .graf--h1,\n  .graf--h3 + .graf--p.graf--empty + .graf--h1,\n  .graf--h4 + .graf--p.graf--empty + .graf--h1 {\n    margin-top: -5px;\n  }\n\n  .graf--h2 + .graf--p.graf--empty + .graf--h3,\n  .graf--h3 + .graf--p.graf--empty + .graf--h3,\n  .graf--h4 + .graf--p.graf--empty + .graf--h3,\n  .graf--h2 + .graf--p.graf--empty + .graf--h4,\n  .graf--h3 + .graf--p.graf--empty + .graf--h4,\n  .graf--h4 + .graf--p.graf--empty + .graf--h4 {\n    margin-top: -8px;\n  }\n\n\n  .graf--blockquote, blockquote {\n    font-family: ", ";\n    border-left: 3px solid rgba(0, 0, 0, .8);\n\n    font-style: italic;\n    font-weight: 400;\n    letter-spacing: 0.16px;\n    letter-spacing: 0.02rem;\n    margin-left: -17px;\n    padding-left: 15px;\n    margin-bottom: 25px;\n    font-size: 1.2em;\n    line-height: 1.9em;\n    margin-top: 20px;\n\n  }\n  .graf--blockquote + .graf--blockquote {\n    margin-top: -30px;\n    padding-top: 30px;\n  }\n\n  .graf--pullquote {\n    line-height: 1.4;\n    text-align: center;\n    font-size: 3.2em;\n    margin: 48px -160px;\n    border: none;\n    padding: 0;\n    font-family: ", ";\n    letter-spacing: 0.01rem;\n    font-weight: 400;\n    font-style: italic;\n    -webkit-transition: margin 100ms;\n    transition: margin 100ms;\n  }\n\n  .graf--pre + .graf--pre {\n    margin-top: -20px;\n  }\n\n  .graf--figure {\n  \n    box-sizing: border-box;\n    clear: both;\n    margin-bottom: 30px;\n    outline: medium none;\n    position: relative;\n\n    &.is-mediaFocused .graf-image,\n    &.is-mediaFocused iframe {\n      box-shadow: 0 0 0 3px #57ad68;\n    }\n  }\n\n  .graf--mixtapeEmbed {\n    a {\n      text-decoration: none;\n    }\n    &.is-mediaFocused {\n      box-shadow: 0 0 0 1px #57ad68;\n    }\n\n    .graf--media-embed-close{\n      position: absolute;\n      top: 1px;\n      display: inline-block;\n      font-size: 2em;\n      width: 20px;\n      right: 10px;\n      text-shadow: 0px 0px 0px white;\n    }\n\n    border-color: ", ";\n    border-radius: 5px;\n    border-style: solid;\n    border-width: 1px;\n    box-sizing: border-box;\n    //color: rgba(0, 0, 0, 0.6);\n    font-family: ", ";\n    font-size: 12px;\n    font-style: normal;\n    font-weight: 300;\n    letter-spacing: -0.02em;\n    margin-bottom: 40px;\n    margin-top: 40px;\n    max-height: 310px;\n    //max-width: 700px;\n    overflow: hidden;\n    padding: 30px;\n    position: relative;\n\n    .is-postEditMode iframe {\n        border: 3px solid rgba(255, 255, 255, 0);\n    }\n\n    .mixtapeImage {\n        background-position: center center;\n        background-repeat: no-repeat;\n        background-size: cover;\n        float: right;\n        height: 310px;\n        margin: -30px -30px 0 25px;\n        width: 310px;\n    }\n\n    .mixtapeImage--empty {\n        height: 0;\n        width: 0;\n    }\n\n    .markup--mixtapeEmbed-strong {\n        //color: #000;\n        display: block;\n        font-family: $dante-font-family-sans;\n        font-size: 30px;\n        font-style: normal;\n        font-weight: 300;\n        letter-spacing: -0.02em;\n        line-height: 1.2;\n        margin-bottom: 0px;\n    }\n\n    .markup--mixtapeEmbed-em {\n        display: block;\n        font-size: 16px;\n        font-style: normal;\n        margin-bottom: 10px;\n        max-height: 120px;\n        overflow: hidden;\n    }\n\n  }\n\n\n\n  .graf--h4 + .graf--figure,\n  .graf--h3 + .graf--figure,\n  .graf--h2 + .graf--figure {\n    margin-top: 15px;\n  }\n\n  .graf--first {\n    margin-top: 0;\n    padding-top: 0;\n  }\n\n  /*.graf--empty {\n    margin-bottom: -7px;\n    margin-top: -7px;\n  }*/\n\n  p[data-align=\"center\"],\n  .graf--h2[data-align=\"center\"],\n  .graf--h3[data-align=\"center\"],\n  .graf--h4[data-align=\"center\"],\n  .graf--blockquote[data-align=\"center\"] {\n    text-align: center;\n  }\n\n  .markup--anchor,\n  .graf--sectionCaption {\n      cursor: text;\n  }\n  .markup--anchor {\n    text-decoration: underline;\n    color: inherit;\n  }\n\n  @media (max-width: 500px) {\n\n    .graf--h2 {\n      font-size: 2.6em;\n    }\n    .graf--h3 {\n      font-size: 1.6em;\n    }\n    .graf--h4 {\n      font-size: 1.4em;\n    }\n\n  }\n\n  .graf--divider span{\n    text-align: center;\n    width: 100%;\n    display: block;\n  }\n\n  .graf--divider span:before {\n    line-height: 1;\n    user-select: none;\n    font-weight: 400;\n    font-size: 25px;\n    letter-spacing: 18px;\n    content: \"...\";\n    display: inline-block;\n    margin-left: .6em;\n    position: relative;\n    color: #757575;\n    top: -3px;\n  }\n\n\n\n  .graf--layoutOutsetLeft {\n      margin-left: -160px;\n  }\n\n  .graf--layoutFillWidth {\n      margin-left: -200px;\n      margin-right: -200px;\n  }\n\n  .graf--layoutOutsetLeft {\n      width: 75%;\n  }\n  .graf--layoutInsetLeft, .graf--layoutOutsetLeft {\n      float: left;\n      margin-right: 30px;\n      padding-top: 10px;\n      padding-bottom: 10px;\n  }\n\n  .imageCaption {\n\n    top: 0;\n    text-align: center;\n    margin-top: 0;\n    font-family: ", ";\n    letter-spacing: 0;\n    font-weight: 400;\n    font-size: 13px;\n    line-height: 1.4;\n    color: ", ";\n    outline: 0;\n    z-index: 300;\n    margin-top: 10px;\n    position:relative;\n\n    .danteDefaultPlaceholder{\n      margin-bottom: -18px !important;\n      display: block;\n    }\n  }\n\n\n  // FIGURE WRAPPER\n\n    .aspectRatioPlaceholder {\n      margin: 0 auto;\n      position: relative;\n      width: 100%;\n    }\n\n    .graf-image:before,\n    .iframeContainer:before {\n      .is-postEditMode & {\n        bottom: 0;\n        content: \"\";\n        left: 0;\n        position: absolute;\n        right: 0;\n        top: 0;\n        z-index: 500;\n      }\n    }\n\n    .aspectRatioPlaceholder.is-locked .graf-image, \n    .aspectRatioPlaceholder.is-locked .graf-imageAnchor {\n        height: 100%;\n        left: 0;\n        position: absolute;\n        top: 0;\n        width: 100%;\n    }\n\n    .graf-image,\n    .graf-imageAnchor,\n    .iframeContainer > iframe,\n    .iframeContainer {\n      box-sizing: border-box;\n      display: block;\n      margin: auto;\n      max-width: 100%;\n    }\n\n    .aspectRatioPlaceholder {\n      .image-upoader-loader{\n        position: absolute;\n        bottom: 0px;\n        left: 0%;\n        background-color: #fff;\n        width: 100%;\n        /* height: 3px; */\n        text-align: center;\n        top: 0px;\n        vertical-align: text-bottom;\n        opacity: 0.7;\n        p{\n          line-height: 5px;\n          /* font-weight: 700; */\n          /* text-transform: uppercase; */\n          font-size: 14px;\n          margin-top: 49%;\n        }\n      }\n    }\n\n    div[contenteditable=\"false\"] {\n      .danteDefaultPlaceholder{\n        display:none;\n      }\n    }\n\n    div[contenteditable=\"false\"] {\n      a.markup--anchor {\n        cursor: pointer;\n      }\n    }\n\n    figcaption .public-DraftStyleDefault-block {\n        text-align: center;\n    }\n\n    @media (max-width: 1200px) {\n      .imageCaption,\n      .postField--outsetCenterImage > .imageCaption {\n        position: relative;\n        width: 100%;\n        text-align: center;\n        left: 0;\n        margin-top: 10px;\n      }\n    }\n\n    figure.graf--layoutOutsetLeft {\n      .imageCaption,\n      .postField--outsetCenterImage > .imageCaption {\n        position: relative;\n        width: 100%;\n        text-align: center;\n        left: 0;\n        margin-top: 10px;\n      }\n    }\n\n    figure.is-defaultValue .imageCaption,\n    .graf--sectionCaption.is-defaultValue {\n      display: none;\n    }\n\n    .graf--figure.is-mediaFocused .imageCaption,\n    .graf--figure.is-defaultValue.is-selected .imageCaption,\n    section.is-mediaFocused .graf--sectionCaption,\n    .graf--sectionCaption.is-defaultValue.is-selected {\n      display: block;\n    }\n\n"])), function (props) {
+var _templateObject, _templateObject2;
+var EditorContainer = styled.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  font-family: ", ";\n  letter-spacing: 0.01rem;\n  font-weight: 400;\n  font-style: normal;\n  font-size: ", ";\n  line-height: ", ";\n  color: ", ";\n\n  @media (max-width: 500px) {\n\n    .postContent {\n      font-size: ", ";\n      line-height: ", ";\n    }\n\n  }\n\n  .public-DraftEditorPlaceholder-root {\n    color: ", ";\n    position: absolute;\n    z-index: 0;\n    font-size: ", ";\n    background-color: transparent;\n  }\n\n  .graf--h2,\n  .graf--h3,\n  .graf--h4,\n  .graf--h5,\n  .graf--h6,\n  .graf--h7,\n  .postList,\n  .graf--hr,\n  .graf--figure,\n  .graf--blockquote,\n  .graf--pullquote,\n  .graf--p,\n  .graf--pre {\n    margin: 0;\n    //position:relative;\n  }\n\n  .graf--code {\n    position:relative;\n    overflow: visible;\n\n    background: ", ";\n    font-family: ", ";\n    font-size: 16px;\n    margin-bottom: 20px;\n    padding: 20px;\n    white-space: pre-wrap;\n    color: ", ";\n\n    .dante-code-syntax{\n      color: ", ";\n      position: absolute;\n      top: 4px;\n      right: 4px;\n      width: 165px;\n    }\n  }\n\n  .graf--pre {\n      background: #000 !important;\n      font-family: ", ";\n      font-size: 16px;\n      margin-bottom: 20px;\n      padding: 20px;\n      white-space: pre-wrap;\n      color: #fff !important;\n  }\n\n  .postList {\n    margin-bottom: 30px;\n  }\n\n  .graf--p,\n  .graf--blockquote,\n  .graf--pullquote {\n    margin-bottom: 30px;\n  }\n\n  .graf--code {\n    line-height: 1em;\n  }\n\n  .graf--p.dante--spinner{\n    position:relative;\n  }\n\n  .graf--hr {\n    hr{\n      border: 1px solid #ccc;\n      margin: 26px;\n    }\n  }\n\n  .graf--h2 {\n    font-family: ", ";\n    font-size: 3.6em;\n    font-style: normal;\n    font-weight: 700;\n    letter-spacing: -0.04em;\n    line-height: 1;\n    margin-bottom: .4em;\n    margin-left: -3px;\n    margin-top: 40px;\n    padding-top: 0;\n  }\n  .graf--h3 {\n    font-family: ", ";\n    letter-spacing: -0.02em;\n    font-weight: 700;\n    font-style: normal;\n    font-size: 2.1em;\n    margin-left: -1.8px;\n    line-height: 1.2;\n    margin-top: 40px;\n    margin-bottom: .7em;\n  }\n  .public-DraftStyleDefault-pre{\n    overflow: inherit;\n  }\n  .graf--h4 {\n    font-family: ", ";\n    letter-spacing: -0.02em;\n    font-weight: 300;\n    font-style: normal;\n    font-size: 1.5em;\n    margin-left: -1.5px;\n    line-height: 1.2;\n    color: ", ";\n    margin-top: 40px;\n    margin-bottom: .6em;\n  }\n\n  .section--first .graf--h2.graf--first,\n  .section--first .graf--h3.graf--first,\n  .section--first .graf--h4.graf--first {\n    margin-top: 0;\n    padding-top: 0;\n  }\n\n  .graf--h2 + .graf--h2 {\n    margin-top: -8px;\n  }\n\n  .graf--h2 + .graf--h3,\n  .graf--h2 + .graf--h4 {\n    margin-top: -6px;\n  }\n\n  .graf--h3 + .graf--h4,\n  .graf--h4 + .graf--h2 {\n    margin-top: 2px;\n  }\n\n  .graf--h3 + .graf--h4,\n  .graf--h4 + .graf--h3 {\n    margin-top: -2px;\n  }\n\n  .graf--h2 + .postList,\n  .graf--h3 + .postList,\n  .graf--h4 + .postList {\n    margin-top: 10px;\n  }\n\n  .graf--h2 + .graf--p.graf--empty,\n  .graf--h3 + .graf--p.graf--empty,\n  .graf--h4 + .graf--p.graf--empty {\n    margin-bottom: -7px;\n    margin-top: -7px;\n  }\n\n  .graf--h2 + .graf--p.graf--empty + .graf--h1,\n  .graf--h3 + .graf--p.graf--empty + .graf--h1,\n  .graf--h4 + .graf--p.graf--empty + .graf--h1 {\n    margin-top: -5px;\n  }\n\n  .graf--h2 + .graf--p.graf--empty + .graf--h3,\n  .graf--h3 + .graf--p.graf--empty + .graf--h3,\n  .graf--h4 + .graf--p.graf--empty + .graf--h3,\n  .graf--h2 + .graf--p.graf--empty + .graf--h4,\n  .graf--h3 + .graf--p.graf--empty + .graf--h4,\n  .graf--h4 + .graf--p.graf--empty + .graf--h4 {\n    margin-top: -8px;\n  }\n\n\n  .graf--blockquote, blockquote {\n    font-family: ", ";\n    border-left: 3px solid rgba(0, 0, 0, .8);\n\n    font-style: italic;\n    font-weight: 400;\n    letter-spacing: 0.16px;\n    letter-spacing: 0.02rem;\n    margin-left: -17px;\n    padding-left: 15px;\n    margin-bottom: 25px;\n    font-size: 1.2em;\n    line-height: 1.9em;\n    margin-top: 20px;\n\n  }\n  .graf--blockquote + .graf--blockquote {\n    margin-top: -30px;\n    padding-top: 30px;\n  }\n\n  .graf--pullquote {\n    line-height: 1.4;\n    text-align: center;\n    font-size: 3.2em;\n    margin: 48px -160px;\n    border: none;\n    padding: 0;\n    font-family: ", ";\n    letter-spacing: 0.01rem;\n    font-weight: 400;\n    font-style: italic;\n    -webkit-transition: margin 100ms;\n    transition: margin 100ms;\n  }\n\n  .graf--pre + .graf--pre {\n    margin-top: -20px;\n  }\n\n  .graf--figure {\n  \n    box-sizing: border-box;\n    clear: both;\n    margin-bottom: 30px;\n    outline: medium none;\n    position: relative;\n\n    &.is-mediaFocused .graf-image,\n    &.is-mediaFocused iframe {\n      box-shadow: 0 0 0 3px #57ad68;\n    }\n  }\n\n  .graf--mixtapeEmbed {\n    a {\n      text-decoration: none;\n    }\n    &.is-mediaFocused {\n      box-shadow: 0 0 0 1px #57ad68;\n    }\n\n    .graf--media-embed-close{\n      position: absolute;\n      top: 1px;\n      display: inline-block;\n      font-size: 2em;\n      width: 20px;\n      right: 10px;\n      text-shadow: 0px 0px 0px white;\n    }\n\n    border-color: ", ";\n    border-radius: 5px;\n    border-style: solid;\n    border-width: 1px;\n    box-sizing: border-box;\n    //color: rgba(0, 0, 0, 0.6);\n    font-family: ", ";\n    font-size: 12px;\n    font-style: normal;\n    font-weight: 300;\n    letter-spacing: -0.02em;\n    margin-bottom: 40px;\n    margin-top: 40px;\n    max-height: 310px;\n    //max-width: 700px;\n    overflow: hidden;\n    padding: 30px;\n    position: relative;\n\n    .is-postEditMode iframe {\n        border: 3px solid rgba(255, 255, 255, 0);\n    }\n\n    .mixtapeImage {\n        background-position: center center;\n        background-repeat: no-repeat;\n        background-size: cover;\n        float: right;\n        height: 310px;\n        margin: -30px -30px 0 25px;\n        width: 310px;\n    }\n\n    .mixtapeImage--empty {\n        height: 0;\n        width: 0;\n    }\n\n    .markup--mixtapeEmbed-strong {\n        //color: #000;\n        display: block;\n        font-family: $dante-font-family-sans;\n        font-size: 30px;\n        font-style: normal;\n        font-weight: 300;\n        letter-spacing: -0.02em;\n        line-height: 1.2;\n        margin-bottom: 0px;\n    }\n\n    .markup--mixtapeEmbed-em {\n        display: block;\n        font-size: 16px;\n        font-style: normal;\n        margin-bottom: 10px;\n        max-height: 120px;\n        overflow: hidden;\n    }\n\n  }\n\n\n\n  .graf--h4 + .graf--figure,\n  .graf--h3 + .graf--figure,\n  .graf--h2 + .graf--figure {\n    margin-top: 15px;\n  }\n\n  .graf--first {\n    margin-top: 0;\n    padding-top: 0;\n  }\n\n  /*.graf--empty {\n    margin-bottom: -7px;\n    margin-top: -7px;\n  }*/\n\n  p[data-align=\"center\"],\n  .graf--h2[data-align=\"center\"],\n  .graf--h3[data-align=\"center\"],\n  .graf--h4[data-align=\"center\"],\n  .graf--blockquote[data-align=\"center\"] {\n    text-align: center;\n  }\n\n  .markup--anchor,\n  .graf--sectionCaption {\n      cursor: text;\n  }\n  .markup--anchor {\n    text-decoration: underline;\n    color: inherit;\n  }\n\n  @media (max-width: 500px) {\n\n    .graf--h2 {\n      font-size: 2.6em;\n    }\n    .graf--h3 {\n      font-size: 1.6em;\n    }\n    .graf--h4 {\n      font-size: 1.4em;\n    }\n\n  }\n\n  .graf--divider span{\n    text-align: center;\n    width: 100%;\n    display: block;\n  }\n\n  .graf--divider span:before {\n    line-height: 1;\n    user-select: none;\n    font-weight: 400;\n    font-size: 25px;\n    letter-spacing: 18px;\n    content: \"...\";\n    display: inline-block;\n    margin-left: .6em;\n    position: relative;\n    color: #757575;\n    top: -3px;\n  }\n\n\n\n  .graf--layoutOutsetLeft {\n      margin-left: -160px;\n  }\n\n  .graf--layoutFillWidth {\n      margin-left: -200px;\n      margin-right: -200px;\n  }\n\n  .graf--layoutOutsetLeft {\n      width: 75%;\n  }\n  .graf--layoutInsetLeft, .graf--layoutOutsetLeft {\n      float: left;\n      margin-right: 30px;\n      padding-top: 10px;\n      padding-bottom: 10px;\n  }\n\n  .imageCaption {\n\n    top: 0;\n    text-align: center;\n    margin-top: 0;\n    font-family: ", ";\n    letter-spacing: 0;\n    font-weight: 400;\n    font-size: 13px;\n    line-height: 1.4;\n    color: ", ";\n    outline: 0;\n    z-index: 300;\n    margin-top: 10px;\n    position:relative;\n\n    .danteDefaultPlaceholder{\n      margin-bottom: -18px !important;\n      display: block;\n    }\n  }\n\n\n  // FIGURE WRAPPER\n\n    .aspectRatioPlaceholder {\n      margin: 0 auto;\n      position: relative;\n      width: 100%;\n    }\n\n    .graf-image:before,\n    .iframeContainer:before {\n      .is-postEditMode & {\n        bottom: 0;\n        content: \"\";\n        left: 0;\n        position: absolute;\n        right: 0;\n        top: 0;\n        z-index: 500;\n      }\n    }\n\n    .aspectRatioPlaceholder.is-locked .graf-image, \n    .aspectRatioPlaceholder.is-locked .graf-imageAnchor {\n        height: 100%;\n        left: 0;\n        position: absolute;\n        top: 0;\n        width: 100%;\n    }\n\n    .graf-image,\n    .graf-imageAnchor,\n    .iframeContainer > iframe,\n    .iframeContainer {\n      box-sizing: border-box;\n      display: block;\n      margin: auto;\n      max-width: 100%;\n    }\n\n    .aspectRatioPlaceholder {\n      .image-upoader-loader{\n        position: absolute;\n        bottom: 0px;\n        left: 0%;\n        background-color: #fff;\n        width: 100%;\n        /* height: 3px; */\n        text-align: center;\n        top: 0px;\n        vertical-align: text-bottom;\n        opacity: 0.7;\n        p{\n          line-height: 5px;\n          /* font-weight: 700; */\n          /* text-transform: uppercase; */\n          font-size: 14px;\n          margin-top: 49%;\n        }\n      }\n    }\n\n    div[contenteditable=\"false\"] {\n      .danteDefaultPlaceholder{\n        display:none;\n      }\n    }\n\n    div[contenteditable=\"false\"] {\n      a.markup--anchor {\n        cursor: pointer;\n      }\n    }\n\n    figcaption .public-DraftStyleDefault-block {\n        text-align: center;\n    }\n\n    @media (max-width: 1200px) {\n      .imageCaption,\n      .postField--outsetCenterImage > .imageCaption {\n        position: relative;\n        width: 100%;\n        text-align: center;\n        left: 0;\n        margin-top: 10px;\n      }\n    }\n\n    figure.graf--layoutOutsetLeft {\n      .imageCaption,\n      .postField--outsetCenterImage > .imageCaption {\n        position: relative;\n        width: 100%;\n        text-align: center;\n        left: 0;\n        margin-top: 10px;\n      }\n    }\n\n    figure.is-defaultValue .imageCaption,\n    .graf--sectionCaption.is-defaultValue {\n      display: none;\n    }\n\n    .graf--figure.is-mediaFocused .imageCaption,\n    .graf--figure.is-defaultValue.is-selected .imageCaption,\n    section.is-mediaFocused .graf--sectionCaption,\n    .graf--sectionCaption.is-defaultValue.is-selected {\n      display: block;\n    }\n\n"])), function (props) {
   return props.theme.dante_font_family_serif;
 }, function (props) {
   return props.theme.dante_editor_font_size;
@@ -2513,14 +2635,10 @@ var InlinetooltipWrapper = styled.div(_templateObject2 || (_templateObject2 = _t
   return props.theme.tooltip_default_transition;
 });
 
-function _createSuper$4(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct$4(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _isNativeReflectConstruct$4() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-
 var DanteInlineTooltip = /*#__PURE__*/function (_React$Component) {
   _inherits(DanteInlineTooltip, _React$Component);
 
-  var _super = _createSuper$4(DanteInlineTooltip);
+  var _super = _createSuper(DanteInlineTooltip);
 
   function DanteInlineTooltip(props) {
     var _this;
@@ -2821,7 +2939,7 @@ var DanteInlineTooltip = /*#__PURE__*/function (_React$Component) {
 var InlineTooltipItem = /*#__PURE__*/function (_React$Component2) {
   _inherits(InlineTooltipItem, _React$Component2);
 
-  var _super2 = _createSuper$4(InlineTooltipItem);
+  var _super2 = _createSuper(InlineTooltipItem);
 
   function InlineTooltipItem() {
     var _this3;
@@ -2874,14 +2992,10 @@ var DanteInlineTooltipConfig = function DanteInlineTooltipConfig() {
   return Object.assign(config, options);
 };
 
-function _createSuper$5(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct$5(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _isNativeReflectConstruct$5() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-
 var DanteTooltipColor = /*#__PURE__*/function (_React$Component) {
   _inherits(DanteTooltipColor, _React$Component);
 
-  var _super = _createSuper$5(DanteTooltipColor);
+  var _super = _createSuper(DanteTooltipColor);
 
   function DanteTooltipColor() {
     var _this;
@@ -2978,14 +3092,10 @@ var DanteTooltipColor = /*#__PURE__*/function (_React$Component) {
   return DanteTooltipColor;
 }(React.Component);
 
-function _createSuper$6(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct$6(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _isNativeReflectConstruct$6() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-
 var DanteTooltip = /*#__PURE__*/function (_React$Component) {
   _inherits(DanteTooltip, _React$Component);
 
-  var _super = _createSuper$6(DanteTooltip);
+  var _super = _createSuper(DanteTooltip);
 
   function DanteTooltip(props) {
     var _this;
@@ -3323,7 +3433,6 @@ var DanteTooltip = /*#__PURE__*/function (_React$Component) {
               type: "block",
               currentStyle: _this.props.editorState.getCurrentInlineStyle
             });
-            break;
 
           case "inline":
             return /*#__PURE__*/React.createElement(DanteTooltipItem, {
@@ -3333,7 +3442,6 @@ var DanteTooltip = /*#__PURE__*/function (_React$Component) {
               editorState: _this.props.editorState,
               handleClick: _this._clickInlineHandler
             });
-            break;
 
           case "color":
             return /*#__PURE__*/React.createElement(DanteTooltipColor, {
@@ -3346,13 +3454,11 @@ var DanteTooltip = /*#__PURE__*/function (_React$Component) {
               handleClick: _this._clickBlockInlineStyle,
               show: _this.state.show
             });
-            break;
 
           case "separator":
             return /*#__PURE__*/React.createElement(DanteMenuDivider, {
               key: i
             });
-            break;
 
           case "link":
             return /*#__PURE__*/React.createElement(DanteTooltipLink, {
@@ -3360,10 +3466,6 @@ var DanteTooltip = /*#__PURE__*/function (_React$Component) {
               editorState: _this.props.editorState,
               enableLinkMode: _this._enableLinkMode
             });
-            break;
-
-          default:
-            break;
         }
       })));
     });
@@ -3391,7 +3493,7 @@ var DanteMenuDivider = function DanteMenuDivider() {
 var DanteTooltipItem = /*#__PURE__*/function (_React$Component2) {
   _inherits(DanteTooltipItem, _React$Component2);
 
-  var _super2 = _createSuper$6(DanteTooltipItem);
+  var _super2 = _createSuper(DanteTooltipItem);
 
   function DanteTooltipItem() {
     var _this2;
@@ -3467,7 +3569,7 @@ var DanteTooltipItem = /*#__PURE__*/function (_React$Component2) {
 var DanteTooltipLink = /*#__PURE__*/function (_React$Component3) {
   _inherits(DanteTooltipLink, _React$Component3);
 
-  var _super3 = _createSuper$6(DanteTooltipLink);
+  var _super3 = _createSuper(DanteTooltipLink);
 
   function DanteTooltipLink() {
     var _this3;
@@ -3582,14 +3684,10 @@ var DanteTooltipConfig = function DanteTooltipConfig() {
   return Object.assign(config, options);
 };
 
-function _createSuper$7(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct$7(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _isNativeReflectConstruct$7() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-
 var ImageBlock = /*#__PURE__*/function (_React$Component) {
   _inherits(ImageBlock, _React$Component);
 
-  var _super = _createSuper$7(ImageBlock);
+  var _super = _createSuper(ImageBlock);
 
   function ImageBlock(props) {
     var _this;
@@ -3961,7 +4059,7 @@ var ImageBlock = /*#__PURE__*/function (_React$Component) {
 var Loader = /*#__PURE__*/function (_React$Component2) {
   _inherits(Loader, _React$Component2);
 
-  var _super2 = _createSuper$7(Loader);
+  var _super2 = _createSuper(Loader);
 
   function Loader() {
     var _this2;
@@ -4045,14 +4143,10 @@ var ImageBlockConfig = function ImageBlockConfig() {
   return Object.assign(config, options);
 };
 
-function _createSuper$8(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct$8(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _isNativeReflectConstruct$8() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-
 var EmbedBlock = /*#__PURE__*/function (_React$Component) {
   _inherits(EmbedBlock, _React$Component);
 
-  var _super = _createSuper$8(EmbedBlock);
+  var _super = _createSuper(EmbedBlock);
 
   function EmbedBlock(props) {
     var _this;
@@ -4086,7 +4180,7 @@ var EmbedBlock = /*#__PURE__*/function (_React$Component) {
       var getEditorState = blockProps.getEditorState,
           setEditorState = blockProps.setEditorState;
       var data = block.getData();
-      var newData = data.merge(_this.state);
+      data.merge(_this.state);
       return setEditorState(resetBlockWithType(getEditorState(), 'unstyled', {}));
     });
 
@@ -4224,14 +4318,10 @@ var EmbedBlockConfig = function EmbedBlockConfig() {
   return Object.assign(config, options);
 };
 
-function _createSuper$9(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct$9(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _isNativeReflectConstruct$9() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-
 var VideoBlock = /*#__PURE__*/function (_React$Component) {
   _inherits(VideoBlock, _React$Component);
 
-  var _super = _createSuper$9(VideoBlock);
+  var _super = _createSuper(VideoBlock);
 
   function VideoBlock(props) {
     var _this;
@@ -4364,14 +4454,10 @@ var VideoBlockConfig = function VideoBlockConfig() {
   return Object.assign(config, options);
 };
 
-function _createSuper$a(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct$a(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _isNativeReflectConstruct$a() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-
 var PlaceholderBlock = /*#__PURE__*/function (_React$Component) {
   _inherits(PlaceholderBlock, _React$Component);
 
-  var _super = _createSuper$a(PlaceholderBlock);
+  var _super = _createSuper(PlaceholderBlock);
 
   function PlaceholderBlock(props) {
     var _this;
@@ -4456,14 +4542,10 @@ var PlaceholderBlockConfig = function PlaceholderBlockConfig() {
   return Object.assign(config, options);
 };
 
-function _createSuper$b(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct$b(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _isNativeReflectConstruct$b() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-
-var CodeBlock = /*#__PURE__*/function (_React$Component) {
+/*#__PURE__*/(function (_React$Component) {
   _inherits(CodeBlock, _React$Component);
 
-  var _super = _createSuper$b(CodeBlock);
+  var _super = _createSuper(CodeBlock);
 
   function CodeBlock(props) {
     var _this;
@@ -4517,16 +4599,12 @@ var CodeBlock = /*#__PURE__*/function (_React$Component) {
   }]);
 
   return CodeBlock;
-}(React.Component);
-
-function _createSuper$c(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct$c(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _isNativeReflectConstruct$c() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+})(React.Component);
 
 var Link = /*#__PURE__*/function (_React$Component) {
   _inherits(Link, _React$Component);
 
-  var _super = _createSuper$c(Link);
+  var _super = _createSuper(Link);
 
   function Link(props) {
     var _this;
@@ -4613,7 +4691,7 @@ var defaultGetSyntax = function defaultGetSyntax(block) {
 };
 
 var defaultRender = function defaultRender(props) {
-  return React.createElement("span", {
+  return /*#__PURE__*/React.createElement("span", {
     className: 'prism-token token ' + props.type
   }, props.children);
 };
@@ -4635,8 +4713,6 @@ var PrismDraftDecorator = function PrismDraftDecorator() {
   return new PrismDecorator(Object.assign(options, PrismOptions));
 };
 
-var _this2 = undefined;
-
 //TODO: what the f*ck is happening here? ;-;
 var findEntities = function findEntities(entityType, instance, contentBlock, callback) {
   return contentBlock.findEntityRanges(function (_this) {
@@ -4649,7 +4725,7 @@ var findEntities = function findEntities(entityType, instance, contentBlock, cal
         hidePopLinkOver: instance.hidePopLinkOver
       }, contentState.mergeEntityData(entityKey, opts)) : void 0, res;
     };
-  }(_this2), callback);
+  }(), callback);
 };
 
 var _theme;
@@ -4695,14 +4771,10 @@ var theme = (_theme = {
   tooltip_item_delay: 30
 }, _defineProperty(_theme, "tooltip_size", tooltip_size), _defineProperty(_theme, "tooltip_line_height", tooltip_size), _defineProperty(_theme, "tooltip_default_transition", '100ms border-color, 100ms color'), _defineProperty(_theme, "tooltip_forward_transition", 'transform 100ms'), _defineProperty(_theme, "tooltip_backward_transition", 'transform 250ms'), _defineProperty(_theme, "dante_code_background", '#000'), _defineProperty(_theme, "dante_code_color", '#fff'), _defineProperty(_theme, "dante_menu_height", '42px'), _defineProperty(_theme, "dante_menu_background", dante_control_color), _defineProperty(_theme, "dante_menu_color", dante_inversed_color), _defineProperty(_theme, "dante_menu_border_radius", '4px'), _defineProperty(_theme, "dante_menu_box_shadow", '1px 1px 3px 0px #9e9393'), _defineProperty(_theme, "dante_menu_icon_size", '16px'), _defineProperty(_theme, "dante_menu_icon_color", dante_inversed_color), _defineProperty(_theme, "dante_menu_icon_accent", dante_accent_color), _defineProperty(_theme, "dante_menu_divider_color", '#3D3E49'), _defineProperty(_theme, "dante_menu_border_width", '0px'), _defineProperty(_theme, "dante_menu_border_color", 'none'), _defineProperty(_theme, "dante_menu_caret_size", '8px'), _theme);
 
-function _createSuper$d(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct$d(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _isNativeReflectConstruct$d() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-
 var Dante = /*#__PURE__*/function (_React$Component) {
   _inherits(Dante, _React$Component);
 
-  var _super = _createSuper$d(Dante);
+  var _super = _createSuper(Dante);
 
   function Dante(props) {
     var _this;
@@ -4728,7 +4800,7 @@ var Dante = /*#__PURE__*/function (_React$Component) {
         theme: this.props.theme || theme
       }, /*#__PURE__*/React.createElement(EditorContainer, {
         style: this.props.style
-      }, /*#__PURE__*/React.createElement(DanteEditor, Object.assign({}, this.props, {
+      }, /*#__PURE__*/React.createElement(DanteEditor, _extends({}, this.props, {
         toggleEditable: this.toggleEditable
       }))));
     }
@@ -4737,6 +4809,36 @@ var Dante = /*#__PURE__*/function (_React$Component) {
   return Dante;
 }(React.Component);
 
+Dante.propTypes = {
+  /** Editor content, it expects a null or a draft's EditorContent. */
+  content: PropTypes.object,
+  read_only: PropTypes.bool,
+  spellcheck: PropTypes.bool,
+  title_placeholder: PropTypes.string,
+  body_placeholder: PropTypes.string,
+  xhr: PropTypes.shape({
+    before_handler: PropTypes.func,
+    success_handler: PropTypes.func,
+    error_handler: PropTypes.func
+  }),
+  data_storage: PropTypes.shape({
+    url: PropTypes.string,
+    method: PropTypes.string,
+    success_handler: PropTypes.func,
+    failure_handler: PropTypes.func,
+    interval: PropTypes.integer
+  }),
+  default_wrappers: PropTypes.arrayOf(PropTypes.shape({
+    className: PropTypes.string.isRequired,
+    block: PropTypes.string.isRequired
+  })),
+  continuousBlocks: PropTypes.arrayOf(PropTypes.string),
+  key_commands: PropTypes.object
+  /*character_convert_mapping: PropTypes.shape({
+      '> ': "blockquote"
+  })*/
+
+};
 Dante.defaultProps = {
   content: null,
   read_only: false,

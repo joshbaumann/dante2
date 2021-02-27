@@ -1,27 +1,168 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('immutable'), require('draft-js'), require('@babel/runtime/helpers/esm/classCallCheck'), require('@babel/runtime/helpers/esm/createClass'), require('@babel/runtime/helpers/esm/assertThisInitialized'), require('@babel/runtime/helpers/esm/inherits'), require('@babel/runtime/helpers/esm/possibleConstructorReturn'), require('@babel/runtime/helpers/esm/getPrototypeOf'), require('@babel/runtime/helpers/esm/defineProperty'), require('react'), require('axios'), require('lodash'), require('draft-convert'), require('draft-js-custom-styles'), require('@babel/runtime/helpers/esm/taggedTemplateLiteral'), require('@emotion/styled'), require('polished'), require('react-dom'), require('react-color'), require('react-select'), require('prismjs'), require('draft-js-prism'), require('draft-js-multidecorators'), require('@emotion/react')) :
-  typeof define === 'function' && define.amd ? define(['immutable', 'draft-js', '@babel/runtime/helpers/esm/classCallCheck', '@babel/runtime/helpers/esm/createClass', '@babel/runtime/helpers/esm/assertThisInitialized', '@babel/runtime/helpers/esm/inherits', '@babel/runtime/helpers/esm/possibleConstructorReturn', '@babel/runtime/helpers/esm/getPrototypeOf', '@babel/runtime/helpers/esm/defineProperty', 'react', 'axios', 'lodash', 'draft-convert', 'draft-js-custom-styles', '@babel/runtime/helpers/esm/taggedTemplateLiteral', '@emotion/styled', 'polished', 'react-dom', 'react-color', 'react-select', 'prismjs', 'draft-js-prism', 'draft-js-multidecorators', '@emotion/react'], factory) :
-  (global.Dante = factory(global.Immutable,global.draftJs,global._classCallCheck,global._createClass,global._assertThisInitialized,global._inherits,global._possibleConstructorReturn,global._getPrototypeOf,global._defineProperty,global.React,global.axios,global.lodash,global.draftConvert,global.createStyles,global._taggedTemplateLiteral,global.styled,global.polished,global.ReactDOM,global.reactColor,global.Select,global.Prism,global.PrismDecorator,global.MultiDecorator,global.react));
-}(this, (function (Immutable,draftJs,_classCallCheck,_createClass,_assertThisInitialized,_inherits,_possibleConstructorReturn,_getPrototypeOf,_defineProperty,React,axios,lodash,draftConvert,createStyles,_taggedTemplateLiteral,styled,polished,ReactDOM,reactColor,Select,Prism,PrismDecorator,MultiDecorator,react) { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('react'), require('immutable'), require('lodash'), require('draft-js'), require('draft-convert'), require('axios'), require('draft-js-custom-styles'), require('@emotion/styled'), require('polished'), require('react-dom'), require('react-color'), require('react-select'), require('prismjs'), require('draft-js-prism'), require('draft-js-multidecorators'), require('@emotion/react'), require('prop-types')) :
+  typeof define === 'function' && define.amd ? define(['react', 'immutable', 'lodash', 'draft-js', 'draft-convert', 'axios', 'draft-js-custom-styles', '@emotion/styled', 'polished', 'react-dom', 'react-color', 'react-select', 'prismjs', 'draft-js-prism', 'draft-js-multidecorators', '@emotion/react', 'prop-types'], factory) :
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.Dante = factory(global.React, global.Immutable, global.lodash, global.draftJs, global.draftConvert, global.axios, global.createStyles, global.styled, global.polished, global.ReactDOM, global.reactColor, global.Select, global.Prism, global.PrismDecorator, global.MultiDecorator, global.react, global.PropTypes));
+}(this, (function (React, Immutable, lodash, draftJs, draftConvert, axios, createStyles, styled, polished, ReactDOM, reactColor, Select, Prism, PrismDecorator, MultiDecorator, react, PropTypes) { 'use strict';
 
-  var Immutable__default = 'default' in Immutable ? Immutable['default'] : Immutable;
-  _classCallCheck = _classCallCheck && _classCallCheck.hasOwnProperty('default') ? _classCallCheck['default'] : _classCallCheck;
-  _createClass = _createClass && _createClass.hasOwnProperty('default') ? _createClass['default'] : _createClass;
-  _assertThisInitialized = _assertThisInitialized && _assertThisInitialized.hasOwnProperty('default') ? _assertThisInitialized['default'] : _assertThisInitialized;
-  _inherits = _inherits && _inherits.hasOwnProperty('default') ? _inherits['default'] : _inherits;
-  _possibleConstructorReturn = _possibleConstructorReturn && _possibleConstructorReturn.hasOwnProperty('default') ? _possibleConstructorReturn['default'] : _possibleConstructorReturn;
-  _getPrototypeOf = _getPrototypeOf && _getPrototypeOf.hasOwnProperty('default') ? _getPrototypeOf['default'] : _getPrototypeOf;
-  _defineProperty = _defineProperty && _defineProperty.hasOwnProperty('default') ? _defineProperty['default'] : _defineProperty;
-  React = React && React.hasOwnProperty('default') ? React['default'] : React;
-  axios = axios && axios.hasOwnProperty('default') ? axios['default'] : axios;
-  createStyles = createStyles && createStyles.hasOwnProperty('default') ? createStyles['default'] : createStyles;
-  _taggedTemplateLiteral = _taggedTemplateLiteral && _taggedTemplateLiteral.hasOwnProperty('default') ? _taggedTemplateLiteral['default'] : _taggedTemplateLiteral;
-  styled = styled && styled.hasOwnProperty('default') ? styled['default'] : styled;
-  ReactDOM = ReactDOM && ReactDOM.hasOwnProperty('default') ? ReactDOM['default'] : ReactDOM;
-  Select = Select && Select.hasOwnProperty('default') ? Select['default'] : Select;
-  Prism = Prism && Prism.hasOwnProperty('default') ? Prism['default'] : Prism;
-  PrismDecorator = PrismDecorator && PrismDecorator.hasOwnProperty('default') ? PrismDecorator['default'] : PrismDecorator;
-  MultiDecorator = MultiDecorator && MultiDecorator.hasOwnProperty('default') ? MultiDecorator['default'] : MultiDecorator;
+  function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+  var React__default = /*#__PURE__*/_interopDefaultLegacy(React);
+  var Immutable__default = /*#__PURE__*/_interopDefaultLegacy(Immutable);
+  var axios__default = /*#__PURE__*/_interopDefaultLegacy(axios);
+  var createStyles__default = /*#__PURE__*/_interopDefaultLegacy(createStyles);
+  var styled__default = /*#__PURE__*/_interopDefaultLegacy(styled);
+  var ReactDOM__default = /*#__PURE__*/_interopDefaultLegacy(ReactDOM);
+  var Select__default = /*#__PURE__*/_interopDefaultLegacy(Select);
+  var Prism__default = /*#__PURE__*/_interopDefaultLegacy(Prism);
+  var PrismDecorator__default = /*#__PURE__*/_interopDefaultLegacy(PrismDecorator);
+  var MultiDecorator__default = /*#__PURE__*/_interopDefaultLegacy(MultiDecorator);
+  var PropTypes__default = /*#__PURE__*/_interopDefaultLegacy(PropTypes);
+
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
+
+  function _defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];
+      descriptor.enumerable = descriptor.enumerable || false;
+      descriptor.configurable = true;
+      if ("value" in descriptor) descriptor.writable = true;
+      Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }
+
+  function _createClass(Constructor, protoProps, staticProps) {
+    if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) _defineProperties(Constructor, staticProps);
+    return Constructor;
+  }
+
+  function _defineProperty(obj, key, value) {
+    if (key in obj) {
+      Object.defineProperty(obj, key, {
+        value: value,
+        enumerable: true,
+        configurable: true,
+        writable: true
+      });
+    } else {
+      obj[key] = value;
+    }
+
+    return obj;
+  }
+
+  function _extends() {
+    _extends = Object.assign || function (target) {
+      for (var i = 1; i < arguments.length; i++) {
+        var source = arguments[i];
+
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
+          }
+        }
+      }
+
+      return target;
+    };
+
+    return _extends.apply(this, arguments);
+  }
+
+  function _inherits(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) {
+      throw new TypeError("Super expression must either be null or a function");
+    }
+
+    subClass.prototype = Object.create(superClass && superClass.prototype, {
+      constructor: {
+        value: subClass,
+        writable: true,
+        configurable: true
+      }
+    });
+    if (superClass) _setPrototypeOf(subClass, superClass);
+  }
+
+  function _getPrototypeOf(o) {
+    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+      return o.__proto__ || Object.getPrototypeOf(o);
+    };
+    return _getPrototypeOf(o);
+  }
+
+  function _setPrototypeOf(o, p) {
+    _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+      o.__proto__ = p;
+      return o;
+    };
+
+    return _setPrototypeOf(o, p);
+  }
+
+  function _isNativeReflectConstruct() {
+    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+    if (Reflect.construct.sham) return false;
+    if (typeof Proxy === "function") return true;
+
+    try {
+      Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function _assertThisInitialized(self) {
+    if (self === void 0) {
+      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    }
+
+    return self;
+  }
+
+  function _possibleConstructorReturn(self, call) {
+    if (call && (typeof call === "object" || typeof call === "function")) {
+      return call;
+    }
+
+    return _assertThisInitialized(self);
+  }
+
+  function _createSuper(Derived) {
+    var hasNativeReflectConstruct = _isNativeReflectConstruct();
+
+    return function _createSuperInternal() {
+      var Super = _getPrototypeOf(Derived),
+          result;
+
+      if (hasNativeReflectConstruct) {
+        var NewTarget = _getPrototypeOf(this).constructor;
+
+        result = Reflect.construct(Super, arguments, NewTarget);
+      } else {
+        result = Super.apply(this, arguments);
+      }
+
+      return _possibleConstructorReturn(this, result);
+    };
+  }
+
+  function _taggedTemplateLiteral(strings, raw) {
+    if (!raw) {
+      raw = strings.slice(0);
+    }
+
+    return Object.freeze(Object.defineProperties(strings, {
+      raw: {
+        value: Object.freeze(raw)
+      }
+    }));
+  }
 
   /*
   Used from [react-rte](https://github.com/brijeshb42/medium-draft)
@@ -177,10 +318,6 @@
     return draftJs.EditorState.push(editorState, newContent, 'split-block');
   };
 
-  function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-  function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-
   var Debug = /*#__PURE__*/function (_React$Component) {
     _inherits(Debug, _React$Component);
 
@@ -257,31 +394,31 @@
     _createClass(Debug, [{
       key: "render",
       value: function render() {
-        return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+        return /*#__PURE__*/React__default['default'].createElement("div", null, /*#__PURE__*/React__default['default'].createElement("div", {
           className: "debugControls"
-        }, /*#__PURE__*/React.createElement("ul", null, /*#__PURE__*/React.createElement("li", null, " LOCKS: ", this.props.editor.state.locks, " "), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("button", {
+        }, /*#__PURE__*/React__default['default'].createElement("ul", null, /*#__PURE__*/React__default['default'].createElement("li", null, " LOCKS: ", this.props.editor.state.locks, " "), /*#__PURE__*/React__default['default'].createElement("li", null, /*#__PURE__*/React__default['default'].createElement("button", {
           onClick: this.handleToggleReadOnly
-        }, "EDITABLE: ", this.props.editor.state.read_only ? 'NO' : 'YES')), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("button", {
+        }, "EDITABLE: ", this.props.editor.state.read_only ? 'NO' : 'YES')), /*#__PURE__*/React__default['default'].createElement("li", null, /*#__PURE__*/React__default['default'].createElement("button", {
           onClick: this.handleTestEmitTEXT
-        }, "EDITOR TEXT")), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("button", {
+        }, "EDITOR TEXT")), /*#__PURE__*/React__default['default'].createElement("li", null, /*#__PURE__*/React__default['default'].createElement("button", {
           onClick: this.handleTestEmitAndDecode
-        }, "EDITOR STATE")))), /*#__PURE__*/React.createElement("div", {
+        }, "EDITOR STATE")))), /*#__PURE__*/React__default['default'].createElement("div", {
           className: "debugZone",
           style: {
             display: this.state.display
           }
-        }, /*#__PURE__*/React.createElement("button", {
+        }, /*#__PURE__*/React__default['default'].createElement("button", {
           href: "#",
           className: "dante-debug-close close",
           onClick: this.toggleDisplay
-        }), /*#__PURE__*/React.createElement("div", {
+        }), /*#__PURE__*/React__default['default'].createElement("div", {
           className: "debugOutput"
-        }, /*#__PURE__*/React.createElement("h2", null, "EDITOR OUTPUT"), this.state.output.length > 0 ? /*#__PURE__*/React.createElement("pre", null, this.state.output) : undefined)));
+        }, /*#__PURE__*/React__default['default'].createElement("h2", null, "EDITOR OUTPUT"), this.state.output.length > 0 ? /*#__PURE__*/React__default['default'].createElement("pre", null, this.state.output) : undefined)));
       }
     }]);
 
     return Debug;
-  }(React.Component);
+  }(React__default['default'].Component);
 
   var SaveBehavior = /*#__PURE__*/function () {
     function SaveBehavior(options) {
@@ -383,7 +520,7 @@
       key: "checkforStore",
       value: function checkforStore(content) {
         // ENTER DATA STORE
-        var isChanged = !Immutable__default.is(Immutable__default.fromJS(this.editorContent), Immutable__default.fromJS(content)); // console.log("CONTENT CHANGED:", isChanged)
+        var isChanged = !Immutable__default['default'].is(Immutable__default['default'].fromJS(this.editorContent), Immutable__default['default'].fromJS(content)); // console.log("CONTENT CHANGED:", isChanged)
 
         if (!isChanged) {
           return;
@@ -407,7 +544,7 @@
         } // console.log "SAVING TO: #{@getMethod()} #{@getUrl()}"
 
 
-        return axios({
+        return axios__default['default']({
           method: this.getMethod(),
           url: this.getUrl(),
           data: {
@@ -562,14 +699,10 @@
     return draftJs.ContentState.createFromBlockArray(contentBlocks);
   };
 
-  function _createSuper$1(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct$1(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-  function _isNativeReflectConstruct$1() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-
   var DanteEditor = /*#__PURE__*/function (_React$Component) {
     _inherits(DanteEditor, _React$Component);
 
-    var _super = _createSuper$1(DanteEditor);
+    var _super = _createSuper(DanteEditor);
 
     function DanteEditor(props) {
       var _this;
@@ -1016,7 +1149,6 @@
                 _this.onChange(resetBlockWithType(editorState, "unstyled"));
 
                 return true;
-                break;
 
               default:
                 return false;
@@ -1391,7 +1523,7 @@
 
       _this.block_types = _this.props.block_types;
 
-      var _createStyles = createStyles(['font-size', 'color', 'font-family']),
+      var _createStyles = createStyles__default['default'](['font-size', 'color', 'font-family']),
           styles = _createStyles.styles,
           customStyleFn = _createStyles.customStyleFn,
           exporter = _createStyles.exporter; //, 'PREFIX', customStyleMap);
@@ -1437,14 +1569,14 @@
       function render() {
         var _this3 = this;
 
-        return /*#__PURE__*/React.createElement("div", {
+        return /*#__PURE__*/React__default['default'].createElement("div", {
           suppressContentEditableWarning: true
-        }, /*#__PURE__*/React.createElement("div", {
+        }, /*#__PURE__*/React__default['default'].createElement("div", {
           className: "postContent"
-        }, /*#__PURE__*/React.createElement("div", {
+        }, /*#__PURE__*/React__default['default'].createElement("div", {
           className: "section-inner layoutSingleColumn" //onClick={ this.focus }
 
-        }, /*#__PURE__*/React.createElement(draftJs.Editor, {
+        }, /*#__PURE__*/React__default['default'].createElement(draftJs.Editor, {
           blockRendererFn: this.blockRenderer,
           editorState: this.state.editorState,
           onBlur: this.onBlur,
@@ -1465,10 +1597,10 @@
           readOnly: this.props.read_only,
           placeholder: this.props.body_placeholder,
           ref: "editor"
-        })), /*#__PURE__*/React.createElement("div", {
+        })), /*#__PURE__*/React__default['default'].createElement("div", {
           className: "danteEditorControls"
         }, this.props.tooltips.map(function (o, i) {
-          return /*#__PURE__*/React.createElement(o.component, {
+          return /*#__PURE__*/React__default['default'].createElement(o.component, {
             ref: o.ref,
             key: i,
             editor: _this3,
@@ -1482,7 +1614,7 @@
             handleOnMouseOver: _this3.handleShowPopLinkOver,
             handleOnMouseOut: _this3.handleHidePopLinkOver
           });
-        }))), this.props.debug ? /*#__PURE__*/React.createElement(Debug, {
+        }))), this.props.debug ? /*#__PURE__*/React__default['default'].createElement(Debug, {
           locks: this.state.locks,
           editor: this
         }) : undefined);
@@ -1490,7 +1622,7 @@
     }]);
 
     return DanteEditor;
-  }(React.Component);
+  }(React__default['default'].Component);
 
   function styleInject(css, ref) {
     if ( ref === void 0 ) ref = {};
@@ -1519,75 +1651,75 @@
     }
   }
 
-  var css = "/**\n * @providesModule DraftEditor\n * @permanent\n */\n\n/**\n * We inherit the height of the container by default\n */\n\n.DraftEditor-root,\n.DraftEditor-editorContainer,\n.public-DraftEditor-content {\n  height: inherit;\n  text-align: initial;\n}\n\n.DraftEditor-root {\n  position: relative;\n}\n\n/*HACK FOR ISSUE  https://github.com/facebook/draft-js/issues/304 , proposal from @bradbumbalough*/\n.DraftEditor-root {\n  //overflow: auto;\n}\n\n/**\n * Zero-opacity background used to allow focus in IE. Otherwise, clicks\n * fall through to the placeholder.\n */\n\n.DraftEditor-editorContainer {\n  background-color: rgba(255, 255, 255, 0);\n  /* Repair mysterious missing Safari cursor */\n  border-left: 0.1px solid transparent;\n  position: relative;\n  z-index: 1;\n}\n\n.public-DraftEditor-content {\n  outline: none;\n  white-space: pre-wrap;\n}\n\n.public-DraftEditor-block {\n  position: relative;\n}\n\n.DraftEditor-alignLeft .public-DraftStyleDefault-block {\n  text-align: left;\n}\n\n.DraftEditor-alignLeft .public-DraftEditorPlaceholder-root {\n  left: 0;\n  text-align: left;\n}\n\n.DraftEditor-alignCenter .public-DraftStyleDefault-block {\n  text-align: center;\n}\n\n.DraftEditor-alignCenter .public-DraftEditorPlaceholder-root {\n  margin: 0 auto;\n  text-align: center;\n  width: 100%;\n}\n\n.DraftEditor-alignRight .public-DraftStyleDefault-block {\n  text-align: right;\n}\n\n.DraftEditor-alignRight .public-DraftEditorPlaceholder-root {\n  right: 0;\n  text-align: right;\n}\n/**\n * @providesModule DraftEditorPlaceholder\n */\n\n.public-DraftEditorPlaceholder-root {\n  color: #9197a3;\n  position: absolute;\n  z-index: 0;\n  background-color: white;\n}\n\n.public-DraftEditorPlaceholder-hasFocus {\n  color: #bdc1c9;\n}\n\n.DraftEditorPlaceholder-hidden {\n  display: none;\n}\n/**\n * @providesModule DraftStyleDefault\n */\n\n.public-DraftStyleDefault-block {\n  position: relative;\n  white-space: pre-wrap;\n}\n\n/* @noflip */\n\n.public-DraftStyleDefault-ltr {\n  direction: ltr;\n  text-align: left;\n}\n\n/* @noflip */\n\n.public-DraftStyleDefault-rtl {\n  direction: rtl;\n  text-align: right;\n}\n\n/**\n * These rules provide appropriate text direction for counter pseudo-elements.\n */\n\n/* @noflip */\n\n.public-DraftStyleDefault-listLTR {\n  direction: ltr;\n}\n\n/* @noflip */\n\n.public-DraftStyleDefault-listRTL {\n  direction: rtl;\n}\n\n/**\n * Default spacing for list container elements. Override with CSS as needed.\n */\n\n.public-DraftStyleDefault-ul,\n.public-DraftStyleDefault-ol {\n  margin: 16px 0;\n  padding: 0;\n}\n\n/**\n * Default counters and styles are provided for five levels of nesting.\n * If you require nesting beyond that level, you should use your own CSS\n * classes to do so. If you care about handling RTL languages, the rules you\n * create should look a lot like these.\n */\n\n/* @noflip */\n\n.public-DraftStyleDefault-depth0.public-DraftStyleDefault-listLTR {\n  margin-left: 1.5em;\n}\n\n/* @noflip */\n\n.public-DraftStyleDefault-depth0.public-DraftStyleDefault-listRTL {\n  margin-right: 1.5em;\n}\n\n/* @noflip */\n\n.public-DraftStyleDefault-depth1.public-DraftStyleDefault-listLTR {\n  margin-left: 3em;\n}\n\n/* @noflip */\n\n.public-DraftStyleDefault-depth1.public-DraftStyleDefault-listRTL {\n  margin-right: 3em;\n}\n\n/* @noflip */\n\n.public-DraftStyleDefault-depth2.public-DraftStyleDefault-listLTR {\n  margin-left: 4.5em;\n}\n\n/* @noflip */\n\n.public-DraftStyleDefault-depth2.public-DraftStyleDefault-listRTL {\n  margin-right: 4.5em;\n}\n\n/* @noflip */\n\n.public-DraftStyleDefault-depth3.public-DraftStyleDefault-listLTR {\n  margin-left: 6em;\n}\n\n/* @noflip */\n\n.public-DraftStyleDefault-depth3.public-DraftStyleDefault-listRTL {\n  margin-right: 6em;\n}\n\n/* @noflip */\n\n.public-DraftStyleDefault-depth4.public-DraftStyleDefault-listLTR {\n  margin-left: 7.5em;\n}\n\n/* @noflip */\n\n.public-DraftStyleDefault-depth4.public-DraftStyleDefault-listRTL {\n  margin-right: 7.5em;\n}\n\n/**\n * Only use `square` list-style after the first two levels.\n */\n\n.public-DraftStyleDefault-unorderedListItem {\n  list-style-type: square;\n  position: relative;\n}\n\n.public-DraftStyleDefault-unorderedListItem.public-DraftStyleDefault-depth0 {\n  list-style-type: disc;\n}\n\n.public-DraftStyleDefault-unorderedListItem.public-DraftStyleDefault-depth1 {\n  list-style-type: circle;\n}\n\n/**\n * Ordered list item counters are managed with CSS, since all list nesting is\n * purely visual.\n */\n\n.public-DraftStyleDefault-orderedListItem {\n  list-style-type: none;\n  position: relative;\n}\n\n/* @noflip */\n\n.public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-listLTR:before {\n  left: -36px;\n  position: absolute;\n  text-align: right;\n  width: 30px;\n}\n\n/* @noflip */\n\n.public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-listRTL:before {\n  position: absolute;\n  right: -36px;\n  text-align: left;\n  width: 30px;\n}\n\n/**\n * Counters are reset in JavaScript. If you need different counter styles,\n * override these rules. If you need more nesting, create your own rules to\n * do so.\n */\n\n.public-DraftStyleDefault-orderedListItem:before {\n  content: counter(ol0) \". \";\n  counter-increment: ol0;\n}\n\n.public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-depth1:before {\n  content: counter(ol1) \". \";\n  counter-increment: ol1;\n}\n\n.public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-depth2:before {\n  content: counter(ol2) \". \";\n  counter-increment: ol2;\n}\n\n.public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-depth3:before {\n  content: counter(ol3) \". \";\n  counter-increment: ol3;\n}\n\n.public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-depth4:before {\n  content: counter(ol4) \". \";\n  counter-increment: ol4;\n}\n\n.public-DraftStyleDefault-depth0.public-DraftStyleDefault-reset {\n  counter-reset: ol0;\n}\n\n.public-DraftStyleDefault-depth1.public-DraftStyleDefault-reset {\n  counter-reset: ol1;\n}\n\n.public-DraftStyleDefault-depth2.public-DraftStyleDefault-reset {\n  counter-reset: ol2;\n}\n\n.public-DraftStyleDefault-depth3.public-DraftStyleDefault-reset {\n  counter-reset: ol3;\n}\n\n.public-DraftStyleDefault-depth4.public-DraftStyleDefault-reset {\n  counter-reset: ol4;\n}\n";
-  styleInject(css);
+  var css_248z = "/**\n * @providesModule DraftEditor\n * @permanent\n */\n\n/**\n * We inherit the height of the container by default\n */\n\n.DraftEditor-root,\n.DraftEditor-editorContainer,\n.public-DraftEditor-content {\n  height: inherit;\n  text-align: initial;\n}\n\n.DraftEditor-root {\n  position: relative;\n}\n\n/*HACK FOR ISSUE  https://github.com/facebook/draft-js/issues/304 , proposal from @bradbumbalough*/\n.DraftEditor-root {\n  //overflow: auto;\n}\n\n/**\n * Zero-opacity background used to allow focus in IE. Otherwise, clicks\n * fall through to the placeholder.\n */\n\n.DraftEditor-editorContainer {\n  background-color: rgba(255, 255, 255, 0);\n  /* Repair mysterious missing Safari cursor */\n  border-left: 0.1px solid transparent;\n  position: relative;\n  z-index: 1;\n}\n\n.public-DraftEditor-content {\n  outline: none;\n  white-space: pre-wrap;\n}\n\n.public-DraftEditor-block {\n  position: relative;\n}\n\n.DraftEditor-alignLeft .public-DraftStyleDefault-block {\n  text-align: left;\n}\n\n.DraftEditor-alignLeft .public-DraftEditorPlaceholder-root {\n  left: 0;\n  text-align: left;\n}\n\n.DraftEditor-alignCenter .public-DraftStyleDefault-block {\n  text-align: center;\n}\n\n.DraftEditor-alignCenter .public-DraftEditorPlaceholder-root {\n  margin: 0 auto;\n  text-align: center;\n  width: 100%;\n}\n\n.DraftEditor-alignRight .public-DraftStyleDefault-block {\n  text-align: right;\n}\n\n.DraftEditor-alignRight .public-DraftEditorPlaceholder-root {\n  right: 0;\n  text-align: right;\n}\n/**\n * @providesModule DraftEditorPlaceholder\n */\n\n.public-DraftEditorPlaceholder-root {\n  color: #9197a3;\n  position: absolute;\n  z-index: 0;\n  background-color: white;\n}\n\n.public-DraftEditorPlaceholder-hasFocus {\n  color: #bdc1c9;\n}\n\n.DraftEditorPlaceholder-hidden {\n  display: none;\n}\n/**\n * @providesModule DraftStyleDefault\n */\n\n.public-DraftStyleDefault-block {\n  position: relative;\n  white-space: pre-wrap;\n}\n\n/* @noflip */\n\n.public-DraftStyleDefault-ltr {\n  direction: ltr;\n  text-align: left;\n}\n\n/* @noflip */\n\n.public-DraftStyleDefault-rtl {\n  direction: rtl;\n  text-align: right;\n}\n\n/**\n * These rules provide appropriate text direction for counter pseudo-elements.\n */\n\n/* @noflip */\n\n.public-DraftStyleDefault-listLTR {\n  direction: ltr;\n}\n\n/* @noflip */\n\n.public-DraftStyleDefault-listRTL {\n  direction: rtl;\n}\n\n/**\n * Default spacing for list container elements. Override with CSS as needed.\n */\n\n.public-DraftStyleDefault-ul,\n.public-DraftStyleDefault-ol {\n  margin: 16px 0;\n  padding: 0;\n}\n\n/**\n * Default counters and styles are provided for five levels of nesting.\n * If you require nesting beyond that level, you should use your own CSS\n * classes to do so. If you care about handling RTL languages, the rules you\n * create should look a lot like these.\n */\n\n/* @noflip */\n\n.public-DraftStyleDefault-depth0.public-DraftStyleDefault-listLTR {\n  margin-left: 1.5em;\n}\n\n/* @noflip */\n\n.public-DraftStyleDefault-depth0.public-DraftStyleDefault-listRTL {\n  margin-right: 1.5em;\n}\n\n/* @noflip */\n\n.public-DraftStyleDefault-depth1.public-DraftStyleDefault-listLTR {\n  margin-left: 3em;\n}\n\n/* @noflip */\n\n.public-DraftStyleDefault-depth1.public-DraftStyleDefault-listRTL {\n  margin-right: 3em;\n}\n\n/* @noflip */\n\n.public-DraftStyleDefault-depth2.public-DraftStyleDefault-listLTR {\n  margin-left: 4.5em;\n}\n\n/* @noflip */\n\n.public-DraftStyleDefault-depth2.public-DraftStyleDefault-listRTL {\n  margin-right: 4.5em;\n}\n\n/* @noflip */\n\n.public-DraftStyleDefault-depth3.public-DraftStyleDefault-listLTR {\n  margin-left: 6em;\n}\n\n/* @noflip */\n\n.public-DraftStyleDefault-depth3.public-DraftStyleDefault-listRTL {\n  margin-right: 6em;\n}\n\n/* @noflip */\n\n.public-DraftStyleDefault-depth4.public-DraftStyleDefault-listLTR {\n  margin-left: 7.5em;\n}\n\n/* @noflip */\n\n.public-DraftStyleDefault-depth4.public-DraftStyleDefault-listRTL {\n  margin-right: 7.5em;\n}\n\n/**\n * Only use `square` list-style after the first two levels.\n */\n\n.public-DraftStyleDefault-unorderedListItem {\n  list-style-type: square;\n  position: relative;\n}\n\n.public-DraftStyleDefault-unorderedListItem.public-DraftStyleDefault-depth0 {\n  list-style-type: disc;\n}\n\n.public-DraftStyleDefault-unorderedListItem.public-DraftStyleDefault-depth1 {\n  list-style-type: circle;\n}\n\n/**\n * Ordered list item counters are managed with CSS, since all list nesting is\n * purely visual.\n */\n\n.public-DraftStyleDefault-orderedListItem {\n  list-style-type: none;\n  position: relative;\n}\n\n/* @noflip */\n\n.public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-listLTR:before {\n  left: -36px;\n  position: absolute;\n  text-align: right;\n  width: 30px;\n}\n\n/* @noflip */\n\n.public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-listRTL:before {\n  position: absolute;\n  right: -36px;\n  text-align: left;\n  width: 30px;\n}\n\n/**\n * Counters are reset in JavaScript. If you need different counter styles,\n * override these rules. If you need more nesting, create your own rules to\n * do so.\n */\n\n.public-DraftStyleDefault-orderedListItem:before {\n  content: counter(ol0) \". \";\n  counter-increment: ol0;\n}\n\n.public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-depth1:before {\n  content: counter(ol1) \". \";\n  counter-increment: ol1;\n}\n\n.public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-depth2:before {\n  content: counter(ol2) \". \";\n  counter-increment: ol2;\n}\n\n.public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-depth3:before {\n  content: counter(ol3) \". \";\n  counter-increment: ol3;\n}\n\n.public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-depth4:before {\n  content: counter(ol4) \". \";\n  counter-increment: ol4;\n}\n\n.public-DraftStyleDefault-depth0.public-DraftStyleDefault-reset {\n  counter-reset: ol0;\n}\n\n.public-DraftStyleDefault-depth1.public-DraftStyleDefault-reset {\n  counter-reset: ol1;\n}\n\n.public-DraftStyleDefault-depth2.public-DraftStyleDefault-reset {\n  counter-reset: ol2;\n}\n\n.public-DraftStyleDefault-depth3.public-DraftStyleDefault-reset {\n  counter-reset: ol3;\n}\n\n.public-DraftStyleDefault-depth4.public-DraftStyleDefault-reset {\n  counter-reset: ol4;\n}\n";
+  styleInject(css_248z);
 
   function imageFill() {
-    return /*#__PURE__*/React.createElement("svg", {
+    return /*#__PURE__*/React__default['default'].createElement("svg", {
       id: "icon-image-fill",
       width: "20px",
       height: "20px",
       viewBox: "0 0 36 32"
-    }, /*#__PURE__*/React.createElement("path", {
+    }, /*#__PURE__*/React__default['default'].createElement("path", {
       fill: "#fff",
       d: "M4 26h28v3h-28v-3zM0 2h36v21h-36v-21z"
     }));
   }
   function imageCenter() {
-    return /*#__PURE__*/React.createElement("svg", {
+    return /*#__PURE__*/React__default['default'].createElement("svg", {
       id: "icon-image-center",
       width: "20px",
       height: "20px",
       viewBox: "0 0 36 32"
-    }, /*#__PURE__*/React.createElement("path", {
+    }, /*#__PURE__*/React__default['default'].createElement("path", {
       fill: "#fff",
       d: "M4 26h28v3h-28v-3zM4 8h28v15h-28v-15zM4 2h28v3h-28v-3z"
     }));
   }
   function imageLeft() {
-    return /*#__PURE__*/React.createElement("svg", {
+    return /*#__PURE__*/React__default['default'].createElement("svg", {
       id: "icon-image-left",
       width: "20px",
       height: "20px",
       viewBox: "0 0 36 32"
-    }, /*#__PURE__*/React.createElement("path", {
+    }, /*#__PURE__*/React__default['default'].createElement("path", {
       fill: "#fff",
       d: "M8 26h28v3h-28v-3zM24 20h12v3h-12v-3zM0 8h21v15h-21v-15zM24 14h12v3h-12v-3zM24 8h12v3h-12v-3zM8 2h28v3h-28v-3z"
     }));
   }
   function imageWide() {
-    return /*#__PURE__*/React.createElement("svg", {
+    return /*#__PURE__*/React__default['default'].createElement("svg", {
       id: "icon-image-wide",
       width: "20px",
       height: "20px",
       viewBox: "0 0 36 32"
-    }, /*#__PURE__*/React.createElement("path", {
+    }, /*#__PURE__*/React__default['default'].createElement("path", {
       fill: "#fff",
       d: "M4 26h28v3h-28v-3zM0 8h36v15h-36v-15zM4 2h28v3h-28v-3z"
     }));
   } // INLINE TOOLTIP
 
   function image() {
-    return /*#__PURE__*/React.createElement("svg", {
+    return /*#__PURE__*/React__default['default'].createElement("svg", {
       className: "icon-photo",
       width: "20px",
       height: "20px",
       viewBox: "0 0 20 20",
       xmlns: "http://www.w3.org/2000/svg"
-    }, /*#__PURE__*/React.createElement("path", {
+    }, /*#__PURE__*/React__default['default'].createElement("path", {
       fill: "#494B56",
       fillRule: "nonzero",
       d: "M17.0705329,6.17097418 L14.5626959,6.17097418 L14.3369906,5.2405567 L14.3119122,5.13717696 C14.1112853,4.46520879 13.5094044,4 12.8322884,4 L8.1426332,4 C7.4655172,4 6.8636364,4.46520879 6.6630094,5.13717696 L6.4122257,6.17097418 L3.9043887,6.17097418 C3.1269592,6.17097418 2.5,6.84294235 2.5,7.61829026 L2.5,15.5526838 C2.5,16.3538767 3.1520376,17 3.9043887,17 L17.0956113,17 C17.8730408,17 18.5,16.3280317 18.5,15.5526838 L18.5,7.64413522 C18.5,6.84294235 17.8479624,6.17097418 17.0705329,6.17097418 Z M17.7476489,15.5526838 C17.7476489,15.9145129 17.4467085,16.2246521 17.0956113,16.2246521 L3.9043887,16.2246521 C3.5532915,16.2246521 3.2523511,15.9145129 3.2523511,15.5526838 L3.2523511,7.64413522 C3.2523511,7.28230618 3.5532915,6.97216695 3.9043887,6.97216695 L7.0141066,6.97216695 L7.3902821,5.42147112 L7.3902821,5.34393634 C7.515674,5.00795226 7.8166144,4.80119287 8.1426332,4.80119287 L12.8322884,4.80119287 C13.1583072,4.80119287 13.484326,5.03379722 13.5846395,5.34393634 L13.9858934,6.97216695 L17.0705329,6.97216695 C17.4467085,6.97216695 17.7476489,7.28230618 17.7476489,7.64413522 L17.7476489,15.5526838 Z M10.4749216,7.51491052 C8.468652,7.51491052 6.838558,9.19483105 6.838558,11.2624254 C6.838558,13.3300198 8.468652,15.0099403 10.4749216,15.0099403 C12.4811912,15.0099403 14.1112853,13.3300198 14.1112853,11.2624254 C14.1112853,9.19483105 12.4811912,7.51491052 10.4749216,7.51491052 Z M10.4749216,14.2345924 C8.8949843,14.2345924 7.5909091,12.890656 7.5909091,11.2624254 C7.5909091,9.63419477 8.8949843,8.29025843 10.4749216,8.29025843 C12.0548589,8.29025843 13.3589342,9.63419477 13.3589342,11.2624254 C13.3589342,12.9165009 12.0799373,14.2345924 10.4749216,14.2345924 Z"
     }));
   }
   function video() {
-    return /*#__PURE__*/React.createElement("svg", {
+    return /*#__PURE__*/React__default['default'].createElement("svg", {
       className: "icon-video",
       width: "20px",
       height: "20px",
       viewBox: "0 0 20 20",
       xmlns: "http://www.w3.org/2000/svg"
-    }, /*#__PURE__*/React.createElement("path", {
+    }, /*#__PURE__*/React__default['default'].createElement("path", {
       fill: "#494B56",
       fillRule: "nonzero",
       d: "M6.5,4 L6.5,15.5471358 L16.5,9.7735679 L6.5,4 Z M7.2945422,5.375733 L14.9109157,9.7735679 L7.2945422,14.1714028 L7.2945422,5.375733 Z",
@@ -1595,23 +1727,23 @@
     }));
   }
   function divider() {
-    return /*#__PURE__*/React.createElement("svg", {
+    return /*#__PURE__*/React__default['default'].createElement("svg", {
       className: "icon-spacer",
       width: "20px",
       height: "20px",
       viewBox: "0 0 20 20",
       xmlns: "http://www.w3.org/2000/svg"
-    }, /*#__PURE__*/React.createElement("path", {
+    }, /*#__PURE__*/React__default['default'].createElement("path", {
       fill: "#494B56",
       d: "M3,10 L4,10 L4,11 L3,11 L3,10 Z M5,10 L6,10 L6,11 L5,11 L5,10 Z M7,10 L8,10 L8,11 L7,11 L7,10 Z M9,10 L10,10 L10,11 L9,11 L9,10 Z M11,10 L12,10 L12,11 L11,11 L11,10 Z M13,10 L14,10 L14,11 L13,11 L13,10 Z M15,10 L16,10 L16,11 L15,11 L15,10 Z M17,10 L18,10 L18,11 L17,11 L17,10 Z"
-    }), /*#__PURE__*/React.createElement("rect", {
+    }), /*#__PURE__*/React__default['default'].createElement("rect", {
       fill: "#DEE0E8",
       fillRule: "nonzero",
       x: "2",
       y: "6",
       width: "17",
       height: "2"
-    }), /*#__PURE__*/React.createElement("rect", {
+    }), /*#__PURE__*/React__default['default'].createElement("rect", {
       fill: "#DEE0E8",
       fillRule: "nonzero",
       x: "2",
@@ -1621,48 +1753,48 @@
     }));
   }
   function button() {
-    return /*#__PURE__*/React.createElement("svg", {
+    return /*#__PURE__*/React__default['default'].createElement("svg", {
       className: "icon-button",
       width: "20px",
       height: "20px",
       viewBox: "0 0 20 20",
       xmlns: "http://www.w3.org/2000/svg"
-    }, /*#__PURE__*/React.createElement("path", {
+    }, /*#__PURE__*/React__default['default'].createElement("path", {
       fill: "#494B56",
       fillRule: "nonzero",
       d: "M12.2382748,16.999996 L8.31885183,16.9847535 C8.15303655,16.9841672 8.01611714,16.8713137 8.00586918,16.7269491 C7.92590153,15.5935771 7.14470492,14.7307605 6.42701203,13.776342 C6.0888295,13.3266866 5.90907027,12.7562633 6.04632568,12.259268 C6.17501312,11.7924647 6.56930741,11.4407135 7.22164859,11.324489 L7.32916812,11.311738 L7.32916812,7.98548983 L7.32732013,7.8889048 C7.33588809,7.62890201 7.44189563,7.40729864 7.64063877,7.24695869 C7.86021382,7.06976399 8.15370855,7 8.4418273,7 C8.75615393,7 9.08308052,7.03854604 9.30467155,7.24666553 C9.52189463,7.45053475 9.55986241,7.74571269 9.54743054,8.05158978 L9.54306253,9.42488547 L9.66469398,9.39483999 C9.74768567,9.38194244 9.83218929,9.37593336 9.91602093,9.37593336 C10.0809962,9.37593336 10.2394195,9.38692558 10.3823868,9.42122134 C10.5295542,9.45654303 10.6678177,9.51824607 10.7788651,9.62259898 C10.833129,9.6737495 10.8763047,9.7304694 10.9102406,9.79158611 L10.9584564,9.91557852 L11.1810555,9.86076387 C11.2640471,9.8478664 11.3483827,9.84185723 11.4322144,9.84185723 C11.5971896,9.84185723 11.755613,9.85284954 11.8985803,9.88714521 C12.0455797,9.92246691 12.183843,9.98416994 12.2948906,10.0885229 C12.4035862,10.1906773 12.4674259,10.3154024 12.5023697,10.4528786 L12.5048897,10.4690005 L12.5532735,10.4618189 C12.6070332,10.4566892 12.6612971,10.4541976 12.7155608,10.4541976 C13.0739032,10.4541976 13.3823499,10.5326089 13.6012529,10.784111 C13.7905881,11.0017572 13.8789557,11.3176005 13.9535474,11.6910431 C14.283666,13.5689553 12.7530246,15.5343657 12.5515935,16.7641761 C12.5292496,16.8998935 12.3955222,17.0007288 12.2382748,16.999996 Z M11.9783799,16.4496518 L11.9839239,16.4238567 C12.3303384,15.0848568 13.6115009,13.3706555 13.3317821,11.7800069 C13.2561824,11.4014346 13.1844468,11.214127 13.0994391,11.116516 C13.0439993,11.0527611 12.9638637,11.003809 12.7155608,11.003809 C12.648697,11.003809 12.5893933,11.0099647 12.5369776,11.0208104 L12.5274016,11.847719 C12.5258896,11.9994118 12.3834262,12.1213522 12.209547,12.1198866 C12.0356677,12.1185675 11.8958924,11.994282 11.8975724,11.8425893 L11.9078203,10.8820152 C11.9197483,10.5836128 11.8654844,10.4927437 11.8333966,10.4625518 C11.8050047,10.4360238 11.724029,10.3914687 11.4322144,10.3914687 C11.2213752,10.3914687 11.0911758,10.450387 11.0229681,10.5255738 L11.0112082,11.3819417 C11.0096962,11.5336344 10.8672327,11.6555749 10.6933536,11.6541092 C10.5194743,11.6527902 10.3796989,11.5285047 10.3813789,11.376812 L10.3917949,10.4163844 C10.4037228,10.117982 10.3494591,10.0269664 10.3173711,9.99662789 C10.2889793,9.97009992 10.2076676,9.9255448 9.91602093,9.9255448 C9.75776556,9.9255448 9.64503811,9.95881462 9.57095042,10.006301 L9.54121456,10.0312167 L9.53701451,11.4081765 C9.53667857,11.5598692 9.39505511,11.6825425 9.22117592,11.6821028 C9.04729667,11.6818097 8.90668128,11.558257 8.90718528,11.4065643 L8.91760124,8.0411838 C8.92952918,7.74190211 8.87560141,7.65132615 8.84317756,7.62069444 C8.81478568,7.59416656 8.73364203,7.54961135 8.4418273,7.54961135 C8.26190008,7.54961135 8.13926061,7.59328716 8.06836492,7.65044675 C8.0045252,7.70203697 7.94589345,7.79305254 7.9584934,7.96848854 L7.95916538,7.98548983 L7.95916538,12.8607627 C7.95916538,13.0124555 7.817878,13.1355684 7.64416675,13.1355684 C7.47028751,13.1355684 7.32916812,13.0124555 7.32916812,12.8607627 L7.32916812,11.867505 L7.18216876,11.9015076 C6.86213014,11.9979461 6.71496278,12.1843743 6.65885103,12.3879504 C6.57384339,12.6958793 6.68018694,13.1110924 6.95368974,13.4748618 C7.5395032,14.2538444 8.31582784,15.1258945 8.56312277,16.2135388 L8.60529059,16.4364612 L11.9783799,16.4496518 Z"
-    }), /*#__PURE__*/React.createElement("path", {
+    }), /*#__PURE__*/React__default['default'].createElement("path", {
       fill: "#494B56",
       fillRule: "nonzero",
       d: "M15.1508665,12.9 L15.1508665,12.1 L15.5514921,12.1 C17.5101104,12.1 19.1,10.4893769 19.1,8.5 C19.1,6.51062312 17.5101104,4.9 15.5514921,4.9 L4.44850787,4.9 C2.4898895,4.9 0.9,6.51062311 0.9,8.5 C0.9,10.4893769 2.4898895,12.1 4.44850787,12.1 L4.69642245,12.1 L4.69642245,12.9 L4.44850787,12.9 C2.04572487,12.9 0.1,10.9289011 0.1,8.5 C0.1,6.07109889 2.04572487,4.1 4.44850787,4.1 L15.5514921,4.1 C17.9542751,4.1 19.9,6.0710989 19.9,8.5 C19.9,10.9289011 17.9542751,12.9 15.5514921,12.9 L15.1508665,12.9 Z"
     }));
   }
   function card() {
-    return /*#__PURE__*/React.createElement("svg", {
+    return /*#__PURE__*/React__default['default'].createElement("svg", {
       className: "icon-signature",
       width: "20px",
       height: "20px",
       viewBox: "0 0 20 20",
       xmlns: "http://www.w3.org/2000/svg"
-    }, /*#__PURE__*/React.createElement("path", {
+    }, /*#__PURE__*/React__default['default'].createElement("path", {
       fill: "#494B56",
       fillRule: "nonzero",
       d: "M9.9347554,11.8295455 C9.795059,11.8295455 9.68330189,11.7113637 9.68330189,11.5636364 L9.68330189,10.3522727 C9.68330189,10.3375 9.68330189,10.3227273 9.68330189,10.3079546 C10.2839964,9.7909091 10.6611767,9.00795455 10.6611767,8.13636364 L10.6611767,6.80681819 C10.6611767,5.25568182 9.47375729,4 8.00694511,4 C6.54013294,4 5.35271355,5.25568182 5.35271355,6.80681819 L5.35271355,8.13636364 C5.35271355,9.00795455 5.72989382,9.7909091 6.33058833,10.3079546 C6.33058833,10.3227273 6.33058833,10.3375 6.33058833,10.3522727 L6.33058833,11.5636364 C6.33058833,11.7113637 6.21883121,11.8295455 6.07913482,11.8295455 C3.83002281,11.8295455 2,13.7647727 2,16.1431819 C2,16.6159091 2.36321064,17 2.81023911,17 L13.1896814,17 C13.6367099,17 13.9999205,16.6159091 13.9999205,16.1431819 C14.0138902,13.7647727 12.1838674,11.8295455 9.9347554,11.8295455 Z M6.19089194,8.13636364 L6.19089194,6.80681819 C6.19089194,5.74318183 7.00113105,4.88636364 8.00694511,4.88636364 C9.01275918,4.88636364 9.82299828,5.74318183 9.82299828,6.80681819 L9.82299828,8.13636364 C9.82299828,9.20000001 9.01275918,10.0568182 8.00694511,10.0568182 C7.00113105,10.0568182 6.19089194,9.20000001 6.19089194,8.13636364 Z M2.83817839,16.1136363 C2.85214803,14.2375 4.29102093,12.7159091 6.07913482,12.7159091 C6.67982933,12.7159091 7.16876672,12.1988637 7.16876672,11.5636364 L7.16876672,10.7954546 C7.43418988,10.8840909 7.71358268,10.9431818 8.00694511,10.9431818 C8.30030755,10.9431818 8.57970034,10.8840909 8.8451235,10.7954546 L8.8451235,11.5488637 C8.8451235,12.1840909 9.33406089,12.7011364 9.9347554,12.7011364 C11.7228693,12.7159091 13.1617422,14.2375 13.1757119,16.1136363 L2.83817839,16.1136363 Z"
-    }), /*#__PURE__*/React.createElement("rect", {
+    }), /*#__PURE__*/React__default['default'].createElement("rect", {
       fill: "#494B56",
       fillRule: "nonzero",
       x: "13",
       y: "6",
       width: "6",
       height: "1"
-    }), /*#__PURE__*/React.createElement("rect", {
+    }), /*#__PURE__*/React__default['default'].createElement("rect", {
       fill: "#494B56",
       fillRule: "nonzero",
       x: "13",
       y: "8",
       width: "6",
       height: "1"
-    }), /*#__PURE__*/React.createElement("rect", {
+    }), /*#__PURE__*/React__default['default'].createElement("rect", {
       fill: "#494B56",
       fillRule: "nonzero",
       x: "13",
@@ -1672,81 +1804,81 @@
     }));
   }
   function add() {
-    return /*#__PURE__*/React.createElement("svg", {
+    return /*#__PURE__*/React__default['default'].createElement("svg", {
       className: "icon-add",
       width: "30px",
       height: "23px",
       viewBox: "0 0 20 20",
       xmlns: "http://www.w3.org/2000/svg"
-    }, /*#__PURE__*/React.createElement("path", {
+    }, /*#__PURE__*/React__default['default'].createElement("path", {
       fill: "#494B56",
       fillRule: "nonzero",
       d: "M16.5,10 C16.5,10.3122826 16.2470652,10.5652174 15.9347826,10.5652174 L10.5652174,10.5652174 L10.5652174,15.9347826 C10.5652174,16.2467826 10.3122826,16.5 10,16.5 C9.6877174,16.5 9.4347826,16.2467826 9.4347826,15.9347826 L9.4347826,10.5652174 L4.0652174,10.5652174 C3.7529348,10.5652174 3.5,10.3122826 3.5,10 C3.5,9.6877174 3.7529348,9.4347826 4.0652174,9.4347826 L9.4347826,9.4347826 L9.4347826,4.0652174 C9.4347826,3.7529348 9.6877174,3.5 10,3.5 C10.3122826,3.5 10.5652174,3.7529348 10.5652174,4.0652174 L10.5652174,9.4347826 L15.9347826,9.4347826 C16.2470652,9.4347826 16.5,9.6877174 16.5,10 Z"
     }));
   }
   function embed() {
-    return /*#__PURE__*/React.createElement("svg", {
+    return /*#__PURE__*/React__default['default'].createElement("svg", {
       className: "icon-embed",
       width: "20px",
       height: "20px",
       viewBox: "0 0 20 20",
       xmlns: "http://www.w3.org/2000/svg"
-    }, /*#__PURE__*/React.createElement("path", {
+    }, /*#__PURE__*/React__default['default'].createElement("path", {
       fill: "#494B56",
       d: "M13.0410996,14.8261802 C12.8030724,15.057835 12.4169249,15.0580448 12.1786821,14.8261802 C11.9404393,14.5943156 11.9406549,14.2185061 12.1786821,13.9868514 L16.275165,10.0000393 L12.1786821,6.01322731 C11.9404393,5.78136272 11.9404393,5.40576303 12.1786821,5.17389844 C12.4169249,4.94203385 12.8028568,4.94203385 13.0410996,5.17389844 L18,10.0000393 L13.0410996,14.8261802 Z"
-    }), /*#__PURE__*/React.createElement("path", {
+    }), /*#__PURE__*/React__default['default'].createElement("path", {
       fill: "#494B56",
       d: "M6.95890041,14.8261802 L2,10.0000393 L6.95890041,5.17389844 C7.19714323,4.94203385 7.58307507,4.94203385 7.82131789,5.17389844 C8.0595607,5.40576303 8.0595607,5.78136272 7.82131789,6.01322731 L3.72483495,10.0000393 L7.82131789,13.9868514 C8.05934511,14.2185061 8.0595607,14.5943156 7.82131789,14.8261802 C7.58307507,15.0580448 7.19692763,15.057835 6.95890041,14.8261802 Z"
     }));
   } // TEXT TOOLTIP
 
   function fontColor() {
-    return /*#__PURE__*/React.createElement("svg", {
+    return /*#__PURE__*/React__default['default'].createElement("svg", {
       className: "icon-fontcolor",
       width: "22px",
       height: "22px",
       viewBox: "0 0 22 22",
       xmlns: "http://www.w3.org/2000/svg"
-    }, /*#__PURE__*/React.createElement("path", {
+    }, /*#__PURE__*/React__default['default'].createElement("path", {
       fill: "#B1B4C1",
       className: "icon-fillcolor",
       fillRule: "nonzero",
       d: "M8.12739586,9.73148148 L10.4359896,4.25925926 L10.2674515,3.85976152 L10.6775092,3.68676844 L10.8505023,3.27671076 L11.25,3.44524887 L11.6494977,3.27671076 L11.8224908,3.68676844 L12.2325485,3.85976152 L12.0640104,4.25925926 L14.3726041,9.73148148 L14.5,9.73148148 L14.5,10.0334569 L15.7325485,12.9550533 L14.3505023,13.5381041 L13.3773959,11.2314815 L9.12260414,11.2314815 L8.14949774,13.5381041 L6.7674515,12.9550533 L8,10.0334569 L8,9.73148148 L8.12739586,9.73148148 Z M9.75541664,9.73148148 L12.7445834,9.73148148 L11.25,6.18876537 L9.75541664,9.73148148 Z"
-    }), /*#__PURE__*/React.createElement("path", {
+    }), /*#__PURE__*/React__default['default'].createElement("path", {
       fill: "#07A8FF",
       d: "M14,15.9259259 L19,15.9259259 C19.5522847,15.9259259 20,16.3736412 20,16.9259259 L20,17 C20,17.5522847 19.5522847,18 19,18 L14,18 L14,15.9259259 Z"
-    }), /*#__PURE__*/React.createElement("rect", {
+    }), /*#__PURE__*/React__default['default'].createElement("rect", {
       fill: "#FFCE0F",
       x: "8",
       y: "15.9259259",
       width: "6",
       height: "2.07407407"
-    }), /*#__PURE__*/React.createElement("path", {
+    }), /*#__PURE__*/React__default['default'].createElement("path", {
       fill: "#FF2B64",
       d: "M3,15.9259259 L8,15.9259259 L8,18 L3,18 C2.44771525,18 2,17.5522847 2,17 L2,16.9259259 C2,16.3736412 2.44771525,15.9259259 3,15.9259259 Z"
     }));
   }
   function bold() {
-    return /*#__PURE__*/React.createElement("svg", {
+    return /*#__PURE__*/React__default['default'].createElement("svg", {
       className: "icon-bold",
       width: "22px",
       height: "22px",
       viewBox: "0 0 22 22",
       xmlns: "http://www.w3.org/2000/svg"
-    }, /*#__PURE__*/React.createElement("path", {
+    }, /*#__PURE__*/React__default['default'].createElement("path", {
       className: "icon-fillcolor",
       fill: "#B1B4C1",
       d: "M11.2197266,10.546875 C11.9580115,10.546875 12.5322245,10.444337 12.9423828,10.2392578 C13.5869173,9.91699058 13.9091797,9.33691825 13.9091797,8.49902344 C13.9091797,7.65526922 13.5664097,7.08691553 12.8808594,6.79394531 C12.4941387,6.62988199 11.9199257,6.54785156 11.1582031,6.54785156 L8.03808593,6.54785156 L8.03808593,10.546875 L11.2197266,10.546875 Z M11.8085937,16.5058594 C12.8808647,16.5058594 13.6455055,16.1953156 14.1025391,15.5742188 C14.3896499,15.1816387 14.5332031,14.707034 14.5332031,14.1503906 C14.5332031,13.2128859 14.114262,12.5742204 13.2763672,12.234375 C12.8310524,12.0527335 12.2421911,11.9619141 11.5097656,11.9619141 L8.03808593,11.9619141 L8.03808593,16.5058594 L11.8085937,16.5058594 Z M6.32421874,5.08886719 L11.8701172,5.08886719 C13.3818435,5.08886719 14.457028,5.54003455 15.0957031,6.44238281 C15.470705,6.9755886 15.6582031,7.59081683 15.6582031,8.28808594 C15.6582031,9.10254313 15.4267601,9.77050521 14.9638672,10.2919922 C14.7236316,10.5673842 14.3779319,10.8193348 13.9267578,11.0478516 C14.5888705,11.2998059 15.0839827,11.5839828 15.4121094,11.9003906 C15.9921904,12.4628934 16.2822266,13.2392529 16.2822266,14.2294922 C16.2822266,15.0615276 16.021487,15.8144498 15.5,16.4882812 C14.7206992,17.4960988 13.4814538,18 11.7822266,18 L6.32421874,18 L6.32421874,5.08886719 Z"
     }));
   }
   function italic() {
-    return /*#__PURE__*/React.createElement("svg", {
+    return /*#__PURE__*/React__default['default'].createElement("svg", {
       className: "icon-italic",
       width: "22px",
       height: "22px",
       viewBox: "0 0 22 22",
       xmlns: "http://www.w3.org/2000/svg"
-    }, /*#__PURE__*/React.createElement("polygon", {
+    }, /*#__PURE__*/React__default['default'].createElement("polygon", {
       className: "icon-fillcolor",
       id: "I",
       fill: "#B1B4C1",
@@ -1754,13 +1886,13 @@
     }));
   }
   function insertunorderedlist() {
-    return /*#__PURE__*/React.createElement("svg", {
+    return /*#__PURE__*/React__default['default'].createElement("svg", {
       className: "icon-unorderedlist",
       width: "22px",
       height: "22px",
       viewBox: "0 0 22 22",
       xmlns: "http://www.w3.org/2000/svg"
-    }, /*#__PURE__*/React.createElement("path", {
+    }, /*#__PURE__*/React__default['default'].createElement("path", {
       className: "icon-fillcolor",
       fill: "#B1B4C1",
       fillRule: "nonzero",
@@ -1768,13 +1900,13 @@
     }));
   }
   function insertorderedlist() {
-    return /*#__PURE__*/React.createElement("svg", {
+    return /*#__PURE__*/React__default['default'].createElement("svg", {
       className: "icon-orderedlist",
       width: "22px",
       height: "22px",
       viewBox: "0 0 22 22",
       xmlns: "http://www.w3.org/2000/svg"
-    }, /*#__PURE__*/React.createElement("path", {
+    }, /*#__PURE__*/React__default['default'].createElement("path", {
       className: "icon-fillcolor",
       fill: "#B1B4C1",
       fillRule: "nonzero",
@@ -1782,13 +1914,13 @@
     }));
   }
   function link() {
-    return /*#__PURE__*/React.createElement("svg", {
+    return /*#__PURE__*/React__default['default'].createElement("svg", {
       className: "icon-link",
       width: "22px",
       height: "22px",
       viewBox: "0 0 22 22",
       xmlns: "http://www.w3.org/2000/svg"
-    }, /*#__PURE__*/React.createElement("path", {
+    }, /*#__PURE__*/React__default['default'].createElement("path", {
       className: "icon-fillcolor",
       fill: "#B1B4C1",
       fillRule: "nonzero",
@@ -1796,13 +1928,13 @@
     }));
   }
   function close() {
-    return /*#__PURE__*/React.createElement("svg", {
+    return /*#__PURE__*/React__default['default'].createElement("svg", {
       className: "icon-close",
       width: "22px",
       height: "22px",
       viewBox: "0 0 22 22",
       xmlns: "http://www.w3.org/2000/svg"
-    }, /*#__PURE__*/React.createElement("path", {
+    }, /*#__PURE__*/React__default['default'].createElement("path", {
       className: "icon-fillcolor",
       fill: "#B1B4C1",
       fillRule: "nonzero",
@@ -1810,12 +1942,12 @@
     }));
   }
   function blockquote() {
-    return /*#__PURE__*/React.createElement("svg", {
+    return /*#__PURE__*/React__default['default'].createElement("svg", {
       width: "19",
       height: "22",
       viewBox: "0 0 31 30",
       xmlns: "http://www.w3.org/2000/svg"
-    }, /*#__PURE__*/React.createElement("path", {
+    }, /*#__PURE__*/React__default['default'].createElement("path", {
       d: "M4,4 L13.597649,4 L13.597649,14.4859813 C13.6427086,15.993777 13.4286787,17.4101699 12.9555528,18.7352025 C12.4824269,20.0602351 11.8178076,21.2253325 10.961675,22.2305296 C10.1055424,23.2357267 9.08045165,24.0695709 7.88637197,24.7320872 C6.69229229,25.3946035 5.39684792,25.8172369 4,26 L4,21.4766355 C5.7122652,20.8826554 6.8837975,20.0031211 7.51463204,18.8380062 C8.14546659,17.6728914 8.46087913,16.245076 8.46087913,14.5545171 L4,14.5545171 L4,4 Z M18.3964736,4 L27.9941226,4 L27.9941226,14.4859813 C28.0391822,15.993777 27.8251523,17.4101699 27.3520264,18.7352025 C26.8789004,20.0602351 26.2142812,21.2253325 25.3581486,22.2305296 C24.502016,23.2357267 23.4769252,24.0695709 22.2828455,24.7320872 C21.0887658,25.3946035 19.7933215,25.8172369 18.3964736,26 L18.3964736,21.4766355 C20.1087388,20.8826554 21.280271,20.0031211 21.9111056,18.8380062 C22.5419401,17.6728914 22.8573527,16.245076 22.8573527,14.5545171 L18.3964736,14.5545171 L18.3964736,4 Z",
       id: "\u201D",
       className: "icon-fillcolor",
@@ -1823,12 +1955,12 @@
     }));
   }
   function code() {
-    return /*#__PURE__*/React.createElement("svg", {
+    return /*#__PURE__*/React__default['default'].createElement("svg", {
       width: "24",
       height: "24",
       viewBox: "0 0 34 31",
       xmlns: "http://www.w3.org/2000/svg"
-    }, /*#__PURE__*/React.createElement("path", {
+    }, /*#__PURE__*/React__default['default'].createElement("path", {
       d: "M15.512,11.828 L5.236,15.916 L15.512,20.004 L15.512,23.196 L1.288,17.568 L1.288,14.264 L15.512,8.608 L15.512,11.828 Z M19.392,20.004 L29.668,15.916 L19.392,11.828 L19.392,8.608 L33.616,14.264 L33.616,17.568 L19.392,23.196 L19.392,20.004 Z",
       id: "<->",
       className: "icon-fillcolor",
@@ -1836,12 +1968,12 @@
     }));
   }
   function h1() {
-    return /*#__PURE__*/React.createElement("svg", {
+    return /*#__PURE__*/React__default['default'].createElement("svg", {
       width: "24",
       height: "24",
       viewBox: "0 0 34 31",
       xmlns: "http://www.w3.org/2000/svg"
-    }, /*#__PURE__*/React.createElement("path", {
+    }, /*#__PURE__*/React__default['default'].createElement("path", {
       d: "M0.932,5.008 L5.328,5.008 L5.328,12.68 L13.42,12.68 L13.42,5.008 L17.816,5.008 L17.816,25 L13.42,25 L13.42,16.376 L5.328,16.376 L5.328,25 L0.932,25 L0.932,5.008 Z M29.1874147,25 L25.2114147,25 L25.2114147,12.288 L20.2834147,12.288 L20.2834147,9.292 C20.9740848,9.31066676 21.6414114,9.25933394 22.2854147,9.138 C22.9294179,9.01666606 23.5080788,8.80200154 24.0214147,8.494 C24.5347506,8.18599846 24.9687462,7.78000252 25.3234147,7.276 C25.6780831,6.77199748 25.9114141,6.1466704 26.0234147,5.4 L29.1874147,5.4 L29.1874147,25 Z",
       id: "H1",
       className: "icon-fillcolor",
@@ -1849,12 +1981,12 @@
     }));
   }
   function h2() {
-    return /*#__PURE__*/React.createElement("svg", {
+    return /*#__PURE__*/React__default['default'].createElement("svg", {
       width: "24",
       height: "24",
       viewBox: "0 0 34 31",
       xmlns: "http://www.w3.org/2000/svg"
-    }, /*#__PURE__*/React.createElement("path", {
+    }, /*#__PURE__*/React__default['default'].createElement("path", {
       d: "M0.932,5.008 L5.328,5.008 L5.328,12.68 L13.42,12.68 L13.42,5.008 L17.816,5.008 L17.816,25 L13.42,25 L13.42,16.376 L5.328,16.376 L5.328,25 L0.932,25 L0.932,5.008 Z M19.2474147,12.932 C19.2100811,11.8119944 19.3407465,10.7713381 19.6394147,9.81 C19.9380828,8.84866186 20.3860783,8.00867026 20.9834147,7.29 C21.580751,6.57132974 22.3320768,6.01133534 23.2374147,5.61 C24.1427525,5.20866466 25.1834088,5.008 26.3594147,5.008 C27.2554191,5.008 28.1094106,5.1479986 28.9214147,5.428 C29.7334187,5.7080014 30.4474116,6.10933072 31.0634147,6.632 C31.6794177,7.15466928 32.1694128,7.79866284 32.5334147,8.564 C32.8974165,9.32933716 33.0794147,10.1879952 33.0794147,11.14 C33.0794147,12.1293383 32.9207496,12.9786631 32.6034147,13.688 C32.2860797,14.3973369 31.8660839,15.0273306 31.3434147,15.578 C30.8207454,16.1286694 30.2280846,16.6279978 29.5654147,17.076 C28.9027447,17.5240022 28.235418,17.9673311 27.5634147,18.406 C26.8914113,18.8446689 26.2380845,19.3159975 25.6034147,19.82 C24.9687448,20.3240025 24.4087504,20.9119966 23.9234147,21.584 L33.1914147,21.584 L33.1914147,25 L18.7994147,25 C18.7994147,23.8613276 18.9627464,22.8720042 19.2894147,22.032 C19.616083,21.1919958 20.0594119,20.44067 20.6194147,19.778 C21.1794175,19.11533 21.8374109,18.5040028 22.5934147,17.944 C23.3494184,17.3839972 24.1474105,16.8146696 24.9874147,16.236 C25.4167501,15.9373318 25.8740789,15.6340015 26.3594147,15.326 C26.8447504,15.0179985 27.2880793,14.6773352 27.6894147,14.304 C28.09075,13.9306648 28.4267466,13.510669 28.6974147,13.044 C28.9680827,12.577331 29.1034147,12.0453363 29.1034147,11.448 C29.1034147,10.4959952 28.8280841,9.75400266 28.2774147,9.222 C27.7267452,8.68999734 27.0220856,8.424 26.1634147,8.424 C25.5847451,8.424 25.09475,8.55933198 24.6934147,8.83 C24.2920793,9.10066802 23.9700825,9.45533114 23.7274147,9.894 C23.4847468,10.3326689 23.3120818,10.8179973 23.2094147,11.35 C23.1067475,11.8820027 23.0554147,12.4093307 23.0554147,12.932 L19.2474147,12.932 Z",
       id: "H2",
       className: "icon-fillcolor",
@@ -1862,12 +1994,12 @@
     }));
   }
   function h3() {
-    return /*#__PURE__*/React.createElement("svg", {
+    return /*#__PURE__*/React__default['default'].createElement("svg", {
       width: "24",
       height: "24",
       viewBox: "0 0 34 31",
       xmlns: "http://www.w3.org/2000/svg"
-    }, /*#__PURE__*/React.createElement("path", {
+    }, /*#__PURE__*/React__default['default'].createElement("path", {
       d: "M0.932,5.008 L5.328,5.008 L5.328,12.68 L13.42,12.68 L13.42,5.008 L17.816,5.008 L17.816,25 L13.42,25 L13.42,16.376 L5.328,16.376 L5.328,25 L0.932,25 L0.932,5.008 Z M24.5954147,13.324 C25.0247501,13.3613335 25.4820789,13.3613335 25.9674147,13.324 C26.4527504,13.2866665 26.9054126,13.1793342 27.3254147,13.002 C27.7454168,12.8246658 28.0907466,12.5680017 28.3614147,12.232 C28.6320827,11.8959983 28.7674147,11.4480028 28.7674147,10.888 C28.7674147,10.0479958 28.4874175,9.40400224 27.9274147,8.956 C27.3674119,8.50799776 26.7234183,8.284 25.9954147,8.284 C24.9874096,8.284 24.2267506,8.61533002 23.7134147,9.278 C23.2000788,9.94066998 22.9527479,10.775995 22.9714147,11.784 L19.1914147,11.784 C19.2287482,10.775995 19.4107464,9.85667082 19.7374147,9.026 C20.064083,8.19532918 20.5214117,7.48133632 21.1094147,6.884 C21.6974176,6.28666368 22.4020772,5.8246683 23.2234147,5.498 C24.0447521,5.1713317 24.9594096,5.008 25.9674147,5.008 C26.7514186,5.008 27.5354107,5.1246655 28.3194147,5.358 C29.1034186,5.5913345 29.8080782,5.941331 30.4334147,6.408 C31.0587511,6.874669 31.5674127,7.44399664 31.9594147,8.116 C32.3514166,8.78800336 32.5474147,9.56266228 32.5474147,10.44 C32.5474147,11.3920048 32.3187503,12.2319964 31.8614147,12.96 C31.404079,13.6880036 30.7180859,14.1826654 29.8034147,14.444 L29.8034147,14.5 C30.8860867,14.7426679 31.7354116,15.2653293 32.3514147,16.068 C32.9674177,16.8706707 33.2754147,17.8319944 33.2754147,18.952 C33.2754147,19.9786718 33.07475,20.8933293 32.6734147,21.696 C32.2720793,22.4986707 31.735418,23.170664 31.0634147,23.712 C30.3914113,24.253336 29.6167524,24.6639986 28.7394147,24.944 C27.8620769,25.2240014 26.9474194,25.364 25.9954147,25.364 C24.8940758,25.364 23.8907525,25.2053349 22.9854147,24.888 C22.0800768,24.5706651 21.3100845,24.1086697 20.6754147,23.502 C20.0407448,22.8953303 19.5507497,22.1533377 19.2054147,21.276 C18.8600796,20.3986623 18.6967479,19.3906724 18.7154147,18.252 L22.4954147,18.252 C22.5140814,18.7746693 22.5980806,19.2739976 22.7474147,19.75 C22.8967487,20.2260024 23.1114133,20.6366649 23.3914147,20.982 C23.6714161,21.3273351 24.0214126,21.6026656 24.4414147,21.808 C24.8614168,22.0133344 25.3607451,22.116 25.9394147,22.116 C26.8354191,22.116 27.5914116,21.8406694 28.2074147,21.29 C28.8234177,20.7393306 29.1314147,19.9880048 29.1314147,19.036 C29.1314147,18.2893296 28.9867494,17.720002 28.6974147,17.328 C28.4080799,16.935998 28.0394169,16.6513342 27.5914147,16.474 C27.1434124,16.2966658 26.6534173,16.1940001 26.1214147,16.166 C25.589412,16.1379999 25.0807504,16.124 24.5954147,16.124 L24.5954147,13.324 Z",
       id: "H3",
       className: "icon-fillcolor",
@@ -1875,12 +2007,12 @@
     }));
   }
   function h4() {
-    return /*#__PURE__*/React.createElement("svg", {
+    return /*#__PURE__*/React__default['default'].createElement("svg", {
       width: "24",
       height: "24",
       viewBox: "0 0 34 31",
       xmlns: "http://www.w3.org/2000/svg"
-    }, /*#__PURE__*/React.createElement("path", {
+    }, /*#__PURE__*/React__default['default'].createElement("path", {
       d: "M0.932,5.008 L5.328,5.008 L5.328,12.68 L13.42,12.68 L13.42,5.008 L17.816,5.008 L17.816,25 L13.42,25 L13.42,16.376 L5.328,16.376 L5.328,25 L0.932,25 L0.932,5.008 Z M26.9474147,10.384 L26.8634147,10.384 L21.7954147,17.188 L26.9474147,17.188 L26.9474147,10.384 Z M26.9474147,20.464 L18.6594147,20.464 L18.6594147,16.824 L27.1714147,5.4 L30.7274147,5.4 L30.7274147,17.188 L33.3314147,17.188 L33.3314147,20.464 L30.7274147,20.464 L30.7274147,25 L26.9474147,25 L26.9474147,20.464 Z",
       id: "H4",
       className: "icon-fillcolor",
@@ -1966,8 +2098,8 @@
     return t;
   };
 
-  var _templateObject;
-  var AnchorStyle = styled.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n\n  // MENU\n  position: absolute;\n  visibility: hidden;\n  z-index: 10;\n  -webkit-transition: none;\n  transition: none;\n  display: none;\n  top: 0;\n  left: 0;\n  display:block;\n  white-space: nowrap;\n\n  height: ", ";\n  background: ", ";\n  color: ", ";\n\n  border: ", ";\n  border-radius: ", ";\n  box-shadow: ", ";\n\n  // CARET\n  // &:before -> Borde\n  // &:after  -> Triangulo\n\n  &.dante-menu{\n    &:after {\n      content: \"\";\n      height: 0;\n      width: 0;\n      position: absolute;\n      left: ", ";\n      pointer-events: none;\n      border: ", " solid transparent;\n      margin-left: -", ";\n    }\n    &:after {\n      border-top-color: ", ";\n      bottom: -", ";\n    }\n  }\n\n\n\n  &.dante-sticky-menu {\n    position: -webkit-sticky;\n    position: sticky;\n    width: 100%;\n    border-radius: 0px;\n    //overflow-x: scroll;\n    &:after{\n      display: none;\n    }\n  }\n\n  &.is-active {\n    visibility: visible;\n    opacity: 1;\n    transition: visibility 0s linear 0s,opacity .2s 0s;\n  }\n\n  &.is-active {\n    opacity: 1;\n  }\n\n\n  // Visible\n\n  &.dante-menu--active {\n    display: inline-block !important;\n    visibility: visible !important;\n    -webkit-animation: pop-upwards 180ms forwards linear;\n    animation: pop-upwards 180ms forwards linear;\n  }\n\n\n  // Link mode\n\n  &.dante-menu--linkmode {\n    .dante-menu-buttons {\n      visibility: hidden;\n    }\n    .dante-menu-linkinput {\n      display: block;\n    }\n    .dante-menu-input {\n      -webkit-animation: pop-upwards 180ms forwards linear;\n              animation: pop-upwards 180ms forwards linear;\n    }\n  }\n\n  &.popover--Linktooltip .popover-inner {\n    padding: 10px 10px;\n    font-size: 12px;\n  }\n\n  &.popover--tooltip .popover-inner {\n      //background: #333333;\n      border-radius: 4px;\n      color: ", ";\n  }\n\n  .popover-inner a {\n    color: inherit;\n    text-decoration: none;\n  }\n\n  .popover-arrow {\n    position: absolute;\n  }\n\n  .popover-arrow:after {\n    background-color: ", ";\n  }\n\n  &.popover--top .popover-arrow,\n  &.popover--bottom .popover-arrow {\n    left: 50%;\n    margin-left: -", ";\n  }\n\n  &.popover--left .popover-arrow,\n  &.popover--right .popover-arrow {\n    top: 50%;\n    margin-top: -", ";\n  }\n\n\n  &.popover--right .popover-arrow {\n    left: 1px;\n  }\n\n  &.popover--bottom .popover-arrow {\n    top: -13px;\n  }\n\n  &.popover--left .popover-arrow {\n    right: 1px;\n    // clip: rect(-4px 14px 18px 0);\n  }\n\n  .popover-arrow:after {\n    content: '';\n    display: block;\n    width: ", ";\n    height: ", ";\n  }\n\n  &.popover--top .popover-arrow:after {\n    -webkit-transform: rotate(45deg) translate(-5px,-5px);\n    -ms-transform: rotate(45deg) translate(-5px,-5px);\n    transform: rotate(45deg) translate(-5px,-5px);\n    box-shadow: 1px 1px 1px -1px ", ";\n  }\n\n  &.popover--right .popover-arrow:after {\n    -webkit-transform: rotate(45deg) translate(6px,-6px);\n    -ms-transform: rotate(45deg) translate(6px,-6px);\n    transform: rotate(45deg) translate(6px,-6px);\n    box-shadow: -1px 1px 1px -1px ", ";\n  }\n\n  &.popover--bottom .popover-arrow:after {\n    -webkit-transform: rotate(45deg) translate(6px,6px);\n    -ms-transform: rotate(45deg) translate(6px,6px);\n    transform: rotate(45deg) translate(6px,6px);\n    box-shadow: -1px -1px 1px -1px ", ";\n  }\n\n  &.popover--left .popover-arrow:after {\n    -webkit-transform: rotate(45deg) translate(-6px,6px);\n    -ms-transform: rotate(45deg) translate(-6px,6px);\n    transform: rotate(45deg) translate(-6px,6px);\n    box-shadow: 1px -1px 1px -1px ", ";\n  }\n\n\n// BUTONS\n\n.dante-menu-buttons {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n  line-height: 0;\n}\n.dante-menu-divider {\n  width: 1px;\n  height: ", ";\n  margin: 9px 2px;\n  background: rgba(100, 100, 100,.2);\n  display: inline-block;\n  overflow: hidden;\n  cursor: default;\n  line-height: ", ";\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n}\n.dante-menu-button {\n\n  min-width: 20px;\n  display: inline-block;\n  padding-left: 10px;\n  padding-right: 10px;\n  overflow: hidden;\n  text-align: center;\n  color: ", ";\n  cursor: pointer;\n  font-size: ", ";\n  line-height: ", ";\n  -webkit-user-select: none;\n      -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n\n  &:hover{\n    // nada\n  }\n  &.active{\n    color: ", ";\n  }\n\n\n  &:first-of-type {\n    border-top-left-radius: ", ";\n    border-bottom-left-radius: ", ";\n    padding-left: 18px;\n  }\n  &:last-child {\n    border-top-right-radius: ", ";\n    border-bottom-right-radius: ", ";\n    padding-right: 18px;\n  }\n\n}\n\n.dante-menu-button--disabled {\n  -webkit-user-select: none !important;\n     -moz-user-select: none !important;\n      -ms-user-select: none !important;\n          user-select: none !important;\n          opacity: .3;\n}\n\n\n// LINK\n\n.dante-menu-linkinput {\n  & {\n    display: none;\n    position: absolute;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n  }\n  .dante-menu-button {\n    position: absolute;\n    top: 0;\n    right: 0;\n  }\n}\n\n.dante-menu-input {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  padding: 13px 40px 13px 10px;\n  color: ", ";\n  border: none;\n  outline: none;\n  font-size: 14px;\n  box-sizing: border-box;\n  border-radius: ", ";\n  appearance: none;\n  text-align: left;\n  font-family: ", ";\n  letter-spacing: 0.01rem;\n  font-weight: 400;\n  font-style: normal;\n  text-rendering: optimizeLegibility;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  -moz-font-feature-settings: \"liga\" on;\n}\n\n&:after {\n  border-top-color: ", ";\n}\n.dante-menu-input {\n  padding: 11px 40px 11px 10px;\n}\n.dante-menu-button {\n  padding-left: 0;\n  padding-right: 0;\n  vertical-align: top;\n  line-height: 1;\n  margin: 0px;\n}\n.dante-menu-button:first-of-type {\n  border-top-left-radius: 4px;\n  border-bottom-left-radius: 4px;\n  padding-left: 0;\n}\n.dante-menu-button:last-of-type {\n  border-top-right-radius: 4px;\n  border-bottom-right-radius: 4px;\n  padding-right: 0;\n}\n.dante-menu-button.visible-overflow {\n  vertical-align: top;\n}\n.dante-menu-button button {\n  height: 42px;\n}\n.dante-menu-button .dante-icon {\n  padding: 10px;\n  min-width: 20px;\n  display: inline-block;\n}\n.dante-menu-button .tooltip-icon {\n  padding: 10px;\n  display: inline-block;\n}\n.dante-menu-button .dante-icon:hover .icon-fillcolor {\n  fill: ", ";\n}\n.dante-menu-button.active .dante-icon .icon-fillcolor {\n  fill: ", ";\n}\n\n.dante-menu-button .dante-icon svg {\n  vertical-align: middle;\n}\n.dropdown {\n  float: left\n}\n.dropdown .btn {\n  color: #BEC2CC;\n  padding: 0 10px;\n  width: auto;\n  font-size: 12px\n}\n.dropdown .btn .caret {\n  border-top-color: #62656A;\n  margin-left: 4px;\n}\n.dropdown .btn:hover {\n  color: ", ";\n}\n.dropdown .btn:hover .caret {\n  border-top-color: ", ";\n}\n.dropdown .dropdown-menu {\n  background: #2A2B32;\n  padding: 0;\n  max-height: 300px;\n  overflow-y: auto;\n  width: auto;\n  min-width: 60px\n}\n.dropdown .dropdown-menu li {\n  border-bottom: 1px solid #383943\n}\n.dropdown .dropdown-menu li:last-child {\n  border-bottom: 0\n}\n.dropdown .dropdown-menu li a {\n  color: #BEC2CC;\n  font-size: 12px;\n  padding: 0 10px;\n  line-height: 30px\n}\n.dropdown.open > .dropdown-toggle.btn-default {\n  color: #BEC2CC;\n}\n.dropdown .dropdown-menu li a:hover,\n.dropdown.open > .dropdown-toggle.btn-default:hover {\n  background: 0;\n  color: ", ";\n}\n\n.divider {\n  position: relative;\n  float: left;\n  width: 1px;\n  height: 20px;\n  margin: 10px 5px;\n  background: ", "\n}\n\n"])), function (props) {
+  var _templateObject$1;
+  var AnchorStyle = styled__default['default'].div(_templateObject$1 || (_templateObject$1 = _taggedTemplateLiteral(["\n\n  // MENU\n  position: absolute;\n  visibility: hidden;\n  z-index: 10;\n  -webkit-transition: none;\n  transition: none;\n  display: none;\n  top: 0;\n  left: 0;\n  display:block;\n  white-space: nowrap;\n\n  height: ", ";\n  background: ", ";\n  color: ", ";\n\n  border: ", ";\n  border-radius: ", ";\n  box-shadow: ", ";\n\n  // CARET\n  // &:before -> Borde\n  // &:after  -> Triangulo\n\n  &.dante-menu{\n    &:after {\n      content: \"\";\n      height: 0;\n      width: 0;\n      position: absolute;\n      left: ", ";\n      pointer-events: none;\n      border: ", " solid transparent;\n      margin-left: -", ";\n    }\n    &:after {\n      border-top-color: ", ";\n      bottom: -", ";\n    }\n  }\n\n\n\n  &.dante-sticky-menu {\n    position: -webkit-sticky;\n    position: sticky;\n    width: 100%;\n    border-radius: 0px;\n    //overflow-x: scroll;\n    &:after{\n      display: none;\n    }\n  }\n\n  &.is-active {\n    visibility: visible;\n    opacity: 1;\n    transition: visibility 0s linear 0s,opacity .2s 0s;\n  }\n\n  &.is-active {\n    opacity: 1;\n  }\n\n\n  // Visible\n\n  &.dante-menu--active {\n    display: inline-block !important;\n    visibility: visible !important;\n    -webkit-animation: pop-upwards 180ms forwards linear;\n    animation: pop-upwards 180ms forwards linear;\n  }\n\n\n  // Link mode\n\n  &.dante-menu--linkmode {\n    .dante-menu-buttons {\n      visibility: hidden;\n    }\n    .dante-menu-linkinput {\n      display: block;\n    }\n    .dante-menu-input {\n      -webkit-animation: pop-upwards 180ms forwards linear;\n              animation: pop-upwards 180ms forwards linear;\n    }\n  }\n\n  &.popover--Linktooltip .popover-inner {\n    padding: 10px 10px;\n    font-size: 12px;\n  }\n\n  &.popover--tooltip .popover-inner {\n      //background: #333333;\n      border-radius: 4px;\n      color: ", ";\n  }\n\n  .popover-inner a {\n    color: inherit;\n    text-decoration: none;\n  }\n\n  .popover-arrow {\n    position: absolute;\n  }\n\n  .popover-arrow:after {\n    background-color: ", ";\n  }\n\n  &.popover--top .popover-arrow,\n  &.popover--bottom .popover-arrow {\n    left: 50%;\n    margin-left: -", ";\n  }\n\n  &.popover--left .popover-arrow,\n  &.popover--right .popover-arrow {\n    top: 50%;\n    margin-top: -", ";\n  }\n\n\n  &.popover--right .popover-arrow {\n    left: 1px;\n  }\n\n  &.popover--bottom .popover-arrow {\n    top: -13px;\n  }\n\n  &.popover--left .popover-arrow {\n    right: 1px;\n    // clip: rect(-4px 14px 18px 0);\n  }\n\n  .popover-arrow:after {\n    content: '';\n    display: block;\n    width: ", ";\n    height: ", ";\n  }\n\n  &.popover--top .popover-arrow:after {\n    -webkit-transform: rotate(45deg) translate(-5px,-5px);\n    -ms-transform: rotate(45deg) translate(-5px,-5px);\n    transform: rotate(45deg) translate(-5px,-5px);\n    box-shadow: 1px 1px 1px -1px ", ";\n  }\n\n  &.popover--right .popover-arrow:after {\n    -webkit-transform: rotate(45deg) translate(6px,-6px);\n    -ms-transform: rotate(45deg) translate(6px,-6px);\n    transform: rotate(45deg) translate(6px,-6px);\n    box-shadow: -1px 1px 1px -1px ", ";\n  }\n\n  &.popover--bottom .popover-arrow:after {\n    -webkit-transform: rotate(45deg) translate(6px,6px);\n    -ms-transform: rotate(45deg) translate(6px,6px);\n    transform: rotate(45deg) translate(6px,6px);\n    box-shadow: -1px -1px 1px -1px ", ";\n  }\n\n  &.popover--left .popover-arrow:after {\n    -webkit-transform: rotate(45deg) translate(-6px,6px);\n    -ms-transform: rotate(45deg) translate(-6px,6px);\n    transform: rotate(45deg) translate(-6px,6px);\n    box-shadow: 1px -1px 1px -1px ", ";\n  }\n\n\n// BUTONS\n\n.dante-menu-buttons {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n  line-height: 0;\n}\n.dante-menu-divider {\n  width: 1px;\n  height: ", ";\n  margin: 9px 2px;\n  background: rgba(100, 100, 100,.2);\n  display: inline-block;\n  overflow: hidden;\n  cursor: default;\n  line-height: ", ";\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n}\n.dante-menu-button {\n\n  min-width: 20px;\n  display: inline-block;\n  padding-left: 10px;\n  padding-right: 10px;\n  overflow: hidden;\n  text-align: center;\n  color: ", ";\n  cursor: pointer;\n  font-size: ", ";\n  line-height: ", ";\n  -webkit-user-select: none;\n      -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n\n  &:hover{\n    // nada\n  }\n  &.active{\n    color: ", ";\n  }\n\n\n  &:first-of-type {\n    border-top-left-radius: ", ";\n    border-bottom-left-radius: ", ";\n    padding-left: 18px;\n  }\n  &:last-child {\n    border-top-right-radius: ", ";\n    border-bottom-right-radius: ", ";\n    padding-right: 18px;\n  }\n\n}\n\n.dante-menu-button--disabled {\n  -webkit-user-select: none !important;\n     -moz-user-select: none !important;\n      -ms-user-select: none !important;\n          user-select: none !important;\n          opacity: .3;\n}\n\n\n// LINK\n\n.dante-menu-linkinput {\n  & {\n    display: none;\n    position: absolute;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n  }\n  .dante-menu-button {\n    position: absolute;\n    top: 0;\n    right: 0;\n  }\n}\n\n.dante-menu-input {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  padding: 13px 40px 13px 10px;\n  color: ", ";\n  border: none;\n  outline: none;\n  font-size: 14px;\n  box-sizing: border-box;\n  border-radius: ", ";\n  appearance: none;\n  text-align: left;\n  font-family: ", ";\n  letter-spacing: 0.01rem;\n  font-weight: 400;\n  font-style: normal;\n  text-rendering: optimizeLegibility;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  -moz-font-feature-settings: \"liga\" on;\n}\n\n&:after {\n  border-top-color: ", ";\n}\n.dante-menu-input {\n  padding: 11px 40px 11px 10px;\n}\n.dante-menu-button {\n  padding-left: 0;\n  padding-right: 0;\n  vertical-align: top;\n  line-height: 1;\n  margin: 0px;\n}\n.dante-menu-button:first-of-type {\n  border-top-left-radius: 4px;\n  border-bottom-left-radius: 4px;\n  padding-left: 0;\n}\n.dante-menu-button:last-of-type {\n  border-top-right-radius: 4px;\n  border-bottom-right-radius: 4px;\n  padding-right: 0;\n}\n.dante-menu-button.visible-overflow {\n  vertical-align: top;\n}\n.dante-menu-button button {\n  height: 42px;\n}\n.dante-menu-button .dante-icon {\n  padding: 10px;\n  min-width: 20px;\n  display: inline-block;\n}\n.dante-menu-button .tooltip-icon {\n  padding: 10px;\n  display: inline-block;\n}\n.dante-menu-button .dante-icon:hover .icon-fillcolor {\n  fill: ", ";\n}\n.dante-menu-button.active .dante-icon .icon-fillcolor {\n  fill: ", ";\n}\n\n.dante-menu-button .dante-icon svg {\n  vertical-align: middle;\n}\n.dropdown {\n  float: left\n}\n.dropdown .btn {\n  color: #BEC2CC;\n  padding: 0 10px;\n  width: auto;\n  font-size: 12px\n}\n.dropdown .btn .caret {\n  border-top-color: #62656A;\n  margin-left: 4px;\n}\n.dropdown .btn:hover {\n  color: ", ";\n}\n.dropdown .btn:hover .caret {\n  border-top-color: ", ";\n}\n.dropdown .dropdown-menu {\n  background: #2A2B32;\n  padding: 0;\n  max-height: 300px;\n  overflow-y: auto;\n  width: auto;\n  min-width: 60px\n}\n.dropdown .dropdown-menu li {\n  border-bottom: 1px solid #383943\n}\n.dropdown .dropdown-menu li:last-child {\n  border-bottom: 0\n}\n.dropdown .dropdown-menu li a {\n  color: #BEC2CC;\n  font-size: 12px;\n  padding: 0 10px;\n  line-height: 30px\n}\n.dropdown.open > .dropdown-toggle.btn-default {\n  color: #BEC2CC;\n}\n.dropdown .dropdown-menu li a:hover,\n.dropdown.open > .dropdown-toggle.btn-default:hover {\n  background: 0;\n  color: ", ";\n}\n\n.divider {\n  position: relative;\n  float: left;\n  width: 1px;\n  height: 20px;\n  margin: 10px 5px;\n  background: ", "\n}\n\n"])), function (props) {
     return props.theme.dante_menu_height;
   }, function (props) {
     return props.theme.dante_menu_background;
@@ -2051,14 +2183,10 @@
     return props.theme.dante_menu_divider_color;
   });
 
-  function _createSuper$2(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct$2(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-  function _isNativeReflectConstruct$2() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-
   var DanteImagePopover = /*#__PURE__*/function (_React$Component) {
     _inherits(DanteImagePopover, _React$Component);
 
-    var _super = _createSuper$2(DanteImagePopover);
+    var _super = _createSuper(DanteImagePopover);
 
     function DanteImagePopover(props) {
       var _this;
@@ -2160,24 +2288,24 @@
       });
 
       _defineProperty(_assertThisInitialized(_this), "render", function () {
-        return /*#__PURE__*/React.createElement(AnchorStyle, {
+        return /*#__PURE__*/React__default['default'].createElement(AnchorStyle, {
           ref: "image_popover",
           className: "dante-popover popover--Aligntooltip popover--top popover--animated ".concat(_this.state.show ? 'is-active' : undefined),
           style: {
             top: _this.state.position.top,
             left: _this.state.position.left
           }
-        }, /*#__PURE__*/React.createElement("div", {
+        }, /*#__PURE__*/React__default['default'].createElement("div", {
           className: "popover-inner"
-        }, /*#__PURE__*/React.createElement("ul", {
+        }, /*#__PURE__*/React__default['default'].createElement("ul", {
           className: "dante-menu-buttons"
         }, _this.state.buttons.map(function (item, i) {
-          return /*#__PURE__*/React.createElement(DanteImagePopoverItem, {
+          return /*#__PURE__*/React__default['default'].createElement(DanteImagePopoverItem, {
             item: item,
             handleClick: _this.handleClick,
             key: i
           });
-        }))), /*#__PURE__*/React.createElement("div", {
+        }))), /*#__PURE__*/React__default['default'].createElement("div", {
           className: "popover-arrow"
         }));
       });
@@ -2210,12 +2338,12 @@
     }]);
 
     return DanteImagePopover;
-  }(React.Component);
+  }(React__default['default'].Component);
 
   var DanteImagePopoverItem = /*#__PURE__*/function (_React$Component2) {
     _inherits(DanteImagePopoverItem, _React$Component2);
 
-    var _super2 = _createSuper$2(DanteImagePopoverItem);
+    var _super2 = _createSuper(DanteImagePopoverItem);
 
     function DanteImagePopoverItem() {
       var _this2;
@@ -2234,10 +2362,10 @@
       });
 
       _defineProperty(_assertThisInitialized(_this2), "render", function () {
-        return /*#__PURE__*/React.createElement("li", {
+        return /*#__PURE__*/React__default['default'].createElement("li", {
           className: "dante-menu-button align-".concat(_this2.props.item.type),
           onMouseDown: _this2.handleClick
-        }, /*#__PURE__*/React.createElement("span", {
+        }, /*#__PURE__*/React__default['default'].createElement("span", {
           className: "tooltip-icon dante-icon"
         }, Icons["image".concat(lodash.capitalize(_this2.props.item.type))]()));
       });
@@ -2248,7 +2376,7 @@
     }
 
     return DanteImagePopoverItem;
-  }(React.Component);
+  }(React__default['default'].Component);
   var DanteImagePopoverConfig = function DanteImagePopoverConfig() {
     var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
     var config = {
@@ -2258,14 +2386,10 @@
     return Object.assign(config, options);
   };
 
-  function _createSuper$3(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct$3(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-  function _isNativeReflectConstruct$3() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-
   var DanteAnchorPopover = /*#__PURE__*/function (_React$Component) {
     _inherits(DanteAnchorPopover, _React$Component);
 
-    var _super = _createSuper$3(DanteAnchorPopover);
+    var _super = _createSuper(DanteAnchorPopover);
 
     function DanteAnchorPopover(props) {
       var _this;
@@ -2299,9 +2423,9 @@
           return;
         }
 
-        var editorState = _this.props.editorState;
+        _this.props.editorState;
         var selectionRect = node.getBoundingClientRect();
-        var parent = ReactDOM.findDOMNode(_this.props.editor);
+        ReactDOM__default['default'].findDOMNode(_this.props.editor);
         var relativeParent = getRelativeParent(_this.refs.dante_popover.parentElement);
         var toolbarHeight = _this.refs.dante_popover.clientHeight;
         var toolbarWidth = _this.refs.dante_popover.clientWidth;
@@ -2347,25 +2471,25 @@
           top: position.top,
           visibility: "".concat(this.state.show ? 'visible' : 'hidden')
         };
-        return /*#__PURE__*/React.createElement(AnchorStyle, {
+        return /*#__PURE__*/React__default['default'].createElement(AnchorStyle, {
           ref: "dante_popover",
           className: "dante-popover popover--tooltip popover--Linktooltip popover--bottom is-active",
           style: style,
           onMouseOver: this.props.handleOnMouseOver,
           onMouseOut: this.props.handleOnMouseOut
-        }, /*#__PURE__*/React.createElement("div", {
+        }, /*#__PURE__*/React__default['default'].createElement("div", {
           className: "popover-inner"
-        }, /*#__PURE__*/React.createElement("a", {
+        }, /*#__PURE__*/React__default['default'].createElement("a", {
           href: this.state.url,
           target: "_blank"
-        }, this.state.url)), /*#__PURE__*/React.createElement("div", {
+        }, this.state.url)), /*#__PURE__*/React__default['default'].createElement("div", {
           className: "popover-arrow"
         }));
       }
     }]);
 
     return DanteAnchorPopover;
-  }(React.Component);
+  }(React__default['default'].Component);
   var DanteAnchorPopoverConfig = function DanteAnchorPopoverConfig() {
     var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
     var config = {
@@ -2375,8 +2499,8 @@
     return Object.assign(config, options);
   };
 
-  var _templateObject$1, _templateObject2;
-  var EditorContainer = styled.div(_templateObject$1 || (_templateObject$1 = _taggedTemplateLiteral(["\n  \n  @import url('//fonts.googleapis.com/css?family=Merriweather:400,700,400italic,700italic|Open+Sans:400,300,800');\n\n  font-family: ", ";\n  letter-spacing: 0.01rem;\n  font-weight: 400;\n  font-style: normal;\n  font-size: ", ";\n  line-height: ", ";\n  color: ", ";\n\n  @media (max-width: 500px) {\n\n    .postContent {\n      font-size: ", ";\n      line-height: ", ";\n    }\n\n  }\n\n  .public-DraftEditorPlaceholder-root {\n    color: ", ";\n    position: absolute;\n    z-index: 0;\n    font-size: ", ";\n    background-color: transparent;\n  }\n\n  .graf--h2,\n  .graf--h3,\n  .graf--h4,\n  .graf--h5,\n  .graf--h6,\n  .graf--h7,\n  .postList,\n  .graf--hr,\n  .graf--figure,\n  .graf--blockquote,\n  .graf--pullquote,\n  .graf--p,\n  .graf--pre {\n    margin: 0;\n    //position:relative;\n  }\n\n  .graf--code {\n    position:relative;\n    overflow: visible;\n\n    background: ", ";\n    font-family: ", ";\n    font-size: 16px;\n    margin-bottom: 20px;\n    padding: 20px;\n    white-space: pre-wrap;\n    color: ", ";\n\n    .dante-code-syntax{\n      color: ", ";\n      position: absolute;\n      top: 4px;\n      right: 4px;\n      width: 165px;\n    }\n  }\n\n  .graf--pre {\n      background: #000 !important;\n      font-family: ", ";\n      font-size: 16px;\n      margin-bottom: 20px;\n      padding: 20px;\n      white-space: pre-wrap;\n      color: #fff !important;\n  }\n\n  .postList {\n    margin-bottom: 30px;\n  }\n\n  .graf--p,\n  .graf--blockquote,\n  .graf--pullquote {\n    margin-bottom: 30px;\n  }\n\n  .graf--code {\n    line-height: 1em;\n  }\n\n  .graf--p.dante--spinner{\n    position:relative;\n  }\n\n  .graf--hr {\n    hr{\n      border: 1px solid #ccc;\n      margin: 26px;\n    }\n  }\n\n  .graf--h2 {\n    font-family: ", ";\n    font-size: 3.6em;\n    font-style: normal;\n    font-weight: 700;\n    letter-spacing: -0.04em;\n    line-height: 1;\n    margin-bottom: .4em;\n    margin-left: -3px;\n    margin-top: 40px;\n    padding-top: 0;\n  }\n  .graf--h3 {\n    font-family: ", ";\n    letter-spacing: -0.02em;\n    font-weight: 700;\n    font-style: normal;\n    font-size: 2.1em;\n    margin-left: -1.8px;\n    line-height: 1.2;\n    margin-top: 40px;\n    margin-bottom: .7em;\n  }\n  .public-DraftStyleDefault-pre{\n    overflow: inherit;\n  }\n  .graf--h4 {\n    font-family: ", ";\n    letter-spacing: -0.02em;\n    font-weight: 300;\n    font-style: normal;\n    font-size: 1.5em;\n    margin-left: -1.5px;\n    line-height: 1.2;\n    color: ", ";\n    margin-top: 40px;\n    margin-bottom: .6em;\n  }\n\n  .section--first .graf--h2.graf--first,\n  .section--first .graf--h3.graf--first,\n  .section--first .graf--h4.graf--first {\n    margin-top: 0;\n    padding-top: 0;\n  }\n\n  .graf--h2 + .graf--h2 {\n    margin-top: -8px;\n  }\n\n  .graf--h2 + .graf--h3,\n  .graf--h2 + .graf--h4 {\n    margin-top: -6px;\n  }\n\n  .graf--h3 + .graf--h4,\n  .graf--h4 + .graf--h2 {\n    margin-top: 2px;\n  }\n\n  .graf--h3 + .graf--h4,\n  .graf--h4 + .graf--h3 {\n    margin-top: -2px;\n  }\n\n  .graf--h2 + .postList,\n  .graf--h3 + .postList,\n  .graf--h4 + .postList {\n    margin-top: 10px;\n  }\n\n  .graf--h2 + .graf--p.graf--empty,\n  .graf--h3 + .graf--p.graf--empty,\n  .graf--h4 + .graf--p.graf--empty {\n    margin-bottom: -7px;\n    margin-top: -7px;\n  }\n\n  .graf--h2 + .graf--p.graf--empty + .graf--h1,\n  .graf--h3 + .graf--p.graf--empty + .graf--h1,\n  .graf--h4 + .graf--p.graf--empty + .graf--h1 {\n    margin-top: -5px;\n  }\n\n  .graf--h2 + .graf--p.graf--empty + .graf--h3,\n  .graf--h3 + .graf--p.graf--empty + .graf--h3,\n  .graf--h4 + .graf--p.graf--empty + .graf--h3,\n  .graf--h2 + .graf--p.graf--empty + .graf--h4,\n  .graf--h3 + .graf--p.graf--empty + .graf--h4,\n  .graf--h4 + .graf--p.graf--empty + .graf--h4 {\n    margin-top: -8px;\n  }\n\n\n  .graf--blockquote, blockquote {\n    font-family: ", ";\n    border-left: 3px solid rgba(0, 0, 0, .8);\n\n    font-style: italic;\n    font-weight: 400;\n    letter-spacing: 0.16px;\n    letter-spacing: 0.02rem;\n    margin-left: -17px;\n    padding-left: 15px;\n    margin-bottom: 25px;\n    font-size: 1.2em;\n    line-height: 1.9em;\n    margin-top: 20px;\n\n  }\n  .graf--blockquote + .graf--blockquote {\n    margin-top: -30px;\n    padding-top: 30px;\n  }\n\n  .graf--pullquote {\n    line-height: 1.4;\n    text-align: center;\n    font-size: 3.2em;\n    margin: 48px -160px;\n    border: none;\n    padding: 0;\n    font-family: ", ";\n    letter-spacing: 0.01rem;\n    font-weight: 400;\n    font-style: italic;\n    -webkit-transition: margin 100ms;\n    transition: margin 100ms;\n  }\n\n  .graf--pre + .graf--pre {\n    margin-top: -20px;\n  }\n\n  .graf--figure {\n  \n    box-sizing: border-box;\n    clear: both;\n    margin-bottom: 30px;\n    outline: medium none;\n    position: relative;\n\n    &.is-mediaFocused .graf-image,\n    &.is-mediaFocused iframe {\n      box-shadow: 0 0 0 3px #57ad68;\n    }\n  }\n\n  .graf--mixtapeEmbed {\n    a {\n      text-decoration: none;\n    }\n    &.is-mediaFocused {\n      box-shadow: 0 0 0 1px #57ad68;\n    }\n\n    .graf--media-embed-close{\n      position: absolute;\n      top: 1px;\n      display: inline-block;\n      font-size: 2em;\n      width: 20px;\n      right: 10px;\n      text-shadow: 0px 0px 0px white;\n    }\n\n    border-color: ", ";\n    border-radius: 5px;\n    border-style: solid;\n    border-width: 1px;\n    box-sizing: border-box;\n    //color: rgba(0, 0, 0, 0.6);\n    font-family: ", ";\n    font-size: 12px;\n    font-style: normal;\n    font-weight: 300;\n    letter-spacing: -0.02em;\n    margin-bottom: 40px;\n    margin-top: 40px;\n    max-height: 310px;\n    //max-width: 700px;\n    overflow: hidden;\n    padding: 30px;\n    position: relative;\n\n    .is-postEditMode iframe {\n        border: 3px solid rgba(255, 255, 255, 0);\n    }\n\n    .mixtapeImage {\n        background-position: center center;\n        background-repeat: no-repeat;\n        background-size: cover;\n        float: right;\n        height: 310px;\n        margin: -30px -30px 0 25px;\n        width: 310px;\n    }\n\n    .mixtapeImage--empty {\n        height: 0;\n        width: 0;\n    }\n\n    .markup--mixtapeEmbed-strong {\n        //color: #000;\n        display: block;\n        font-family: $dante-font-family-sans;\n        font-size: 30px;\n        font-style: normal;\n        font-weight: 300;\n        letter-spacing: -0.02em;\n        line-height: 1.2;\n        margin-bottom: 0px;\n    }\n\n    .markup--mixtapeEmbed-em {\n        display: block;\n        font-size: 16px;\n        font-style: normal;\n        margin-bottom: 10px;\n        max-height: 120px;\n        overflow: hidden;\n    }\n\n  }\n\n\n\n  .graf--h4 + .graf--figure,\n  .graf--h3 + .graf--figure,\n  .graf--h2 + .graf--figure {\n    margin-top: 15px;\n  }\n\n  .graf--first {\n    margin-top: 0;\n    padding-top: 0;\n  }\n\n  /*.graf--empty {\n    margin-bottom: -7px;\n    margin-top: -7px;\n  }*/\n\n  p[data-align=\"center\"],\n  .graf--h2[data-align=\"center\"],\n  .graf--h3[data-align=\"center\"],\n  .graf--h4[data-align=\"center\"],\n  .graf--blockquote[data-align=\"center\"] {\n    text-align: center;\n  }\n\n  .markup--anchor,\n  .graf--sectionCaption {\n      cursor: text;\n  }\n  .markup--anchor {\n    text-decoration: underline;\n    color: inherit;\n  }\n\n  @media (max-width: 500px) {\n\n    .graf--h2 {\n      font-size: 2.6em;\n    }\n    .graf--h3 {\n      font-size: 1.6em;\n    }\n    .graf--h4 {\n      font-size: 1.4em;\n    }\n\n  }\n\n  .graf--divider span{\n    text-align: center;\n    width: 100%;\n    display: block;\n  }\n\n  .graf--divider span:before {\n    line-height: 1;\n    user-select: none;\n    font-weight: 400;\n    font-size: 25px;\n    letter-spacing: 18px;\n    content: \"...\";\n    display: inline-block;\n    margin-left: .6em;\n    position: relative;\n    color: #757575;\n    top: -3px;\n  }\n\n\n\n  .graf--layoutOutsetLeft {\n      margin-left: -160px;\n  }\n\n  .graf--layoutFillWidth {\n      margin-left: -200px;\n      margin-right: -200px;\n  }\n\n  .graf--layoutOutsetLeft {\n      width: 75%;\n  }\n  .graf--layoutInsetLeft, .graf--layoutOutsetLeft {\n      float: left;\n      margin-right: 30px;\n      padding-top: 10px;\n      padding-bottom: 10px;\n  }\n\n  .imageCaption {\n\n    top: 0;\n    text-align: center;\n    margin-top: 0;\n    font-family: ", ";\n    letter-spacing: 0;\n    font-weight: 400;\n    font-size: 13px;\n    line-height: 1.4;\n    color: ", ";\n    outline: 0;\n    z-index: 300;\n    margin-top: 10px;\n    position:relative;\n\n    .danteDefaultPlaceholder{\n      margin-bottom: -18px !important;\n      display: block;\n    }\n  }\n\n\n  // FIGURE WRAPPER\n\n    .aspectRatioPlaceholder {\n      margin: 0 auto;\n      position: relative;\n      width: 100%;\n    }\n\n    .graf-image:before,\n    .iframeContainer:before {\n      .is-postEditMode & {\n        bottom: 0;\n        content: \"\";\n        left: 0;\n        position: absolute;\n        right: 0;\n        top: 0;\n        z-index: 500;\n      }\n    }\n\n    .aspectRatioPlaceholder.is-locked .graf-image, \n    .aspectRatioPlaceholder.is-locked .graf-imageAnchor {\n        height: 100%;\n        left: 0;\n        position: absolute;\n        top: 0;\n        width: 100%;\n    }\n\n    .graf-image,\n    .graf-imageAnchor,\n    .iframeContainer > iframe,\n    .iframeContainer {\n      box-sizing: border-box;\n      display: block;\n      margin: auto;\n      max-width: 100%;\n    }\n\n    .aspectRatioPlaceholder {\n      .image-upoader-loader{\n        position: absolute;\n        bottom: 0px;\n        left: 0%;\n        background-color: #fff;\n        width: 100%;\n        /* height: 3px; */\n        text-align: center;\n        top: 0px;\n        vertical-align: text-bottom;\n        opacity: 0.7;\n        p{\n          line-height: 5px;\n          /* font-weight: 700; */\n          /* text-transform: uppercase; */\n          font-size: 14px;\n          margin-top: 49%;\n        }\n      }\n    }\n\n    div[contenteditable=\"false\"] {\n      .danteDefaultPlaceholder{\n        display:none;\n      }\n    }\n\n    div[contenteditable=\"false\"] {\n      a.markup--anchor {\n        cursor: pointer;\n      }\n    }\n\n    figcaption .public-DraftStyleDefault-block {\n        text-align: center;\n    }\n\n    @media (max-width: 1200px) {\n      .imageCaption,\n      .postField--outsetCenterImage > .imageCaption {\n        position: relative;\n        width: 100%;\n        text-align: center;\n        left: 0;\n        margin-top: 10px;\n      }\n    }\n\n    figure.graf--layoutOutsetLeft {\n      .imageCaption,\n      .postField--outsetCenterImage > .imageCaption {\n        position: relative;\n        width: 100%;\n        text-align: center;\n        left: 0;\n        margin-top: 10px;\n      }\n    }\n\n    figure.is-defaultValue .imageCaption,\n    .graf--sectionCaption.is-defaultValue {\n      display: none;\n    }\n\n    .graf--figure.is-mediaFocused .imageCaption,\n    .graf--figure.is-defaultValue.is-selected .imageCaption,\n    section.is-mediaFocused .graf--sectionCaption,\n    .graf--sectionCaption.is-defaultValue.is-selected {\n      display: block;\n    }\n\n"])), function (props) {
+  var _templateObject, _templateObject2;
+  var EditorContainer = styled__default['default'].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  font-family: ", ";\n  letter-spacing: 0.01rem;\n  font-weight: 400;\n  font-style: normal;\n  font-size: ", ";\n  line-height: ", ";\n  color: ", ";\n\n  @media (max-width: 500px) {\n\n    .postContent {\n      font-size: ", ";\n      line-height: ", ";\n    }\n\n  }\n\n  .public-DraftEditorPlaceholder-root {\n    color: ", ";\n    position: absolute;\n    z-index: 0;\n    font-size: ", ";\n    background-color: transparent;\n  }\n\n  .graf--h2,\n  .graf--h3,\n  .graf--h4,\n  .graf--h5,\n  .graf--h6,\n  .graf--h7,\n  .postList,\n  .graf--hr,\n  .graf--figure,\n  .graf--blockquote,\n  .graf--pullquote,\n  .graf--p,\n  .graf--pre {\n    margin: 0;\n    //position:relative;\n  }\n\n  .graf--code {\n    position:relative;\n    overflow: visible;\n\n    background: ", ";\n    font-family: ", ";\n    font-size: 16px;\n    margin-bottom: 20px;\n    padding: 20px;\n    white-space: pre-wrap;\n    color: ", ";\n\n    .dante-code-syntax{\n      color: ", ";\n      position: absolute;\n      top: 4px;\n      right: 4px;\n      width: 165px;\n    }\n  }\n\n  .graf--pre {\n      background: #000 !important;\n      font-family: ", ";\n      font-size: 16px;\n      margin-bottom: 20px;\n      padding: 20px;\n      white-space: pre-wrap;\n      color: #fff !important;\n  }\n\n  .postList {\n    margin-bottom: 30px;\n  }\n\n  .graf--p,\n  .graf--blockquote,\n  .graf--pullquote {\n    margin-bottom: 30px;\n  }\n\n  .graf--code {\n    line-height: 1em;\n  }\n\n  .graf--p.dante--spinner{\n    position:relative;\n  }\n\n  .graf--hr {\n    hr{\n      border: 1px solid #ccc;\n      margin: 26px;\n    }\n  }\n\n  .graf--h2 {\n    font-family: ", ";\n    font-size: 3.6em;\n    font-style: normal;\n    font-weight: 700;\n    letter-spacing: -0.04em;\n    line-height: 1;\n    margin-bottom: .4em;\n    margin-left: -3px;\n    margin-top: 40px;\n    padding-top: 0;\n  }\n  .graf--h3 {\n    font-family: ", ";\n    letter-spacing: -0.02em;\n    font-weight: 700;\n    font-style: normal;\n    font-size: 2.1em;\n    margin-left: -1.8px;\n    line-height: 1.2;\n    margin-top: 40px;\n    margin-bottom: .7em;\n  }\n  .public-DraftStyleDefault-pre{\n    overflow: inherit;\n  }\n  .graf--h4 {\n    font-family: ", ";\n    letter-spacing: -0.02em;\n    font-weight: 300;\n    font-style: normal;\n    font-size: 1.5em;\n    margin-left: -1.5px;\n    line-height: 1.2;\n    color: ", ";\n    margin-top: 40px;\n    margin-bottom: .6em;\n  }\n\n  .section--first .graf--h2.graf--first,\n  .section--first .graf--h3.graf--first,\n  .section--first .graf--h4.graf--first {\n    margin-top: 0;\n    padding-top: 0;\n  }\n\n  .graf--h2 + .graf--h2 {\n    margin-top: -8px;\n  }\n\n  .graf--h2 + .graf--h3,\n  .graf--h2 + .graf--h4 {\n    margin-top: -6px;\n  }\n\n  .graf--h3 + .graf--h4,\n  .graf--h4 + .graf--h2 {\n    margin-top: 2px;\n  }\n\n  .graf--h3 + .graf--h4,\n  .graf--h4 + .graf--h3 {\n    margin-top: -2px;\n  }\n\n  .graf--h2 + .postList,\n  .graf--h3 + .postList,\n  .graf--h4 + .postList {\n    margin-top: 10px;\n  }\n\n  .graf--h2 + .graf--p.graf--empty,\n  .graf--h3 + .graf--p.graf--empty,\n  .graf--h4 + .graf--p.graf--empty {\n    margin-bottom: -7px;\n    margin-top: -7px;\n  }\n\n  .graf--h2 + .graf--p.graf--empty + .graf--h1,\n  .graf--h3 + .graf--p.graf--empty + .graf--h1,\n  .graf--h4 + .graf--p.graf--empty + .graf--h1 {\n    margin-top: -5px;\n  }\n\n  .graf--h2 + .graf--p.graf--empty + .graf--h3,\n  .graf--h3 + .graf--p.graf--empty + .graf--h3,\n  .graf--h4 + .graf--p.graf--empty + .graf--h3,\n  .graf--h2 + .graf--p.graf--empty + .graf--h4,\n  .graf--h3 + .graf--p.graf--empty + .graf--h4,\n  .graf--h4 + .graf--p.graf--empty + .graf--h4 {\n    margin-top: -8px;\n  }\n\n\n  .graf--blockquote, blockquote {\n    font-family: ", ";\n    border-left: 3px solid rgba(0, 0, 0, .8);\n\n    font-style: italic;\n    font-weight: 400;\n    letter-spacing: 0.16px;\n    letter-spacing: 0.02rem;\n    margin-left: -17px;\n    padding-left: 15px;\n    margin-bottom: 25px;\n    font-size: 1.2em;\n    line-height: 1.9em;\n    margin-top: 20px;\n\n  }\n  .graf--blockquote + .graf--blockquote {\n    margin-top: -30px;\n    padding-top: 30px;\n  }\n\n  .graf--pullquote {\n    line-height: 1.4;\n    text-align: center;\n    font-size: 3.2em;\n    margin: 48px -160px;\n    border: none;\n    padding: 0;\n    font-family: ", ";\n    letter-spacing: 0.01rem;\n    font-weight: 400;\n    font-style: italic;\n    -webkit-transition: margin 100ms;\n    transition: margin 100ms;\n  }\n\n  .graf--pre + .graf--pre {\n    margin-top: -20px;\n  }\n\n  .graf--figure {\n  \n    box-sizing: border-box;\n    clear: both;\n    margin-bottom: 30px;\n    outline: medium none;\n    position: relative;\n\n    &.is-mediaFocused .graf-image,\n    &.is-mediaFocused iframe {\n      box-shadow: 0 0 0 3px #57ad68;\n    }\n  }\n\n  .graf--mixtapeEmbed {\n    a {\n      text-decoration: none;\n    }\n    &.is-mediaFocused {\n      box-shadow: 0 0 0 1px #57ad68;\n    }\n\n    .graf--media-embed-close{\n      position: absolute;\n      top: 1px;\n      display: inline-block;\n      font-size: 2em;\n      width: 20px;\n      right: 10px;\n      text-shadow: 0px 0px 0px white;\n    }\n\n    border-color: ", ";\n    border-radius: 5px;\n    border-style: solid;\n    border-width: 1px;\n    box-sizing: border-box;\n    //color: rgba(0, 0, 0, 0.6);\n    font-family: ", ";\n    font-size: 12px;\n    font-style: normal;\n    font-weight: 300;\n    letter-spacing: -0.02em;\n    margin-bottom: 40px;\n    margin-top: 40px;\n    max-height: 310px;\n    //max-width: 700px;\n    overflow: hidden;\n    padding: 30px;\n    position: relative;\n\n    .is-postEditMode iframe {\n        border: 3px solid rgba(255, 255, 255, 0);\n    }\n\n    .mixtapeImage {\n        background-position: center center;\n        background-repeat: no-repeat;\n        background-size: cover;\n        float: right;\n        height: 310px;\n        margin: -30px -30px 0 25px;\n        width: 310px;\n    }\n\n    .mixtapeImage--empty {\n        height: 0;\n        width: 0;\n    }\n\n    .markup--mixtapeEmbed-strong {\n        //color: #000;\n        display: block;\n        font-family: $dante-font-family-sans;\n        font-size: 30px;\n        font-style: normal;\n        font-weight: 300;\n        letter-spacing: -0.02em;\n        line-height: 1.2;\n        margin-bottom: 0px;\n    }\n\n    .markup--mixtapeEmbed-em {\n        display: block;\n        font-size: 16px;\n        font-style: normal;\n        margin-bottom: 10px;\n        max-height: 120px;\n        overflow: hidden;\n    }\n\n  }\n\n\n\n  .graf--h4 + .graf--figure,\n  .graf--h3 + .graf--figure,\n  .graf--h2 + .graf--figure {\n    margin-top: 15px;\n  }\n\n  .graf--first {\n    margin-top: 0;\n    padding-top: 0;\n  }\n\n  /*.graf--empty {\n    margin-bottom: -7px;\n    margin-top: -7px;\n  }*/\n\n  p[data-align=\"center\"],\n  .graf--h2[data-align=\"center\"],\n  .graf--h3[data-align=\"center\"],\n  .graf--h4[data-align=\"center\"],\n  .graf--blockquote[data-align=\"center\"] {\n    text-align: center;\n  }\n\n  .markup--anchor,\n  .graf--sectionCaption {\n      cursor: text;\n  }\n  .markup--anchor {\n    text-decoration: underline;\n    color: inherit;\n  }\n\n  @media (max-width: 500px) {\n\n    .graf--h2 {\n      font-size: 2.6em;\n    }\n    .graf--h3 {\n      font-size: 1.6em;\n    }\n    .graf--h4 {\n      font-size: 1.4em;\n    }\n\n  }\n\n  .graf--divider span{\n    text-align: center;\n    width: 100%;\n    display: block;\n  }\n\n  .graf--divider span:before {\n    line-height: 1;\n    user-select: none;\n    font-weight: 400;\n    font-size: 25px;\n    letter-spacing: 18px;\n    content: \"...\";\n    display: inline-block;\n    margin-left: .6em;\n    position: relative;\n    color: #757575;\n    top: -3px;\n  }\n\n\n\n  .graf--layoutOutsetLeft {\n      margin-left: -160px;\n  }\n\n  .graf--layoutFillWidth {\n      margin-left: -200px;\n      margin-right: -200px;\n  }\n\n  .graf--layoutOutsetLeft {\n      width: 75%;\n  }\n  .graf--layoutInsetLeft, .graf--layoutOutsetLeft {\n      float: left;\n      margin-right: 30px;\n      padding-top: 10px;\n      padding-bottom: 10px;\n  }\n\n  .imageCaption {\n\n    top: 0;\n    text-align: center;\n    margin-top: 0;\n    font-family: ", ";\n    letter-spacing: 0;\n    font-weight: 400;\n    font-size: 13px;\n    line-height: 1.4;\n    color: ", ";\n    outline: 0;\n    z-index: 300;\n    margin-top: 10px;\n    position:relative;\n\n    .danteDefaultPlaceholder{\n      margin-bottom: -18px !important;\n      display: block;\n    }\n  }\n\n\n  // FIGURE WRAPPER\n\n    .aspectRatioPlaceholder {\n      margin: 0 auto;\n      position: relative;\n      width: 100%;\n    }\n\n    .graf-image:before,\n    .iframeContainer:before {\n      .is-postEditMode & {\n        bottom: 0;\n        content: \"\";\n        left: 0;\n        position: absolute;\n        right: 0;\n        top: 0;\n        z-index: 500;\n      }\n    }\n\n    .aspectRatioPlaceholder.is-locked .graf-image, \n    .aspectRatioPlaceholder.is-locked .graf-imageAnchor {\n        height: 100%;\n        left: 0;\n        position: absolute;\n        top: 0;\n        width: 100%;\n    }\n\n    .graf-image,\n    .graf-imageAnchor,\n    .iframeContainer > iframe,\n    .iframeContainer {\n      box-sizing: border-box;\n      display: block;\n      margin: auto;\n      max-width: 100%;\n    }\n\n    .aspectRatioPlaceholder {\n      .image-upoader-loader{\n        position: absolute;\n        bottom: 0px;\n        left: 0%;\n        background-color: #fff;\n        width: 100%;\n        /* height: 3px; */\n        text-align: center;\n        top: 0px;\n        vertical-align: text-bottom;\n        opacity: 0.7;\n        p{\n          line-height: 5px;\n          /* font-weight: 700; */\n          /* text-transform: uppercase; */\n          font-size: 14px;\n          margin-top: 49%;\n        }\n      }\n    }\n\n    div[contenteditable=\"false\"] {\n      .danteDefaultPlaceholder{\n        display:none;\n      }\n    }\n\n    div[contenteditable=\"false\"] {\n      a.markup--anchor {\n        cursor: pointer;\n      }\n    }\n\n    figcaption .public-DraftStyleDefault-block {\n        text-align: center;\n    }\n\n    @media (max-width: 1200px) {\n      .imageCaption,\n      .postField--outsetCenterImage > .imageCaption {\n        position: relative;\n        width: 100%;\n        text-align: center;\n        left: 0;\n        margin-top: 10px;\n      }\n    }\n\n    figure.graf--layoutOutsetLeft {\n      .imageCaption,\n      .postField--outsetCenterImage > .imageCaption {\n        position: relative;\n        width: 100%;\n        text-align: center;\n        left: 0;\n        margin-top: 10px;\n      }\n    }\n\n    figure.is-defaultValue .imageCaption,\n    .graf--sectionCaption.is-defaultValue {\n      display: none;\n    }\n\n    .graf--figure.is-mediaFocused .imageCaption,\n    .graf--figure.is-defaultValue.is-selected .imageCaption,\n    section.is-mediaFocused .graf--sectionCaption,\n    .graf--sectionCaption.is-defaultValue.is-selected {\n      display: block;\n    }\n\n"])), function (props) {
     return props.theme.dante_font_family_serif;
   }, function (props) {
     return props.theme.dante_editor_font_size;
@@ -2423,7 +2547,7 @@
   }, function (props) {
     return polished.lighten(0.2, props.theme.dante_text_color);
   });
-  var InlinetooltipWrapper = styled.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  // BASE\n  position: absolute;\n  z-index: 10;\n  width: ", ";\n  height: ", ";\n  -webkit-transition: opacity 100ms, width 0 linear 250ms;\n  transition: opacity 100ms, width 0 linear 250ms;\n  padding: 0;\n  font-size: 0;\n\n  opacity: 0;\n  pointer-events: none;\n\n  &.is-active {\n    opacity: 1;\n    pointer-events: auto;\n  }\n  &.is-scaled {\n    -webkit-transition-delay: 0;\n    transition-delay: 0;\n    width: auto;\n\n    .control {\n            -webkit-transition: -webkit-", ", ", ";\n              transition: ", ", ", ";\n       -webkit-transform: rotate(45deg) !important;\n           -ms-transform: rotate(45deg) !important;\n               transform: rotate(45deg) !important;\n            border-color: ", ";\n                   color: ", ";\n    }\n\n    .scale {\n       -webkit-transform: scale(1) !important;\n           -ms-transform: scale(1) !important;\n               transform: scale(1) !important;\n      -webkit-transition: -webkit-", ", ", " !important;\n              transition: ", ", ", " !important;\n    }\n\n  }\n\n\n  // MENU\n  .inlineTooltip-menu {\n    display: inline-block;\n    margin-left: ", ";\n    svg path{\n      fill: ", ";\n    }\n  }\n\n  // BUTTON\n  .inlineTooltip-button {\n\n    // BASE\n\n    float: left;\n    margin-right: ", ";\n    display: inline-block;\n    position: relative;\n    outline: 0;\n    padding: 0;\n    vertical-align: bottom;\n    box-sizing: border-box;\n    border-radius: ", ";\n    cursor: pointer;\n    font-size: 14px;\n    text-decoration: none;\n    font-family: ", ";\n    letter-spacing: -0.02em;\n    font-weight: 400;\n    font-style: normal;\n    white-space: nowrap;\n    text-rendering: auto;\n    text-align: center;\n    text-rendering: optimizeLegibility;\n    -webkit-font-smoothing: antialiased;\n    -moz-osx-font-smoothing: grayscale;\n    -moz-font-feature-settings: \"liga\" on;\n    width: ", ";\n    height: ", ";\n    line-height: ", ";\n    -webkit-transition: 100ms border-color, 100ms color;\n    transition: 100ms border-color, 100ms color;\n    background: ", ";\n    border: ", " solid;\n    border-color: ", ";\n    color: ", ";\n\n    &:hover {\n      border-color: ", "\n      color: rgba(", ", ", ");\n    }\n\n    svg path {\n      fill: ", ";\n    }\n\n    // SCALE\n    &.scale {\n   \n       -webkit-transform: scale(0);\n           -ms-transform: scale(0);\n               transform: scale(0);\n      -webkit-transition: -webkit-", ", ", ";\n              transition: ", ", ", ";\n\n\n      svg path {\n        fill: ", ";\n      }\n      //@while ", " > 0 {\n      //  &:nth-of-type(", ") {\n      //    -webkit-transition-delay: ", " + \"ms\"};\n      //            transition-delay: ", " + \"ms\"};\n      //  }\n      //  ", ": ", ";\n      //}\n    }\n\n    // CONTROL\n    &.control {\n      \n      display: block;\n      position: absolute;\n      margin-right: ", ";\n      padding-top: 4px;\n\n      -webkit-transition: -webkit-", ", ", ";\n              transition: ", ", ", ";\n       -webkit-transform: rotate(0);\n           -ms-transform: rotate(0);\n               transform: rotate(0);\n    }\n\n"])), function (props) {
+  var InlinetooltipWrapper = styled__default['default'].div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  // BASE\n  position: absolute;\n  z-index: 10;\n  width: ", ";\n  height: ", ";\n  -webkit-transition: opacity 100ms, width 0 linear 250ms;\n  transition: opacity 100ms, width 0 linear 250ms;\n  padding: 0;\n  font-size: 0;\n\n  opacity: 0;\n  pointer-events: none;\n\n  &.is-active {\n    opacity: 1;\n    pointer-events: auto;\n  }\n  &.is-scaled {\n    -webkit-transition-delay: 0;\n    transition-delay: 0;\n    width: auto;\n\n    .control {\n            -webkit-transition: -webkit-", ", ", ";\n              transition: ", ", ", ";\n       -webkit-transform: rotate(45deg) !important;\n           -ms-transform: rotate(45deg) !important;\n               transform: rotate(45deg) !important;\n            border-color: ", ";\n                   color: ", ";\n    }\n\n    .scale {\n       -webkit-transform: scale(1) !important;\n           -ms-transform: scale(1) !important;\n               transform: scale(1) !important;\n      -webkit-transition: -webkit-", ", ", " !important;\n              transition: ", ", ", " !important;\n    }\n\n  }\n\n\n  // MENU\n  .inlineTooltip-menu {\n    display: inline-block;\n    margin-left: ", ";\n    svg path{\n      fill: ", ";\n    }\n  }\n\n  // BUTTON\n  .inlineTooltip-button {\n\n    // BASE\n\n    float: left;\n    margin-right: ", ";\n    display: inline-block;\n    position: relative;\n    outline: 0;\n    padding: 0;\n    vertical-align: bottom;\n    box-sizing: border-box;\n    border-radius: ", ";\n    cursor: pointer;\n    font-size: 14px;\n    text-decoration: none;\n    font-family: ", ";\n    letter-spacing: -0.02em;\n    font-weight: 400;\n    font-style: normal;\n    white-space: nowrap;\n    text-rendering: auto;\n    text-align: center;\n    text-rendering: optimizeLegibility;\n    -webkit-font-smoothing: antialiased;\n    -moz-osx-font-smoothing: grayscale;\n    -moz-font-feature-settings: \"liga\" on;\n    width: ", ";\n    height: ", ";\n    line-height: ", ";\n    -webkit-transition: 100ms border-color, 100ms color;\n    transition: 100ms border-color, 100ms color;\n    background: ", ";\n    border: ", " solid;\n    border-color: ", ";\n    color: ", ";\n\n    &:hover {\n      border-color: ", "\n      color: rgba(", ", ", ");\n    }\n\n    svg path {\n      fill: ", ";\n    }\n\n    // SCALE\n    &.scale {\n   \n       -webkit-transform: scale(0);\n           -ms-transform: scale(0);\n               transform: scale(0);\n      -webkit-transition: -webkit-", ", ", ";\n              transition: ", ", ", ";\n\n\n      svg path {\n        fill: ", ";\n      }\n      //@while ", " > 0 {\n      //  &:nth-of-type(", ") {\n      //    -webkit-transition-delay: ", " + \"ms\"};\n      //            transition-delay: ", " + \"ms\"};\n      //  }\n      //  ", ": ", ";\n      //}\n    }\n\n    // CONTROL\n    &.control {\n      \n      display: block;\n      position: absolute;\n      margin-right: ", ";\n      padding-top: 4px;\n\n      -webkit-transition: -webkit-", ", ", ";\n              transition: ", ", ", ";\n       -webkit-transform: rotate(0);\n           -ms-transform: rotate(0);\n               transform: rotate(0);\n    }\n\n"])), function (props) {
     return props.theme.tooltip_size;
   }, function (props) {
     return props.theme.tooltip_size;
@@ -2513,14 +2637,10 @@
     return props.theme.tooltip_default_transition;
   });
 
-  function _createSuper$4(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct$4(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-  function _isNativeReflectConstruct$4() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-
   var DanteInlineTooltip = /*#__PURE__*/function (_React$Component) {
     _inherits(DanteInlineTooltip, _React$Component);
 
-    var _super = _createSuper$4(DanteInlineTooltip);
+    var _super = _createSuper(DanteInlineTooltip);
 
     function DanteInlineTooltip(props) {
       var _this;
@@ -2724,7 +2844,7 @@
         }
 
         var selectionRect = getSelectionRect(nativeSelection);
-        var parent = ReactDOM.findDOMNode(_this.props.editor); // hide if selected node is not in editor
+        var parent = ReactDOM__default['default'].findDOMNode(_this.props.editor); // hide if selected node is not in editor
 
         if (!_this.isDescendant(parent, nativeSelection.anchorNode)) {
           _this.hide();
@@ -2781,28 +2901,28 @@
       value: function render() {
         var _this2 = this;
 
-        return /*#__PURE__*/React.createElement(InlinetooltipWrapper, {
+        return /*#__PURE__*/React__default['default'].createElement(InlinetooltipWrapper, {
           ref: "tooltip",
           className: "inlineTooltip ".concat(this.activeClass(), " ").concat(this.scaledClass()),
           style: this.state.position
-        }, /*#__PURE__*/React.createElement("button", {
+        }, /*#__PURE__*/React__default['default'].createElement("button", {
           type: "button",
           className: "inlineTooltip-button control",
           title: "Close Menu",
           "data-action": "inline-menu",
           onMouseDown: this._toggleScaled
-        }, add()), /*#__PURE__*/React.createElement("div", {
+        }, add()), /*#__PURE__*/React__default['default'].createElement("div", {
           className: "inlineTooltip-menu",
           style: {
             width: "".concat(this.state.scaledWidth, "px")
           }
         }, this.getItems().map(function (item, i) {
-          return /*#__PURE__*/React.createElement(InlineTooltipItem, {
+          return /*#__PURE__*/React__default['default'].createElement(InlineTooltipItem, {
             item: item,
             key: i,
             clickHandler: _this2.clickHandler
           });
-        }), /*#__PURE__*/React.createElement("input", {
+        }), /*#__PURE__*/React__default['default'].createElement("input", {
           type: "file",
           accept: "image/*",
           style: {
@@ -2816,12 +2936,12 @@
     }]);
 
     return DanteInlineTooltip;
-  }(React.Component);
+  }(React__default['default'].Component);
 
   var InlineTooltipItem = /*#__PURE__*/function (_React$Component2) {
     _inherits(InlineTooltipItem, _React$Component2);
 
-    var _super2 = _createSuper$4(InlineTooltipItem);
+    var _super2 = _createSuper(InlineTooltipItem);
 
     function InlineTooltipItem() {
       var _this3;
@@ -2845,7 +2965,7 @@
     _createClass(InlineTooltipItem, [{
       key: "render",
       value: function render() {
-        return /*#__PURE__*/React.createElement("button", {
+        return /*#__PURE__*/React__default['default'].createElement("button", {
           type: "button",
           className: "inlineTooltip-button scale",
           title: this.props.title,
@@ -2856,14 +2976,14 @@
           style: {
             fontSize: '21px'
           }
-        }, /*#__PURE__*/React.createElement("span", {
+        }, /*#__PURE__*/React__default['default'].createElement("span", {
           className: 'tooltip-icon'
         }, this.props.item.icon()));
       }
     }]);
 
     return InlineTooltipItem;
-  }(React.Component);
+  }(React__default['default'].Component);
 
   var DanteInlineTooltipConfig = function DanteInlineTooltipConfig() {
     var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
@@ -2874,14 +2994,10 @@
     return Object.assign(config, options);
   };
 
-  function _createSuper$5(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct$5(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-  function _isNativeReflectConstruct$5() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-
   var DanteTooltipColor = /*#__PURE__*/function (_React$Component) {
     _inherits(DanteTooltipColor, _React$Component);
 
-    var _super = _createSuper$5(DanteTooltipColor);
+    var _super = _createSuper(DanteTooltipColor);
 
     function DanteTooltipColor() {
       var _this;
@@ -2933,11 +3049,11 @@
 
 
         if (_this.state.open) {
-          return /*#__PURE__*/React.createElement("div", {
+          return /*#__PURE__*/React__default['default'].createElement("div", {
             style: {
               position: 'absolute'
             }
-          }, /*#__PURE__*/React.createElement(reactColor.SketchPicker, {
+          }, /*#__PURE__*/React__default['default'].createElement(reactColor.SketchPicker, {
             color: v,
             presetColors: [],
             onChangeComplete: function onChangeComplete(color, e) {
@@ -2966,26 +3082,22 @@
     }, {
       key: "render",
       value: function render() {
-        return /*#__PURE__*/React.createElement("li", {
+        return /*#__PURE__*/React__default['default'].createElement("li", {
           className: "dante-menu-button",
           onMouseDown: this.toggle
-        }, /*#__PURE__*/React.createElement("span", {
+        }, /*#__PURE__*/React__default['default'].createElement("span", {
           className: 'dante-icon'
         }, fontColor()), this.renderColor());
       }
     }]);
 
     return DanteTooltipColor;
-  }(React.Component);
-
-  function _createSuper$6(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct$6(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-  function _isNativeReflectConstruct$6() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+  }(React__default['default'].Component);
 
   var DanteTooltip = /*#__PURE__*/function (_React$Component) {
     _inherits(DanteTooltip, _React$Component);
 
-    var _super = _createSuper$6(DanteTooltip);
+    var _super = _createSuper(DanteTooltip);
 
     function DanteTooltip(props) {
       var _this;
@@ -3078,7 +3190,7 @@
         }
 
         var selectionBoundary = getSelectionRect(nativeSelection);
-        var parent = ReactDOM.findDOMNode(_this.props.editor); // hide if selected node is not in editor
+        var parent = ReactDOM__default['default'].findDOMNode(_this.props.editor); // hide if selected node is not in editor
 
         if (!_this.isDescendant(parent, nativeSelection.anchorNode)) {
           _this.hide();
@@ -3289,32 +3401,32 @@
       });
 
       _defineProperty(_assertThisInitialized(_this), "render", function () {
-        return /*#__PURE__*/React.createElement(AnchorStyle, {
+        return /*#__PURE__*/React__default['default'].createElement(AnchorStyle, {
           id: "dante-menu",
           ref: "dante_menu",
           className: "dante-menu ".concat(_this.displayActiveMenu(), " ").concat(_this.displayLinkMode(), " ").concat(_this.isSticky() ? 'dante-sticky-menu' : ''),
           style: _this.getPosition(),
           arrowPosition: _this.state.tooltipArrowPosition
-        }, _this.linkBlock() ? /*#__PURE__*/React.createElement("div", {
+        }, _this.linkBlock() ? /*#__PURE__*/React__default['default'].createElement("div", {
           className: "dante-menu-linkinput"
-        }, /*#__PURE__*/React.createElement("input", {
+        }, /*#__PURE__*/React__default['default'].createElement("input", {
           className: "dante-menu-input",
           ref: "dante_menu_input",
           placeholder: _this.linkBlock().placeholder,
           onKeyPress: _this.handleInputEnter //defaultValue={ this.getDefaultValue() }
 
-        }), /*#__PURE__*/React.createElement("div", {
+        }), /*#__PURE__*/React__default['default'].createElement("div", {
           className: "dante-menu-button",
           onMouseDown: _this._disableLinkMode
-        }, /*#__PURE__*/React.createElement("span", {
+        }, /*#__PURE__*/React__default['default'].createElement("span", {
           className: 'dante-icon'
-        }, Icons['close']()))) : null, /*#__PURE__*/React.createElement("ul", {
+        }, Icons['close']()))) : null, /*#__PURE__*/React__default['default'].createElement("ul", {
           className: "dante-menu-buttons",
           style: _this.state.menu_style
         }, _this.props.widget_options.block_types.map(function (item, i) {
           switch (item.type) {
             case "block":
-              return /*#__PURE__*/React.createElement(DanteTooltipItem, {
+              return /*#__PURE__*/React__default['default'].createElement(DanteTooltipItem, {
                 key: i,
                 item: item,
                 styles: _this.props.style,
@@ -3323,20 +3435,18 @@
                 type: "block",
                 currentStyle: _this.props.editorState.getCurrentInlineStyle
               });
-              break;
 
             case "inline":
-              return /*#__PURE__*/React.createElement(DanteTooltipItem, {
+              return /*#__PURE__*/React__default['default'].createElement(DanteTooltipItem, {
                 key: i,
                 item: item,
                 type: "inline",
                 editorState: _this.props.editorState,
                 handleClick: _this._clickInlineHandler
               });
-              break;
 
             case "color":
-              return /*#__PURE__*/React.createElement(DanteTooltipColor, {
+              return /*#__PURE__*/React__default['default'].createElement(DanteTooltipColor, {
                 key: i,
                 styles: _this.props.styles,
                 editorState: _this.props.editorState,
@@ -3346,24 +3456,18 @@
                 handleClick: _this._clickBlockInlineStyle,
                 show: _this.state.show
               });
-              break;
 
             case "separator":
-              return /*#__PURE__*/React.createElement(DanteMenuDivider, {
+              return /*#__PURE__*/React__default['default'].createElement(DanteMenuDivider, {
                 key: i
               });
-              break;
 
             case "link":
-              return /*#__PURE__*/React.createElement(DanteTooltipLink, {
+              return /*#__PURE__*/React__default['default'].createElement(DanteTooltipLink, {
                 key: i,
                 editorState: _this.props.editorState,
                 enableLinkMode: _this._enableLinkMode
               });
-              break;
-
-            default:
-              break;
           }
         })));
       });
@@ -3380,10 +3484,10 @@
     }
 
     return DanteTooltip;
-  }(React.Component);
+  }(React__default['default'].Component);
 
   var DanteMenuDivider = function DanteMenuDivider() {
-    return /*#__PURE__*/React.createElement("li", {
+    return /*#__PURE__*/React__default['default'].createElement("li", {
       className: "dante-menu-divider"
     });
   };
@@ -3391,7 +3495,7 @@
   var DanteTooltipItem = /*#__PURE__*/function (_React$Component2) {
     _inherits(DanteTooltipItem, _React$Component2);
 
-    var _super2 = _createSuper$6(DanteTooltipItem);
+    var _super2 = _createSuper(DanteTooltipItem);
 
     function DanteTooltipItem() {
       var _this2;
@@ -3452,22 +3556,22 @@
     _createClass(DanteTooltipItem, [{
       key: "render",
       value: function render() {
-        return /*#__PURE__*/React.createElement("li", {
+        return /*#__PURE__*/React__default['default'].createElement("li", {
           className: "dante-menu-button ".concat(this.activeClass()),
           onMouseDown: this.handleClick
-        }, /*#__PURE__*/React.createElement("span", {
+        }, /*#__PURE__*/React__default['default'].createElement("span", {
           className: 'dante-icon'
         }, this.props.item.icon()));
       }
     }]);
 
     return DanteTooltipItem;
-  }(React.Component);
+  }(React__default['default'].Component);
 
   var DanteTooltipLink = /*#__PURE__*/function (_React$Component3) {
     _inherits(DanteTooltipLink, _React$Component3);
 
-    var _super3 = _createSuper$6(DanteTooltipLink);
+    var _super3 = _createSuper(DanteTooltipLink);
 
     function DanteTooltipLink() {
       var _this3;
@@ -3495,17 +3599,17 @@
     _createClass(DanteTooltipLink, [{
       key: "render",
       value: function render() {
-        return /*#__PURE__*/React.createElement("li", {
+        return /*#__PURE__*/React__default['default'].createElement("li", {
           className: "dante-menu-button",
           onMouseDown: this.promptForLink
-        }, /*#__PURE__*/React.createElement("span", {
+        }, /*#__PURE__*/React__default['default'].createElement("span", {
           className: 'dante-icon'
         }, Icons['link']()));
       }
     }]);
 
     return DanteTooltipLink;
-  }(React.Component);
+  }(React__default['default'].Component);
   var DanteTooltipConfig = function DanteTooltipConfig() {
     var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
     var config = {
@@ -3582,14 +3686,10 @@
     return Object.assign(config, options);
   };
 
-  function _createSuper$7(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct$7(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-  function _isNativeReflectConstruct$7() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-
   var ImageBlock = /*#__PURE__*/function (_React$Component) {
     _inherits(ImageBlock, _React$Component);
 
-    var _super = _createSuper$7(ImageBlock);
+    var _super = _createSuper(ImageBlock);
 
     function ImageBlock(props) {
       var _this;
@@ -3811,7 +3911,7 @@
 
         _this.props.blockProps.addLock();
 
-        axios({
+        axios__default['default']({
           method: 'post',
           url: _this.getUploadUrl(),
           headers: _this.getUploadHeaders(),
@@ -3854,19 +3954,19 @@
       });
 
       _defineProperty(_assertThisInitialized(_this), "render", function () {
-        return /*#__PURE__*/React.createElement("figure", {
+        return /*#__PURE__*/React__default['default'].createElement("figure", {
           ref: "image_tag2",
           suppressContentEditableWarning: true
-        }, /*#__PURE__*/React.createElement("div", {
+        }, /*#__PURE__*/React__default['default'].createElement("div", {
           className: "aspectRatioPlaceholder is-locked",
           style: _this.coords(),
           onClick: _this.handleGrafFigureSelectImg
-        }, /*#__PURE__*/React.createElement("div", {
+        }, /*#__PURE__*/React__default['default'].createElement("div", {
           style: {
             paddingBottom: "".concat(_this.state.aspect_ratio.ratio, "%")
           },
           className: "aspect-ratio-fill"
-        }), /*#__PURE__*/React.createElement("img", {
+        }), /*#__PURE__*/React__default['default'].createElement("img", {
           src: _this.state.url,
           ref: function ref(_ref) {
             return _this.image_tag = _ref;
@@ -3876,15 +3976,15 @@
           className: "graf-image",
           contentEditable: false,
           alt: _this.state.url
-        }), /*#__PURE__*/React.createElement(Loader, {
+        }), /*#__PURE__*/React__default['default'].createElement(Loader, {
           toggle: _this.state.loading,
           progress: _this.state.loading_progress
-        })), /*#__PURE__*/React.createElement("figcaption", {
+        })), /*#__PURE__*/React__default['default'].createElement("figcaption", {
           className: "imageCaption",
           onMouseDown: _this.handleFocus
-        }, _this.props.block.getText().length === 0 ? /*#__PURE__*/React.createElement("span", {
+        }, _this.props.block.getText().length === 0 ? /*#__PURE__*/React__default['default'].createElement("span", {
           className: "danteDefaultPlaceholder"
-        }, _this.placeholderText()) : undefined, /*#__PURE__*/React.createElement(draftJs.EditorBlock, Object.assign({}, _this.props, {
+        }, _this.placeholderText()) : undefined, /*#__PURE__*/React__default['default'].createElement(draftJs.EditorBlock, Object.assign({}, _this.props, {
           "editable": true,
           "className": "imageCaption"
         }))));
@@ -3956,12 +4056,12 @@
     }]);
 
     return ImageBlock;
-  }(React.Component);
+  }(React__default['default'].Component);
 
   var Loader = /*#__PURE__*/function (_React$Component2) {
     _inherits(Loader, _React$Component2);
 
-    var _super2 = _createSuper$7(Loader);
+    var _super2 = _createSuper(Loader);
 
     function Loader() {
       var _this2;
@@ -3975,16 +4075,16 @@
       _this2 = _super2.call.apply(_super2, [this].concat(args));
 
       _defineProperty(_assertThisInitialized(_this2), "render", function () {
-        return /*#__PURE__*/React.createElement("div", null, _this2.props.toggle ? /*#__PURE__*/React.createElement("div", {
+        return /*#__PURE__*/React__default['default'].createElement("div", null, _this2.props.toggle ? /*#__PURE__*/React__default['default'].createElement("div", {
           className: "image-upoader-loader"
-        }, /*#__PURE__*/React.createElement("p", null, _this2.props.progress === 100 ? "processing image..." : /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("span", null, "loading"), " ", Math.round(_this2.props.progress)))) : undefined);
+        }, /*#__PURE__*/React__default['default'].createElement("p", null, _this2.props.progress === 100 ? "processing image..." : /*#__PURE__*/React__default['default'].createElement("span", null, /*#__PURE__*/React__default['default'].createElement("span", null, "loading"), " ", Math.round(_this2.props.progress)))) : undefined);
       });
 
       return _this2;
     }
 
     return Loader;
-  }(React.Component);
+  }(React__default['default'].Component);
 
   var ImageBlockConfig = function ImageBlockConfig() {
     var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
@@ -4045,14 +4145,10 @@
     return Object.assign(config, options);
   };
 
-  function _createSuper$8(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct$8(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-  function _isNativeReflectConstruct$8() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-
   var EmbedBlock = /*#__PURE__*/function (_React$Component) {
     _inherits(EmbedBlock, _React$Component);
 
-    var _super = _createSuper$8(EmbedBlock);
+    var _super = _createSuper(EmbedBlock);
 
     function EmbedBlock(props) {
       var _this;
@@ -4086,7 +4182,7 @@
         var getEditorState = blockProps.getEditorState,
             setEditorState = blockProps.setEditorState;
         var data = block.getData();
-        var newData = data.merge(_this.state);
+        data.merge(_this.state);
         return setEditorState(resetBlockWithType(getEditorState(), 'unstyled', {}));
       });
 
@@ -4143,7 +4239,7 @@
           return;
         }
 
-        return axios({
+        return axios__default['default']({
           method: 'get',
           url: "".concat(this.dataForUpdate().endpoint).concat(this.dataForUpdate().provisory_text, "&scheme=https")
         }).then(function (result) {
@@ -4162,35 +4258,35 @@
     }, {
       key: "render",
       value: function render() {
-        return /*#__PURE__*/React.createElement("span", null, this.picture() ? /*#__PURE__*/React.createElement("a", {
+        return /*#__PURE__*/React__default['default'].createElement("span", null, this.picture() ? /*#__PURE__*/React__default['default'].createElement("a", {
           target: "_blank",
           className: "js-mixtapeImage mixtapeImage ".concat(this.classForImage()),
           href: this.state.embed_data.url,
           style: {
             backgroundImage: "url('".concat(this.picture(), "')")
           }
-        }) : undefined, this.state.error ? /*#__PURE__*/React.createElement("h2", null, this.state.error) : undefined, !this.props.blockProps.getEditor().props.read_only ? /*#__PURE__*/React.createElement("a", {
+        }) : undefined, this.state.error ? /*#__PURE__*/React__default['default'].createElement("h2", null, this.state.error) : undefined, !this.props.blockProps.getEditor().props.read_only ? /*#__PURE__*/React__default['default'].createElement("a", {
           href: "#",
           className: "graf--media-embed-close",
           onClick: this.deleteSelf
-        }, "x") : null, /*#__PURE__*/React.createElement("a", {
+        }, "x") : null, /*#__PURE__*/React__default['default'].createElement("a", {
           className: "markup--anchor markup--mixtapeEmbed-anchor",
           target: "_blank",
           href: this.state.embed_data.url,
           onClick: this.handleClick,
           contentEditable: false
-        }, /*#__PURE__*/React.createElement("strong", {
+        }, /*#__PURE__*/React__default['default'].createElement("strong", {
           className: "markup--strong markup--mixtapeEmbed-strong"
-        }, this.state.embed_data.title), /*#__PURE__*/React.createElement("em", {
+        }, this.state.embed_data.title), /*#__PURE__*/React__default['default'].createElement("em", {
           className: "markup--em markup--mixtapeEmbed-em"
-        }, this.state.embed_data.description)), /*#__PURE__*/React.createElement("span", {
+        }, this.state.embed_data.description)), /*#__PURE__*/React__default['default'].createElement("span", {
           contentEditable: false
         }, this.state.embed_data.provider_url || this.state.embed_data.url));
       }
     }]);
 
     return EmbedBlock;
-  }(React.Component);
+  }(React__default['default'].Component);
   var EmbedBlockConfig = function EmbedBlockConfig() {
     var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
     var config = {
@@ -4224,14 +4320,10 @@
     return Object.assign(config, options);
   };
 
-  function _createSuper$9(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct$9(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-  function _isNativeReflectConstruct$9() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-
   var VideoBlock = /*#__PURE__*/function (_React$Component) {
     _inherits(VideoBlock, _React$Component);
 
-    var _super = _createSuper$9(VideoBlock);
+    var _super = _createSuper(VideoBlock);
 
     function VideoBlock(props) {
       var _this;
@@ -4297,7 +4389,7 @@
           return;
         }
 
-        return axios({
+        return axios__default['default']({
           method: 'get',
           url: "".concat(this.dataForUpdate().endpoint).concat(this.dataForUpdate().provisory_text, "&scheme=https")
         }).then(function (result) {
@@ -4312,24 +4404,24 @@
     }, {
       key: "render",
       value: function render() {
-        return /*#__PURE__*/React.createElement("figure", {
+        return /*#__PURE__*/React__default['default'].createElement("figure", {
           className: "graf--figure graf--iframe graf--first",
           tabIndex: "0"
-        }, /*#__PURE__*/React.createElement("div", {
+        }, /*#__PURE__*/React__default['default'].createElement("div", {
           className: "iframeContainer",
           dangerouslySetInnerHTML: {
             __html: this.renderEmbedHtml()
           }
-        }), /*#__PURE__*/React.createElement("figcaption", {
+        }), /*#__PURE__*/React__default['default'].createElement("figcaption", {
           className: "imageCaption"
-        }, /*#__PURE__*/React.createElement(draftJs.EditorBlock, Object.assign({}, this.props, {
+        }, /*#__PURE__*/React__default['default'].createElement(draftJs.EditorBlock, Object.assign({}, this.props, {
           "className": "imageCaption"
         }))));
       }
     }]);
 
     return VideoBlock;
-  }(React.Component);
+  }(React__default['default'].Component);
   var VideoBlockConfig = function VideoBlockConfig() {
     var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
     var config = {
@@ -4364,14 +4456,10 @@
     return Object.assign(config, options);
   };
 
-  function _createSuper$a(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct$a(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-  function _isNativeReflectConstruct$a() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-
   var PlaceholderBlock = /*#__PURE__*/function (_React$Component) {
     _inherits(PlaceholderBlock, _React$Component);
 
-    var _super = _createSuper$a(PlaceholderBlock);
+    var _super = _createSuper(PlaceholderBlock);
 
     function PlaceholderBlock(props) {
       var _this;
@@ -4397,9 +4485,9 @@
 
       _defineProperty(_assertThisInitialized(_this), "placeholderRender", function () {
         if (_this.props.block.text.length === 0) {
-          return /*#__PURE__*/React.createElement("div", {
+          return /*#__PURE__*/React__default['default'].createElement("div", {
             className: "public-DraftEditorPlaceholder-root"
-          }, /*#__PURE__*/React.createElement("div", {
+          }, /*#__PURE__*/React__default['default'].createElement("div", {
             className: "public-DraftEditorPlaceholder-inner"
           }, _this.placeholderText()));
         }
@@ -4415,9 +4503,9 @@
     _createClass(PlaceholderBlock, [{
       key: "render",
       value: function render() {
-        return /*#__PURE__*/React.createElement("span", {
+        return /*#__PURE__*/React__default['default'].createElement("span", {
           onMouseDown: this.handleFocus
-        }, this.placeholderRender(), /*#__PURE__*/React.createElement(draftJs.EditorBlock, Object.assign({}, this.props, {
+        }, this.placeholderRender(), /*#__PURE__*/React__default['default'].createElement(draftJs.EditorBlock, Object.assign({}, this.props, {
           "className": "imageCaption",
           "placeholder": "escrive alalal"
         })));
@@ -4425,7 +4513,7 @@
     }]);
 
     return PlaceholderBlock;
-  }(React.Component);
+  }(React__default['default'].Component);
   var PlaceholderBlockConfig = function PlaceholderBlockConfig() {
     var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
     var config = {
@@ -4456,14 +4544,10 @@
     return Object.assign(config, options);
   };
 
-  function _createSuper$b(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct$b(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-  function _isNativeReflectConstruct$b() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-
-  var CodeBlock = /*#__PURE__*/function (_React$Component) {
+  /*#__PURE__*/(function (_React$Component) {
     _inherits(CodeBlock, _React$Component);
 
-    var _super = _createSuper$b(CodeBlock);
+    var _super = _createSuper(CodeBlock);
 
     function CodeBlock(props) {
       var _this;
@@ -4488,9 +4572,9 @@
       });
 
       _defineProperty(_assertThisInitialized(_this), "render", function () {
-        return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", {
+        return /*#__PURE__*/React__default['default'].createElement("div", null, /*#__PURE__*/React__default['default'].createElement("span", {
           className: "dante-code-syntax"
-        }, _this.renderSelect() ? /*#__PURE__*/React.createElement(Select, {
+        }, _this.renderSelect() ? /*#__PURE__*/React__default['default'].createElement(Select__default['default'], {
           options: _this.languages,
           isSearchable: true,
           defaultValue: _this.state.syntax,
@@ -4499,7 +4583,7 @@
               syntax: o.value
             });
           }
-        }) : null), /*#__PURE__*/React.createElement(draftJs.EditorBlock, _this.props));
+        }) : null), /*#__PURE__*/React__default['default'].createElement(draftJs.EditorBlock, _this.props));
       });
 
       _this.state = {
@@ -4517,16 +4601,12 @@
     }]);
 
     return CodeBlock;
-  }(React.Component);
-
-  function _createSuper$c(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct$c(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-  function _isNativeReflectConstruct$c() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+  })(React__default['default'].Component);
 
   var Link = /*#__PURE__*/function (_React$Component) {
     _inherits(Link, _React$Component);
 
-    var _super = _createSuper$c(Link);
+    var _super = _createSuper(Link);
 
     function Link(props) {
       var _this;
@@ -4585,7 +4665,7 @@
       value: function render() {
         this.data = this.props.contentState.getEntity(this.props.entityKey).getData(); //Entity.get(this.props.entityKey).getData()
 
-        return /*#__PURE__*/React.createElement("a", {
+        return /*#__PURE__*/React__default['default'].createElement("a", {
           ref: "link",
           href: this.data.url,
           className: "markup--anchor",
@@ -4596,7 +4676,7 @@
     }]);
 
     return Link;
-  }(React.Component);
+  }(React__default['default'].Component);
 
   // code taken from https://gist.github.com/SamyPesse/0690602631c19aedcfa0a28feabb9d2b
 
@@ -4613,7 +4693,7 @@
   };
 
   var defaultRender = function defaultRender(props) {
-    return React.createElement("span", {
+    return /*#__PURE__*/React__default['default'].createElement("span", {
       className: 'prism-token token ' + props.type
     }, props.children);
   };
@@ -4628,14 +4708,12 @@
     // Render a decorated text for a token
     render: defaultRender,
     // Prism module
-    prism: Prism
+    prism: Prism__default['default']
   };
   var PrismDraftDecorator = function PrismDraftDecorator() {
     var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-    return new PrismDecorator(Object.assign(options, PrismOptions));
+    return new PrismDecorator__default['default'](Object.assign(options, PrismOptions));
   };
-
-  var _this2 = undefined;
 
   //TODO: what the f*ck is happening here? ;-;
   var findEntities = function findEntities(entityType, instance, contentBlock, callback) {
@@ -4649,7 +4727,7 @@
           hidePopLinkOver: instance.hidePopLinkOver
         }, contentState.mergeEntityData(entityKey, opts)) : void 0, res;
       };
-    }(_this2), callback);
+    }(), callback);
   };
 
   var _theme;
@@ -4695,14 +4773,10 @@
     tooltip_item_delay: 30
   }, _defineProperty(_theme, "tooltip_size", tooltip_size), _defineProperty(_theme, "tooltip_line_height", tooltip_size), _defineProperty(_theme, "tooltip_default_transition", '100ms border-color, 100ms color'), _defineProperty(_theme, "tooltip_forward_transition", 'transform 100ms'), _defineProperty(_theme, "tooltip_backward_transition", 'transform 250ms'), _defineProperty(_theme, "dante_code_background", '#000'), _defineProperty(_theme, "dante_code_color", '#fff'), _defineProperty(_theme, "dante_menu_height", '42px'), _defineProperty(_theme, "dante_menu_background", dante_control_color), _defineProperty(_theme, "dante_menu_color", dante_inversed_color), _defineProperty(_theme, "dante_menu_border_radius", '4px'), _defineProperty(_theme, "dante_menu_box_shadow", '1px 1px 3px 0px #9e9393'), _defineProperty(_theme, "dante_menu_icon_size", '16px'), _defineProperty(_theme, "dante_menu_icon_color", dante_inversed_color), _defineProperty(_theme, "dante_menu_icon_accent", dante_accent_color), _defineProperty(_theme, "dante_menu_divider_color", '#3D3E49'), _defineProperty(_theme, "dante_menu_border_width", '0px'), _defineProperty(_theme, "dante_menu_border_color", 'none'), _defineProperty(_theme, "dante_menu_caret_size", '8px'), _theme);
 
-  function _createSuper$d(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct$d(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-  function _isNativeReflectConstruct$d() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-
   var Dante = /*#__PURE__*/function (_React$Component) {
     _inherits(Dante, _React$Component);
 
-    var _super = _createSuper$d(Dante);
+    var _super = _createSuper(Dante);
 
     function Dante(props) {
       var _this;
@@ -4724,19 +4798,49 @@
     _createClass(Dante, [{
       key: "render",
       value: function render() {
-        return /*#__PURE__*/React.createElement(react.ThemeProvider, {
+        return /*#__PURE__*/React__default['default'].createElement(react.ThemeProvider, {
           theme: this.props.theme || theme
-        }, /*#__PURE__*/React.createElement(EditorContainer, {
+        }, /*#__PURE__*/React__default['default'].createElement(EditorContainer, {
           style: this.props.style
-        }, /*#__PURE__*/React.createElement(DanteEditor, Object.assign({}, this.props, {
+        }, /*#__PURE__*/React__default['default'].createElement(DanteEditor, _extends({}, this.props, {
           toggleEditable: this.toggleEditable
         }))));
       }
     }]);
 
     return Dante;
-  }(React.Component);
+  }(React__default['default'].Component);
 
+  Dante.propTypes = {
+    /** Editor content, it expects a null or a draft's EditorContent. */
+    content: PropTypes__default['default'].object,
+    read_only: PropTypes__default['default'].bool,
+    spellcheck: PropTypes__default['default'].bool,
+    title_placeholder: PropTypes__default['default'].string,
+    body_placeholder: PropTypes__default['default'].string,
+    xhr: PropTypes__default['default'].shape({
+      before_handler: PropTypes__default['default'].func,
+      success_handler: PropTypes__default['default'].func,
+      error_handler: PropTypes__default['default'].func
+    }),
+    data_storage: PropTypes__default['default'].shape({
+      url: PropTypes__default['default'].string,
+      method: PropTypes__default['default'].string,
+      success_handler: PropTypes__default['default'].func,
+      failure_handler: PropTypes__default['default'].func,
+      interval: PropTypes__default['default'].integer
+    }),
+    default_wrappers: PropTypes__default['default'].arrayOf(PropTypes__default['default'].shape({
+      className: PropTypes__default['default'].string.isRequired,
+      block: PropTypes__default['default'].string.isRequired
+    })),
+    continuousBlocks: PropTypes__default['default'].arrayOf(PropTypes__default['default'].string),
+    key_commands: PropTypes__default['default'].object
+    /*character_convert_mapping: PropTypes.shape({
+        '> ': "blockquote"
+    })*/
+
+  };
   Dante.defaultProps = {
     content: null,
     read_only: false,
@@ -4744,7 +4848,7 @@
     title_placeholder: "Title",
     body_placeholder: "Write your story",
     decorators: function decorators(context) {
-      return new MultiDecorator([PrismDraftDecorator(), new draftJs.CompositeDecorator([{
+      return new MultiDecorator__default['default']([PrismDraftDecorator(), new draftJs.CompositeDecorator([{
         strategy: findEntities.bind(null, 'LINK', context),
         component: Link
       }])]);
