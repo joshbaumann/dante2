@@ -81,14 +81,11 @@
     "react-dev-utils": "^5.0.0",
     "react-dom": "^16.2.0",
     "react-popper": "^1.0.0",
-    "react-select": "^2.0.0"
-  },
-  "peerDependencies": {
+    "react-select": "^2.0.0",
     "@emotion/cache": "^10.0.14",
     "@emotion/core": "^10.0.10",
     "@emotion/react": "^11.1.4",
-    "@emotion/styled": "^10.0.14",
-    "polished": "^3.4.0"
+    "@emotion/styled": "^10.0.14"
   },
   "scripts": {
     "docz:dev": "docz dev",
